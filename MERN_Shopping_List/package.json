@@ -4,9 +4,11 @@
   "description": "Shopping list application built with the MERN stack",
   "main": "server.js",
   "scripts": {
+    "client-install": "npm install --prefix client",
     "start": "node server",
     "server": "nodemon server",
-    "dev": ""
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Cameron Shatto",
   "license": "MIT",
