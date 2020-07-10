@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 
@@ -9,15 +10,22 @@ app.use(express.json());
 const db = require('./config/keys').mongoUri;
 
 // Connect to Mongo
-mongoose.connect(db, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-  })
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err)
 );
 
 app.use('/api/items', require('./routes/api/items'));
+
+// Serve static assets if in production
+if(process.end.NODE_ENV == 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  })
+}
 
 const port = process.env.PORT || 5000;
 
