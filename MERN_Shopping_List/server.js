@@ -18,7 +18,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use('/api/items', require('./routes/api/items'));
 
 // Serve static assets if in production
-if(process.end.NODE_ENV == 'production') {
+if(process.env.NODE_ENV == 'production') {
   // Set static folder
   app.use(express.static('client/build'));
 
