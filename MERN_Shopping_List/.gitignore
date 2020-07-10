@@ -1,5 +1,3 @@
-# dependencies
-node_modules/
-
-# other
-config/
+node_modules
+package-lock.json
+.env
