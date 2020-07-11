@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Button,
   Modal,
@@ -20,7 +20,8 @@ class ItemModal extends Component {
   }
 
   static propTypes = {
-    addItem: PropTypes.func.isRequired
+    addItem: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
   }
 
   toggle = () => {
@@ -44,7 +45,10 @@ class ItemModal extends Component {
 
     return (
       <div>
-        <Button color='dark' className='mb-3' onClick={this.toggle}>Add Item</Button>
+        { this.props.isAuthenticated ?
+          <Button color='dark' className='mb-3' onClick={this.toggle}>Add Item</Button> :
+          <h4 className='mb-3 text-center'>Please log in to modify shopping list!</h4>
+        }
         <Modal isOpen={this.state.isOpen}>
           <ModalHeader toggle={this.toggle}>Add To Shopping List</ModalHeader>
           <ModalBody>
@@ -63,7 +67,8 @@ class ItemModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, { addItem })(ItemModal);
