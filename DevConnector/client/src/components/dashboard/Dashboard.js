@@ -11,7 +11,7 @@ import { getProfile, deleteAccount } from '../../actions/profile'
 const Dashboard = ({ getProfile, deleteAccount, auth: { user }, profile: { profile, loading } }) => {
   useEffect(() => {
     getProfile()
-  }, [])
+  }, [getProfile])
 
   return loading && profile === null ?
     <Spinner /> :
