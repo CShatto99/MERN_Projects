@@ -17,7 +17,7 @@ const Education = ({ education, deleteEducation }) => {
           (<Moment format='YYYY/MM/DD'>{edu.to}</Moment>)
         }
       </td>
-      <td><button className='btn btn-danger'>Delete</button></td>
+      <td><button className='btn btn-danger' onClick={() => deleteEducation(edu._id)}>Delete</button></td>
     </tr>
   ))
   return (
@@ -42,7 +42,7 @@ const Education = ({ education, deleteEducation }) => {
 }
 
 Education.propTypes = {
-  educations: PropTypes.array.isRequired,
+  educations: PropTypes.array,
   deleteEducation: PropTypes.func.isRequired
 }
 
