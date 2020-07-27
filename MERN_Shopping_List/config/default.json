@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://CShatto99:admin@testcluster1.eivxk.mongodb.net/shopping_list_db?retryWrites=true&w=majority",
-  "jwtSecret": "cams_secret"
-}
