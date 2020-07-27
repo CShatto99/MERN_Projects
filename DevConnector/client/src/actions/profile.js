@@ -71,9 +71,8 @@ export const getProfileById = userId => async dispatch => {
   }
 }
 
-// Get githib repos
+// Get github repos
 export const getGithubRepos = username => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE })
   try {
     const res = await axios.get(`/api/profile/github/${username}`)
 
@@ -102,7 +101,6 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     }
 
     const res = await axios.post('/api/profile', formData, config)
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data
