@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://Cshatto99:admin@testcluster1.eivxk.mongodb.net/shopping_list_db?retryWrites=true&w=majority",
-  "jwtSecret": "cams_secret"
+  "mongoURI": "mongodb+srv://<USERNAME>:<PASSWORD>@testcluster1.eivxk.mongodb.net/<DB_NAME>?retryWrites=true&w=majority",
+  "jwtSecret": "<YOUR_JWT_SECRET"
 }
