@@ -15,7 +15,7 @@ const AppNavbar = () => {
 
   return (
     <div>
-      <Navbar color='dark' dark expand='sm' className='mb-4'>
+      <Navbar style={{backgroundColor: '#272B30'}} dark expand='sm' className='mb-4'>
         <Container>
           <NavbarBrand>Countdown Timer</NavbarBrand>
           <NavbarToggler onClick={() => setIsOpen(!isOpen)} />

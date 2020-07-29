@@ -5,8 +5,8 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date: [Number],
-  time: [Number]
+  date: String,
+  time: String
 })
 
 module.exports = Event = mongoose.model('event', EventSchema)

@@ -10,9 +10,9 @@ import {
   Label,
   Input
 } from 'reactstrap'
-import { addTimer} from '../store/timer'
+import { modifyTimer } from '../store/timer'
 
-const EventModal = () => {
+const ModifyModal = () => {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -36,7 +36,7 @@ const EventModal = () => {
   const onSubmit = e => {
     e.preventDefault()
 
-    dispatch(addTimer(formData))
+    dispatch(modifyTimer(formData))
 
     toggle()
   }
@@ -44,11 +44,11 @@ const EventModal = () => {
   return (
     <div>
       <div className='d-flex justify-content-center'>
-        <Button color='primary' onClick={toggle}>Add Timer</Button>
+        <Button className='mt-3' color='primary' onClick={toggle}>Modify Timer</Button>
       </div>
 
       <Modal color='dark' isOpen={isOpen} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Add Timer</ModalHeader>
+        <ModalHeader toggle={toggle}>Modify Timer</ModalHeader>
         <ModalBody>
           <Form onSubmit={e => onSubmit(e)}>
             <FormGroup>
@@ -90,7 +90,7 @@ const EventModal = () => {
                 onChange={e => onChange(e)}
               />
             </FormGroup>
-            <Button color='primary' block>Add Timer</Button>
+            <Button color='primary' block>Modify Timer</Button>
           </Form>
         </ModalBody>
       </Modal>
@@ -99,4 +99,4 @@ const EventModal = () => {
   )
 }
 
-export default EventModal
+export default ModifyModal

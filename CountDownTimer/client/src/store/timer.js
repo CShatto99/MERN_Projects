@@ -4,7 +4,9 @@ import axios from 'axios'
 const timer = createSlice({
   name: 'timer',
   initialState: {
-    timer: {},
+    name: '',
+    date: undefined,
+    time: undefined,
     loading: true,
     error: ''
   },
@@ -12,7 +14,18 @@ const timer = createSlice({
     add_timer: (state, action) => {
       return {
         ...state,
-        timer: action.payload,
+        name: action.payload.name,
+        date: action.payload.date,
+        time: action.payload.time,
+        loading: false
+      }
+    },
+    modify_timer: (state, action) => {
+      return {
+        ...state,
+        name: action.payload.name,
+        date: action.payload.date,
+        time: action.payload.time,
         loading: false
       }
     },
@@ -28,7 +41,7 @@ const timer = createSlice({
 
 export default timer.reducer
 
-const { add_timer, error_action} = timer.actions
+const { add_timer, modify_timer, error_action } = timer.actions
 
 export const addTimer = formData => async dispatch => {
   try {
@@ -38,9 +51,27 @@ export const addTimer = formData => async dispatch => {
       }
     }
 
-    const res = await axios.post('/api/timer', formData, config)
+    //const res = await axios.post('/api/timer', formData, config)
 
-    dispatch(add_timer(res.data))
+    dispatch(add_timer(formData))
+  } catch(err) {
+    console.error(err.response.data)
+
+    dispatch(error_action())
+  }
+}
+
+export const modifyTimer = formData => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    //const res = await axios.post('/api/timer', formData, config)
+
+    dispatch(modify_timer(formData))
   } catch(err) {
     console.error(err.response.data)
 

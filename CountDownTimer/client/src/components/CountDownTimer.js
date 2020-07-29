@@ -1,51 +1,72 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { Button, Container, Row, Col } from 'reactstrap'
 import { useSelector } from 'react-redux'
-import EventModal from './EventModal'
 import moment from 'moment'
+import EventModal from './EventModal'
+import ModifyModal from './ModifyModal'
 
 const CountDownTimer = () => {
+  const [state, setState] = useState({
+    days: undefined,
+    hours: undefined,
+    minutes: undefined,
+    seconds: undefined
+  })
 
-
-  const [time, setTime] = useState('')
-
-  const [dateFields, setDateFields] = useState([])
-
-  const [timeFields, setTimeFields] = useState([])
-
-  const { timer } = useSelector(state => state.timer)
-
+  const { name, date, time, loading } = useSelector(state => state.timer)
+  const then = moment(date + time, 'MM-DD-YYYY hh:mm:ss')
   useEffect(() => {
     setInterval(() => {
-      setDateFields(moment().format('YYYY/MM/DD').split('/').map(num => {
-        num.trim()
-        return parseInt(num)
-      }))
 
-      setTimeFields(moment().format('hh:mm:ss').split(':').map(num => {
-        num.trim()
-        return parseInt(num)
-      }))
-
-      setTime(moment().format('hh:mm:ss'))
+      const now = moment()
+      const countdown = moment(then - now)
+      const days = countdown.format('D')
+      const hours = countdown.format('HH')
+      const minutes = countdown.format('mm')
+      const seconds = countdown.format('ss')
+      setState({
+        ...state,
+        days,
+        hours,
+        minutes,
+        seconds
+      })
     }, 1000)
   })
 
+  const { days, hours, minutes, seconds } = state
+
   return (
-    <div>
-      <EventModal />
-      {timer.date && timer.time ? (
+    <div className='timer'>
+      {!name && <EventModal />}
+      {name && date && !loading && (
         <Fragment>
-          <p>Year | Month | Day</p>
-          <p>{timer.date[0]}{' | '}{timer.date[1]}{' | '}{timer.date[2]}</p>
-          <p>Hour | Minute | Second</p>
-          <p>{timer.time[0]}{' | '}{timer.time[1]}{' | '}{timer.time[2]}</p>
-
-          <p>{moment().to([timer.date[0], timer.date[1], timer.date[2]])}</p>
-
+          <Container className='text-center'>
+            <Row className='m-3'>
+              <Col><h1>Time until {name}</h1></Col>
+            </Row>
+            <Row>
+              <Col>
+                <h1>{days}</h1>
+                <h5>Days</h5>
+              </Col>
+              <Col>
+                <h1>{hours}</h1>
+                <h5>Hours</h5>
+              </Col>
+              <Col>
+                <h1>{minutes}</h1>
+                <h5>Minutes</h5>
+              </Col>
+              <Col>
+                <h1>{seconds}</h1>
+                <h5>Seconds</h5>
+              </Col>
+            </Row>
+          </Container>
         </Fragment>
-      ) : ''}
-      <p>{dateFields[0]}</p>
-      <p>{timeFields}</p>
+      )}
+      {name && <ModifyModal />}
     </div>
   )
 }
