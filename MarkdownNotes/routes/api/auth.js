@@ -1,5 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const router = express.Router()
 const auth = require('../../middleware/auth')
 
@@ -7,8 +8,8 @@ const User = require('../../models/User')
 
 // @route POST /api/auth
 // @desc  Login a user
-// @access Private
-router.post('/', auth, async (req, res) => {
+// @access Public
+router.post('/', async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -24,9 +25,14 @@ router.post('/', auth, async (req, res) => {
 
     if(!match)
       return res.status(400).json({ msg: 'Invalid credentials' })
-    else
-      res.json(user)
-       
+
+    const token = jwt.sign({ _id: user._id }, process.env.ACCESS_SECRET_TOKEN, { expiresIn: 600 })
+
+    res.json({
+      token,
+      user: { name: user.name , email }
+    })
+
   } catch(err) {
     console.error(err.message)
     res.status(500).send('Server error')
