@@ -67,8 +67,8 @@ router.put('/', auth, async (req, res) => {
     const user = await User.findById({ _id: req.user._id })
 
     user.notes.map(note => {
-      if(note._id === req.body._id)
-        return note.text = req.body.text
+      if(note._id.toString() === req.body._id)
+        note.text = req.body.text
     })
 
     await user.save()
