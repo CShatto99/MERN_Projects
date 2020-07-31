@@ -1,3 +1,10 @@
+body {
+  background-image: url('./img/star-exposure.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 .note-item-enter {
   opacity: 0.01;
 }
@@ -24,14 +31,18 @@
 }
 
 .form-title {
-  background-color: #fff;
+  background-color: #e9ecef;
   padding: 5px 0 5px 0;
   border-radius: 4px;
 }
 
 .form-section {
   margin-top: 10px;
-  background-color: #fff;
+  background-color: #e9ecef;
   padding: 20px;
   border-radius: 4px;
+}
+
+.std-link:hover {
+  text-decoration: none;
 }

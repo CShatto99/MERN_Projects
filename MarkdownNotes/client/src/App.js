@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Container } from 'reactstrap'
 import './App.css';
@@ -7,10 +7,15 @@ import AppNavbar from './components/AppNavbar'
 import NoteList from './components/NoteList'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
+import Hero from './components/Hero'
 import store from './store'
 import { Provider } from 'react-redux'
+import { loadUser } from './store/auth'
 
 const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser())
+  })
   return (
     <div className="App">
       <Router>
@@ -18,9 +23,10 @@ const App = () => {
           <AppNavbar />
           <Container>
             <Switch>
-              <Route exact path='/' component={NoteList} />
+              <Route exact path='/home' component={NoteList} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <Route exact path='/hero' component={Hero} />
             </Switch>
           </Container>
         </Provider>

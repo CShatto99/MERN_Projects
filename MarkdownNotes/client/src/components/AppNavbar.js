@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
   Navbar,
@@ -11,21 +11,24 @@ import {
   Collapse,
   Container
 } from 'reactstrap'
+import { logout } from '../store/auth'
 
 const AppNavbar = () => {
-  const { isAuthenticated, loading } = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const { isAuthenticated, loading } = useSelector(state => state.auth)
   const [isOpen, setIsOpen] = useState(false)
 
-  const toggle = () => {
-    setIsOpen(!isOpen)
-  }
+  const toggle = () => setIsOpen(!isOpen)
 
   const userLinks = (
     <Fragment>
       <NavItem>
         <NavLink>
-          <Link className='nav-item' to='/'>Home</Link>
+          <Link className='nav-item' to='/home'>Home</Link>
         </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink onClick={() => dispatch(logout())} style={{cursor: 'pointer'}}>Logout</NavLink>
       </NavItem>
     </Fragment>
   )
@@ -49,7 +52,7 @@ const AppNavbar = () => {
     <div>
       <Navbar className='mb-5' color='primary' dark expand='sm'>
         <Container>
-          <NavbarBrand>Markdown Notes</NavbarBrand>
+          <NavbarBrand><Link className='nav-item' to='/hero'>Markdown Notes</Link></NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
@@ -57,7 +60,7 @@ const AppNavbar = () => {
               userLinks : guestLinks
             }
               <NavItem>
-                <NavLink className='nav-item' href='https://github.com/CShatto99'>Github</NavLink>
+                <NavLink className='nav-item' target='_blank' href='https://github.com/CShatto99'>Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

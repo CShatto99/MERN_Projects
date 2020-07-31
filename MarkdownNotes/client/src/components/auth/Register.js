@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import {
   Button,
   Form,
@@ -8,11 +8,11 @@ import {
   Label,
   Input
 } from 'reactstrap'
-import { register } from '../../store/user'
+import { register } from '../../store/auth'
 
 const Register = () => {
   const dispatch = useDispatch()
-  const { isAuthenticated, loading } = useSelector(state => state.user)
+  const { isAuthenticated, loading } = useSelector(state => state.auth)
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -36,7 +36,7 @@ const Register = () => {
     dispatch(register(user))
   }
 
-    if(isAuthenticated) return <Redirect to='/' />
+    if(isAuthenticated) return <Redirect to='/home' />
 
   return (
     <div>
@@ -78,7 +78,16 @@ const Register = () => {
               onChange={e => onChange(e)}
             />
           </FormGroup>
-          <Button color='primary' block>Register</Button>
+          <div className='text-center'>
+            <Button style={{width: '30%'}} className='mr-3' color='primary'>
+              Register
+            </Button>
+            <Button style={{width: '30%'}} color='light'>
+              <Link className='std-link' to='/hero'>
+                Go Back
+              </Link>
+            </Button>
+          </div>
         </Form>
       </div>
     </div>

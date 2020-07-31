@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import {
   Button,
@@ -7,6 +9,11 @@ import {
 } from 'reactstrap'
 
 const NoteList = () => {
+  const { isAuthenticated, loading } = useSelector(state => state.auth)
+
+  if(!isAuthenticated)
+    return <Redirect to='/hero' />
+    
   return (
     <div>
       <ListGroup className='mb-2 text-center'>
