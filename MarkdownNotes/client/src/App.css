@@ -46,3 +46,7 @@ body {
 .std-link:hover {
   text-decoration: none;
 }
+
+li.list-group-item-cust {
+  background-color: #e9ecef;
+}

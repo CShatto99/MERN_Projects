@@ -6,13 +6,16 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Alert
 } from 'reactstrap'
 import { register } from '../../store/auth'
+import { clearAlert } from '../../store/alert'
 
 const Register = () => {
   const dispatch = useDispatch()
-  const { isAuthenticated, loading } = useSelector(state => state.auth)
+  const { isAuthenticated } = useSelector(state => state.auth)
+  const { msg } = useSelector(state => state.alert)
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -45,8 +48,10 @@ const Register = () => {
       </div>
       <div className='form-section'>
         <Form onSubmit={e => onSubmit(e)}>
+          {msg && <Alert color='danger'>{msg}</Alert>}
+          <small className='text-danger'>* = required</small>
           <FormGroup>
-            <Label for='name'>Name</Label>
+            <Label for='name'>Name <span className='text-danger'>*</span></Label>
             <Input
               type='text'
               id='name'
@@ -57,7 +62,7 @@ const Register = () => {
             />
           </FormGroup>
           <FormGroup>
-            <Label for='email'>Email</Label>
+            <Label for='email'>Email <span className='text-danger'>*</span></Label>
             <Input
               type='email'
               id='email'
@@ -68,7 +73,7 @@ const Register = () => {
             />
           </FormGroup>
           <FormGroup>
-            <Label for='password'>Password</Label>
+            <Label for='password'>Password <span className='text-danger'>*</span></Label>
             <Input
               type='password'
               id='password'
@@ -82,7 +87,7 @@ const Register = () => {
             <Button style={{width: '30%'}} className='mr-3' color='primary'>
               Register
             </Button>
-            <Button style={{width: '30%'}} color='light'>
+            <Button style={{width: '30%'}} color='light' onClick={() => dispatch(clearAlert())}>
               <Link className='std-link' to='/'>
                 Go Back
               </Link>

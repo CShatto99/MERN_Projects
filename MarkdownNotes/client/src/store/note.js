@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import setAuthToken from '../utils/setAuthToken'
 
 const note = createSlice({
   name: 'note',
   initialState: {
-    notes: null,
+    notes: [],
     loading: true
   },
   reducers: {
@@ -25,14 +24,21 @@ const note = createSlice({
     create_note: (state, action) => {
       return {
         ...state,
-        notes: [...state.notes, { note: action.payload.note }],
+        notes: [...state.notes, action.payload],
         loading: false
       }
     },
-    delete_note: (state, action) => {
+    update_notes: (state, action) => {
       return {
         ...state,
         notes: action.payload,
+        loading: false
+      }
+    },
+    clear_notes: (state, action) => {
+      return {
+        ...state,
+        notes: [],
         loading: false
       }
     }
@@ -41,7 +47,7 @@ const note = createSlice({
 
 export default note.reducer
 
-const { get_notes, create_note, delete_note } = note.actions
+const { get_notes, create_note, update_notes, clear_notes } = note.actions
 
 export const getNotes = () => async dispatch => {
   try {
@@ -59,9 +65,9 @@ export const createNote = note => async dispatch => {
       'Content-Type': 'application/json'
     }
   }
-  try {
-    const res = axios.post('/api/note', note, config)
 
+  try {
+    const res = await axios.post('/api/note', note, config)
     dispatch(create_note(res.data))
   } catch(err) {
     console.error(err.message)
@@ -79,9 +85,30 @@ export const deleteNote = _id => async dispatch => {
   try {
     const res = await axios.delete(`/api/note/${_id}`, config)
 
-    dispatch(delete_note(res.data))
+    dispatch(update_notes(res.data))
   } catch(err) {
     console.error(err.message)
     // dispatch err
   }
+}
+
+export const editNote = ({ _id, note }) => async dispatch => {
+  const config = {
+    header: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const res = await axios.put(`/api/note/${_id}`, {note}, config)
+
+    dispatch(update_notes(res.data))
+  } catch(err) {
+    console.error(err.message)
+    //dispatch error
+  }
+}
+
+export const clearNotes = () => dispatch => {
+  dispatch(clear_notes())
 }

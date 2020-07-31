@@ -11,7 +11,7 @@ const User = require('../../models/User')
 // @access Public
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById({ _id: req.user._id }).select('-password')
+    const user = await User.findById({ _id: req.user._id }).select('-password -notes')
     res.json(user)
   } catch(err) {
     console.error(err.message)
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     const { email, password } = req.body
 
     if(!email || !password)
-      return res.status(400).json({ msg: 'Please enter all fields' })
+      return res.status(400).json({ msg: 'Please enter all required fields' })
 
     const user = await User.findOne({ email })
 

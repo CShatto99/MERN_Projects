@@ -12,7 +12,10 @@ router.post('/', async (req, res) => {
   const { name, email, password } = req.body
 
   if(!name || !email || !password)
-    return res.status(400).json({ msg: 'Please enter all fields' })
+    return res.status(400).json({ msg: 'Please enter all required fields' })
+
+  if(password.length < 6)
+    return res.status(400).json({ msg: 'Password must be at least 6 characters long' })
 
   const existingUser = await User.findOne({ email })
 

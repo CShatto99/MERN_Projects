@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
+import { clearNotes } from './note'
+import { setAlert } from './alert'
 
 const auth = createSlice({
   name: 'auth',
@@ -59,7 +61,7 @@ export const register = user => async dispatch => {
     dispatch(loadUser())
   } catch(err) {
     console.error(err.message)
-    // dispatch error
+    dispatch(setAlert(err.response.data.msg, err.response.statusText))
   }
 }
 
@@ -75,8 +77,7 @@ export const login = user => async dispatch => {
     dispatch(login_user(res.data))
     dispatch(loadUser())
   } catch(err) {
-    console.error(err.message)
-    // dispatch error
+    dispatch(setAlert(err.response.data.msg, err.response.statusText))
   }
 }
 
@@ -96,4 +97,5 @@ export const loadUser = () => async dispatch => {
 
 export const logout = () => dispatch => {
   dispatch(clear_user())
+  dispatch(clearNotes())
 }

@@ -4,7 +4,7 @@ import { Container } from 'reactstrap'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from './components/AppNavbar'
-import NoteList from './components/NoteList'
+import NoteList from './components/note/NoteList'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import Hero from './components/Hero'
@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadUser())
   })
-  
+
   return (
     <div className="App">
       <Router>

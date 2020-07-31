@@ -39,7 +39,7 @@ router.post('/', auth, async (req, res) => {
   }
 })
 
-// @route DELETE /api/note/:id
+// @route DELETE /api/note/:_id
 // @desc Delete a note by id
 // @access Private
 router.delete('/:_id', auth, async (req, res) => {
@@ -58,15 +58,15 @@ router.delete('/:_id', auth, async (req, res) => {
   }
 })
 
-// @route PUT /api/note
+// @route PUT /api/note/:_id
 // @desc Edit a note by id
 // @access Private
-router.put('/', auth, async (req, res) => {
+router.put('/:_id', auth, async (req, res) => {
   try {
     const user = await User.findById({ _id: req.user._id })
 
     user.notes.map(note => {
-      if(note._id.toString() === req.body._id)
+      if(note._id.toString() === req.params._id)
         note.note = req.body.note
     })
 
