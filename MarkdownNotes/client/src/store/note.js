@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { setAlert } from './alert'
 
 const note = createSlice({
   name: 'note',
@@ -12,12 +13,6 @@ const note = createSlice({
       return {
         ...state,
         notes: action.payload,
-        loading: false
-      }
-    },
-    notes_loaded: (state, action) => {
-      return {
-        ...state,
         loading: false
       }
     },
@@ -70,8 +65,7 @@ export const createNote = note => async dispatch => {
     const res = await axios.post('/api/note', note, config)
     dispatch(create_note(res.data))
   } catch(err) {
-    console.error(err.message)
-    // dispatch err
+    dispatch(setAlert(err.response.data.msg, err.response.statusText))
   }
 }
 
@@ -104,8 +98,7 @@ export const editNote = ({ _id, note }) => async dispatch => {
 
     dispatch(update_notes(res.data))
   } catch(err) {
-    console.error(err.message)
-    //dispatch error
+    dispatch(setAlert(err.response.data.msg, err.response.statusText))
   }
 }
 

@@ -28,7 +28,6 @@ export default alert.reducer
 
 const { set_alert, clear_alert } = alert.actions
 
-
 export const setAlert = (msg, type) => dispatch => {
   dispatch(set_alert({ msg, type }))
 }

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Button,
   Modal,
@@ -8,12 +8,15 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Alert
 } from 'reactstrap'
 import { editNote } from '../../store/note'
+import { clearAlert } from '../../store/alert'
 
 const EditNote = ({ _id, note }) => {
   const dispatch = useDispatch()
+  const { msg } = useSelector(state => state.alert)
   const [state, setState] = useState({
     isOpen: false,
     note: note
@@ -22,8 +25,12 @@ const EditNote = ({ _id, note }) => {
   const toggle = () => {
     setState({
       ...state,
+      note: '',
       isOpen: !state.isOpen
     })
+    
+    if(msg)
+      dispatch(clearAlert())
   }
 
   const onChange = e => {
@@ -38,7 +45,8 @@ const EditNote = ({ _id, note }) => {
 
     dispatch(editNote({ _id, note: state.note }))
 
-    toggle()
+    if(state.note && msg)
+      toggle()
   }
 
   return (
@@ -55,6 +63,7 @@ const EditNote = ({ _id, note }) => {
         <ModalHeader toggle={toggle}>Edit Note</ModalHeader>
         <ModalBody>
           <Form onSubmit={e => onSubmit(e)}>
+            {msg && <Alert color='danger'>{msg}</Alert>}
             <FormGroup>
               <Label for='note'>Note</Label>
               <Input

@@ -25,6 +25,9 @@ router.get('/', auth, async (req, res) => {
 // @access Private
 router.post('/', auth, async (req, res) => {
   try {
+    if(!req.body.note)
+      return res.status(400).json({ msg: 'Please enter a note' })
+
     const user = await User.findById({ _id: req.user._id })
 
     user.notes.push({ note: req.body.note })
@@ -63,6 +66,9 @@ router.delete('/:_id', auth, async (req, res) => {
 // @access Private
 router.put('/:_id', auth, async (req, res) => {
   try {
+    if(!req.body.note)
+      return res.status(400).json({ msg: 'Please enter a note' })
+      
     const user = await User.findById({ _id: req.user._id })
 
     user.notes.map(note => {
