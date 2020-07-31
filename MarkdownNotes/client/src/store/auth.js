@@ -24,8 +24,8 @@ const auth = createSlice({
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
-        user: action.payload
+        user: action.payload,
+        loading: false
       }
     },
     clear_user: (state, action) => {
@@ -64,13 +64,12 @@ export const register = user => async dispatch => {
 }
 
 export const login = user => async dispatch => {
-  try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
     }
-
+  }
+  try {
     const res = await axios.post('/api/auth', user, config)
 
     dispatch(login_user(res.data))

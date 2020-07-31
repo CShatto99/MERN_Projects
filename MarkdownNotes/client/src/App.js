@@ -16,6 +16,7 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadUser())
   })
+  
   return (
     <div className="App">
       <Router>
@@ -26,7 +27,7 @@ const App = () => {
               <Route exact path='/home' component={NoteList} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
-              <Route exact path='/hero' component={Hero} />
+              <Route exact path='/' component={Hero} />
             </Switch>
           </Container>
         </Provider>

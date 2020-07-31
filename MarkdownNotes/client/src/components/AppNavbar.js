@@ -23,9 +23,7 @@ const AppNavbar = () => {
   const userLinks = (
     <Fragment>
       <NavItem>
-        <NavLink>
-          <Link className='nav-item' to='/home'>Home</Link>
-        </NavLink>
+        <Link className='nav-link' to='/home'>Home</Link>
       </NavItem>
       <NavItem>
         <NavLink onClick={() => dispatch(logout())} style={{cursor: 'pointer'}}>Logout</NavLink>
@@ -36,14 +34,10 @@ const AppNavbar = () => {
   const guestLinks = (
     <Fragment>
       <NavItem>
-        <NavLink>
-          <Link className='nav-item' to='/login'>Login</Link>
-        </NavLink>
+        <Link className='nav-link' to='/login'>Login</Link>
       </NavItem>
       <NavItem>
-        <NavLink>
-          <Link className='nav-item' to='/register'>Register</Link>
-        </NavLink>
+        <Link className='nav-link' to='/register'>Register</Link>
       </NavItem>
     </Fragment>
   )
@@ -52,7 +46,7 @@ const AppNavbar = () => {
     <div>
       <Navbar className='mb-5' color='primary' dark expand='sm'>
         <Container>
-          <NavbarBrand><Link className='nav-item' to='/hero'>Markdown Notes</Link></NavbarBrand>
+          <NavbarBrand href='/'>Markdown Notes</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
@@ -60,7 +54,7 @@ const AppNavbar = () => {
               userLinks : guestLinks
             }
               <NavItem>
-                <NavLink className='nav-item' target='_blank' href='https://github.com/CShatto99'>Github</NavLink>
+                <NavLink className='nav-item' target='_blank' href='https://github.com/CShatto99/MERN_Projects/tree/master/MarkdownNotes'>Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

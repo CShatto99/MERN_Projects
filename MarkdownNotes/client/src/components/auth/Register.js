@@ -36,7 +36,7 @@ const Register = () => {
     dispatch(register(user))
   }
 
-    if(isAuthenticated) return <Redirect to='/home' />
+  if(isAuthenticated) return <Redirect to='/home' />
 
   return (
     <div>
@@ -83,7 +83,7 @@ const Register = () => {
               Register
             </Button>
             <Button style={{width: '30%'}} color='light'>
-              <Link className='std-link' to='/hero'>
+              <Link className='std-link' to='/'>
                 Go Back
               </Link>
             </Button>

@@ -5,26 +5,6 @@ const auth = require('../../middleware/auth')
 const User = require('../../models/User')
 const Note = require('../../models/Note')
 
-// @route POST /api/note
-// @desc Create a note
-// @access Private
-router.post('/', auth, async (req, res) => {
-  try {
-    const user = await User.findById({ _id: req.user._id })
-
-    user.notes.push({ text: req.body.text })
-
-    const updatedUser = await user.save()
-
-    res.json(updatedUser)
-
-  } catch(err) {
-    console.error(err.message)
-    res.status(500).send('Server error')
-  }
-
-})
-
 // @route GET /api/note
 // @desc Get user notes
 // @access Private
@@ -40,14 +20,33 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
-// @route DELETE /api/note
-// @desc Delete a note by id
+// @route POST /api/note
+// @desc Create a note
 // @access Private
-router.delete('/', auth, async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     const user = await User.findById({ _id: req.user._id })
 
-    user.notes = user.notes.filter(note => note._id.toString() !== req.body._id)
+    user.notes.push({ note: req.body.note })
+
+    await user.save()
+
+    res.json(user.notes[user.notes.length-1])
+
+  } catch(err) {
+    console.error(err.message)
+    res.status(500).send('Server error')
+  }
+})
+
+// @route DELETE /api/note/:id
+// @desc Delete a note by id
+// @access Private
+router.delete('/:_id', auth, async (req, res) => {
+  try {
+    const user = await User.findById({ _id: req.user._id })
+
+    user.notes = user.notes.filter(note => note._id.toString() !== req.params._id)
 
     await user.save()
 
@@ -60,7 +59,7 @@ router.delete('/', auth, async (req, res) => {
 })
 
 // @route PUT /api/note
-// @desc Edit a noteby id
+// @desc Edit a note by id
 // @access Private
 router.put('/', auth, async (req, res) => {
   try {
@@ -68,7 +67,7 @@ router.put('/', auth, async (req, res) => {
 
     user.notes.map(note => {
       if(note._id.toString() === req.body._id)
-        note.text = req.body.text
+        note.note = req.body.note
     })
 
     await user.save()

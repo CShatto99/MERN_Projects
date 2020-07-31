@@ -69,7 +69,7 @@ const Login = () => {
               Login
             </Button>
             <Button style={{width: '30%'}} color='light'>
-              <Link className='std-link' to='/hero'>
+              <Link className='std-link' to='/'>
                 Go Back
               </Link>
             </Button>

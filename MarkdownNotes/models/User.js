@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   notes: [{
-    text: {
+    note: {
       type: String,
       required: true
     },
