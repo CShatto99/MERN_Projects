@@ -47,13 +47,13 @@ const AppNavbar = () => {
 
   return (
     <div>
-      <Navbar className='mb-5' color='primary' dark expand='sm'>
+      <Navbar className='mb-5' dark expand='sm'>
         <Container>
           <NavbarBrand href='/'>Markdown Notes</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
-            {isAuthenticated && !loading ? userLinks : guestLinks}
+              {isAuthenticated && !loading ? userLinks : guestLinks}
               <NavItem>
                 <NavLink className='nav-item' target='_blank' href='https://github.com/CShatto99/MERN_Projects/tree/master/MarkdownNotes'>Github</NavLink>
               </NavItem>

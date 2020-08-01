@@ -10,13 +10,11 @@ import Login from './components/auth/Login'
 import Hero from './components/Hero'
 import store from './store'
 import { Provider } from 'react-redux'
-import { loadUser, logout } from './store/auth'
+import { loadUser } from './store/auth'
 
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser())
-    if(!localStorage.token)
-      store.dispatch(logout())
   })
 
   return (
