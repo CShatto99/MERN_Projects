@@ -8,6 +8,7 @@ import NoteList from './components/note/NoteList'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import Hero from './components/Hero'
+import NotFound from './components/NotFound'
 import store from './store'
 import { Provider } from 'react-redux'
 import { loadUser } from './store/auth'
@@ -24,10 +25,11 @@ const App = () => {
           <AppNavbar />
           <Container>
             <Switch>
+            <Route exact path='/' component={Hero} />
               <Route exact path='/home' component={NoteList} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
-              <Route exact path='/' component={Hero} />
+              <Route component={NotFound} />
             </Switch>
           </Container>
         </Provider>

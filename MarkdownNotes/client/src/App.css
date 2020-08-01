@@ -27,7 +27,7 @@ body {
 
 .form-title {
   background-color: #e9ecef;
-  padding: 5px 0 5px 0;
+  padding: 5px;
   border-radius: 4px;
 }
 
@@ -44,4 +44,10 @@ body {
 
 li.list-group-item-cust {
   background-color: #e9ecef;
+}
+
+.not-found {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 4px;
 }
