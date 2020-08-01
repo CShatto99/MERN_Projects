@@ -20,14 +20,9 @@ body {
   transition: opacity 1000ms ease-in;
 }
 
-.nav-item:link {
-  color: #fff;
-  cursor: pointer;
+.nav-item:link, .nav-item:hover, .nav-item:active, .nav-item:visited {
   text-decoration: none;
-}
-
-.nav-item:hover, .nav-item:active, .nav-item:visited {
-  color: rgba(255,255,255,.5);
+  color: #fff;
 }
 
 .form-title {

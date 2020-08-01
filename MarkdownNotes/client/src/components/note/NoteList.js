@@ -59,7 +59,7 @@ const NoteList = () => {
                 <CSSTransition key={_id} timeout={500} classNames='note-item'>
                   <ListGroup className='mb-1' key={_id}>
                     <ListGroupItem className='list-group-item-cust'>
-                      <small>Created on <Moment format='MMM Do, YYYY hh:mm:ss A'>{date}</Moment></small>
+                      <small><Moment format='MMM Do, YYYY hh:mm:ss A'>{date}</Moment></small>
                       <Button
                         className='float-right ml-1'
                         size='sm'
@@ -71,10 +71,8 @@ const NoteList = () => {
                       <EditNote _id={_id} note={note} />
                     </ListGroupItem>
                     <ListGroupItem className='list-group-item-cust'>
-                      <h3>
-                        <i className="fa fa-sticky-note" aria-hidden="true"></i>{' '}
+                        <i className="fa fa-sticky-note" aria-hidden="true"></i>
                         <span dangerouslySetInnerHTML={rawMarkup(note)} />
-                      </h3>
                     </ListGroupItem>
                   </ListGroup>
                 </CSSTransition>

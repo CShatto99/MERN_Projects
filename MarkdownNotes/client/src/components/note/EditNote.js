@@ -66,7 +66,7 @@ const EditNote = ({ _id, note }) => {
             <FormGroup>
               <Label for='note'>Note</Label>
               <Input
-                type='text'
+                type='textarea'
                 id='note'
                 name='note'
                 placeholder='Edit note'

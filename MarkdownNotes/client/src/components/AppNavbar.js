@@ -15,13 +15,16 @@ import { logout } from '../store/auth'
 
 const AppNavbar = () => {
   const dispatch = useDispatch()
-  const { isAuthenticated, loading } = useSelector(state => state.auth)
+  const { isAuthenticated, loading, user } = useSelector(state => state.auth)
   const [isOpen, setIsOpen] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen)
 
   const userLinks = (
     <Fragment>
+      <NavItem>
+        <NavLink href='#'>Welcome, {isAuthenticated && <span>{user.name}</span>}</NavLink>
+      </NavItem>
       <NavItem>
         <Link className='nav-link' to='/home'>Home</Link>
       </NavItem>
@@ -50,9 +53,7 @@ const AppNavbar = () => {
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
-            {isAuthenticated && !loading ?
-              userLinks : guestLinks
-            }
+            {isAuthenticated && !loading ? userLinks : guestLinks}
               <NavItem>
                 <NavLink className='nav-item' target='_blank' href='https://github.com/CShatto99/MERN_Projects/tree/master/MarkdownNotes'>Github</NavLink>
               </NavItem>

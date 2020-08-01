@@ -45,7 +45,7 @@ const AddNote = () => {
 
     dispatch(createNote({ note: state.note }))
 
-    if(state.note && msg)
+    if(state.isOpen && state.note)
       toggle()
   }
 
@@ -60,7 +60,7 @@ const AddNote = () => {
             <FormGroup>
               <Label for='note'>Note</Label>
               <Input
-                type='text'
+                type='textarea'
                 id='note'
                 name='note'
                 placeholder='Enter a markdown note'
