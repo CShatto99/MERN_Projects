@@ -28,7 +28,7 @@ const AddNote = () => {
       note: '',
       isOpen: !state.isOpen
     })
-    
+
     if(msg)
       dispatch(clearAlert())
   }

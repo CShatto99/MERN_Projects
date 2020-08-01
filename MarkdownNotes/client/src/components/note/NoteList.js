@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Moment from 'react-moment'
+import marked from 'marked'
 import { CSSTransition } from 'react-transition-group'
 import {
   Button,
@@ -12,6 +13,8 @@ import {
 import AddNote from './AddNote'
 import EditNote from './EditNote'
 import { getNotes, deleteNote } from '../../store/note'
+
+
 
 const NoteList = () => {
   const dispatch = useDispatch()
@@ -24,6 +27,11 @@ const NoteList = () => {
 
   if(!isAuthenticated)
     return <Redirect to='/' />
+
+  const rawMarkup = note => {
+    let rawMarkup = marked(note)
+    return { __html: rawMarkup }
+  }
 
   return (
     <div>
@@ -63,10 +71,10 @@ const NoteList = () => {
                       <EditNote _id={_id} note={note} />
                     </ListGroupItem>
                     <ListGroupItem className='list-group-item-cust'>
-                      <h5>
+                      <h3>
                         <i className="fa fa-sticky-note" aria-hidden="true"></i>{' '}
-                        {note}
-                      </h5>
+                        <span dangerouslySetInnerHTML={rawMarkup(note)} />
+                      </h3>
                     </ListGroupItem>
                   </ListGroup>
                 </CSSTransition>

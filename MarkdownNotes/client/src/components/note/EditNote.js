@@ -25,10 +25,9 @@ const EditNote = ({ _id, note }) => {
   const toggle = () => {
     setState({
       ...state,
-      note: '',
       isOpen: !state.isOpen
     })
-    
+
     if(msg)
       dispatch(clearAlert())
   }
@@ -45,7 +44,7 @@ const EditNote = ({ _id, note }) => {
 
     dispatch(editNote({ _id, note: state.note }))
 
-    if(state.note && msg)
+    if(state.isOpen && state.note)
       toggle()
   }
 
