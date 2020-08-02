@@ -7,7 +7,7 @@ Demo: [MarkdownNotes](https://markdown-notes.herokuapp.com/)
 
 ### Introduction
 
-
+Markdown Notes is a simple web app that allows a user to keep track of a list of markdown-styled notes. Once an account has been created the user can add notes, edit notes, and remove notes. The idea came from [this](https://github.com/florinpop17/app-ideas) repository. The motivation for building this project came from just wanting to advance my understanding of how to create a web app using the MERN stack.
 
 ### What I learned
 
@@ -38,7 +38,7 @@ If you would like to clone and manipulate the project on your machine, follow th
 6. Fetch the files\
 `git pull origin master`
 
-7. In the MarkdownNots root run\
+7. In the MarkdownNotes root directory run\
 `cd client`\
 `npm install`\
 `cd ..`\
