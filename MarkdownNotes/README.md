@@ -20,10 +20,8 @@ Demo: [MarkdownNotes](https://markdown-notes.herokuapp.com/)
 If you would like to clone and manipulate the project on your machine, follow the steps below.
 
 1. Create a directory\
-`
-mkdir myDir\
-cd myDir
-`
+`mkdir myDir`\
+`cd myDir`
 
 2. Initialize a Git repository\
 `git init`
@@ -39,3 +37,14 @@ cd myDir
 
 6. Fetch the files\
 `git pull origin master`
+
+7. In the MarkdownNots root run\
+`cd client`
+`npm install`
+`cd ..`
+`npm install`
+
+8. Add your Mongo URI and JWT secret to the `.env` file\
+
+9. Run the dev script\
+`npm run dev`
