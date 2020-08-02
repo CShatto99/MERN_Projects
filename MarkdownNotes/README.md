@@ -39,7 +39,10 @@ If you would like to clone and manipulate the project on your machine, follow th
 `git pull origin master`
 
 7. In the MarkdownNots root run\
-`cd client`
+`
+cd client  
+npm install
+`
 `npm install`
 `cd ..`
 `npm install`
