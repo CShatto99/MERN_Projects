@@ -1,0 +1,9 @@
+a.std-link {
+  text-decoration: none;
+  color: #e16428;
+}
+
+a.std-link:hover, a.std-link:active {
+  text-decoration: none;
+  color: #A0461B;
+}

@@ -1,7 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Container, Row } from 'reactstrap'
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Input
+} from 'reactstrap'
 import mapboxgl from 'mapbox-gl'
 import geoJSON from '../json/geoJSON.json'
+import '../css/mapbox.css'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyMThvczlzYTAifQ.unXf2zoBfeVM28V-tQSRPw'
 
@@ -11,7 +20,8 @@ const Mapbox = () => {
   const [state, setState] = useState({
     lng: -92,
     lat: 40,
-    zoom: 3
+    zoom: 3,
+    fillColor: ''
   })
 
   useEffect(() => {
@@ -53,7 +63,7 @@ const Mapbox = () => {
             'source': source,
             'layout': {},
             'paint': {
-              'fill-color': '#088',
+              'fill-color': state.fillColor,
               'fill-opacity': 0.5
             }
           })
@@ -62,19 +72,64 @@ const Mapbox = () => {
     })
 
     return () => map.remove()
-  }, [])
+  }, [state])
+
+  const onChange = e => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const onSubmit = e => {
+    e.preventDefault()
+    setState({
+      ...state,
+      fillColor: ''
+    })
+  }
 
   return (
     <Container>
       <Row className='justify-content-center'>
-        <div className="sidebarStyle">
-          <div>
-            Longitude: {state.lng} | Latitude: {state.lat} | Zoom: {state.zoom}
+        <Col sm={{size: 'auto'}}>
+          <div className="sidebarStyle">
+            <div>
+              Longitude: {state.lng} | Latitude: {state.lat} | Zoom: {state.zoom}
+            </div>
           </div>
-        </div>
+        </Col>
       </Row>
       <Row className='justify-content-center'>
         <div className="map-container" ref={mapContainerRef} />
+      </Row>
+      <Row className='justify-content-center mt-3'>
+        <Col sm={{size: 'auto'}} className='text-center'>
+          <Form>
+            <FormGroup>
+              <Input
+                onChange={e => onChange(e)}
+                type='text' id='fillColor'
+                name='fillColor'
+                placeholder='Change Highlight'
+                value={state.fillColor}
+              />
+            </FormGroup>
+            <Button color='dark'>Submit</Button>
+            <p className='text-light'>
+              Click{' '}
+              <a
+                className='std-link'
+                href='https://htmlcolorcodes.com/color-picker/'
+                target='_blank'
+                rel="noopener noreferrer"
+              >
+                here
+              </a>{' '}
+              for hex color codes
+            </p>
+          </Form>
+        </Col>
       </Row>
     </Container>
   );
