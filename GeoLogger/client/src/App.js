@@ -1,11 +1,12 @@
 import React from 'react';
-import MySketch from './components/MySketch'
+import Mapbox from './components/Mapbox'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div>
-      <MySketch />
+      <Mapbox />
     </div>
   );
 }

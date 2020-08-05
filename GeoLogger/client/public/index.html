@@ -1,41 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>GeoLogger</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
-    <title>GeoLogger</title>
-    <style type='text/css'>
-      #menu {
-        position: absolute;
-        background: #fff;
-        padding: 10px;
-        font-family: 'Open Sans', sans-serif;
-      }
-      #info {
-        display: block;
-        position: relative;
-        margin: 0px auto;
-        width: 50%;
-        padding: 10px;
-        border: none;
-        border-radius: 3px;
-        font-size: 12px;
-        text-align: center;
-        color: #222;
-        background: #fff;
-      }
-    </style>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='style.css' rel='stylesheet'/>
   </head>
-  <body>
+  <body style='background-color: #222831;'>
     <div id="root"></div>
     <div id='map' style='width: 1024px; height: 512px;'></div>
-    <pre id="info"></pre>
   </body>
 </html>
