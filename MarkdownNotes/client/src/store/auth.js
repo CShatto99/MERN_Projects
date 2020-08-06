@@ -96,9 +96,9 @@ export const loadUser = () => async dispatch => {
 
 export const deleteUser = () => async dispatch => {
   try {
-    await axios.delete('/api/auth')
-
     dispatch(logout())
+    
+    await axios.delete('/api/auth')
   } catch(err) {
     console.error(err.message)
   }

@@ -49,7 +49,7 @@ const NoteList = () => {
           {notes.length === 0 ?
             <ListGroup className='mb-2 text-center'>
               <ListGroupItem className='list-group-item-cust'>
-                <h4>It looks like you don't have any notes...</h4>
+                <h4>It looks like you haven't created a note.</h4>
               </ListGroupItem>
             </ListGroup> :
             <ListGroup>

@@ -15,7 +15,6 @@ const DeleteAccount = () => {
   const toggle = () => setIsOpen(!isOpen)
 
   const onClick = () => {
-    console.log(' here')
     dispatch(deleteUser())
 
     toggle()
