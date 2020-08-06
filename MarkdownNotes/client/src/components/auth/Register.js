@@ -84,10 +84,10 @@ const Register = () => {
             />
           </FormGroup>
           <div className='text-center'>
-            <Button style={{width: '30%'}} className='mr-3' color='primary'>
+            <Button className='mr-3 is-mobile' color='primary'>
               Register <i className="fa fa-sign-in" aria-hidden="true"></i>
             </Button>
-            <Button href='/' style={{width: '30%'}} color='light' onClick={() => dispatch(clearAlert())}>
+            <Button href='/' className='is-mobile' color='light' onClick={() => dispatch(clearAlert())}>
               <i className="fa fa-arrow-left" aria-hidden="true"></i> Go Back
             </Button>
           </div>

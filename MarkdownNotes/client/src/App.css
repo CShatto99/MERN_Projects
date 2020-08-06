@@ -52,10 +52,14 @@ li.list-group-item-cust {
   border-radius: 4px;
 }
 
+.is-mobile {
+  width: 30%;
+}
 
-
-@media screen and (max-width: 450px) {
-  .fa {
-      display: none;
+@media only screen and (max-width: 450px) {
+  .is-mobile {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
   }
 }

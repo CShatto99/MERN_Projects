@@ -25,11 +25,11 @@ const Account = ({ match }) => {
           <h1>{user.name}</h1>
           <p className='lead'>{user.email}</p>
           <hr/>
-          <Button onClick={() => dispatch(logout())} style={{width: '30%'}} className='mr-3' color='primary'>
-            Logout <i className="fa fa-sign-out" aria-hidden="true"></i>
-          </Button>
-          <EditAccount />
-          <DeleteAccount />
+            <EditAccount />
+            <Button onClick={() => dispatch(logout())} className='mr-3 is-mobile' color='primary'>
+              Logout <i className="fa fa-sign-out" aria-hidden="true"></i>
+            </Button>
+            <DeleteAccount />
         </Fragment>
       )}
     </Jumbotron>

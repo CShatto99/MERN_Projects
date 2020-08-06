@@ -22,7 +22,7 @@ const DeleteAccount = () => {
 
   return (
     <Fragment>
-      <Button onClick={toggle} style={{width: '30%'}} color='danger'>
+      <Button onClick={toggle} className='is-mobile' color='danger'>
         Delete Account <i className="fa fa-trash" aria-hidden="true"></i>
       </Button>
       <Modal isOpen={isOpen}>

@@ -28,10 +28,10 @@ const Hero = () => {
         notes
       </p>
       <hr />
-      <Button href='/register' style={{width: '30%'}} className='mr-3' color='primary'>
+      <Button href='/register' className='mr-3 is-mobile' color='primary'>
         Register <i className="fa fa-sign-in" aria-hidden="true"></i>
       </Button>
-      <Button href='/login' style={{width: '30%'}} color='light'>
+      <Button href='/login' className='is-mobile' color='light'>
         Login <i className="fa fa-sign-in" aria-hidden="true"></i>
       </Button>
     </Jumbotron>

@@ -45,7 +45,7 @@ const EditAccount = () => {
 
   return (
     <Fragment>
-      <Button onClick={toggle} style={{width: '30%'}} className='mr-3' color='primary'>
+      <Button onClick={toggle} className='mr-3 is-mobile' color='primary'>
         Edit Account <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
       </Button>
       <Modal isOpen={state.isOpen}>
