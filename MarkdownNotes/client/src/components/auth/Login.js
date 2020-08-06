@@ -71,12 +71,10 @@ const Login = () => {
           </FormGroup>
           <div className='text-center'>
             <Button style={{width: '30%'}} className='mr-3' color='primary'>
-              Login
+              Login <i class="fa fa-sign-in" aria-hidden="true"></i>
             </Button>
-            <Button style={{width: '30%'}} color='light' onClick={() => dispatch(clearAlert())}>
-              <Link className='std-link' to='/'>
-                Go Back
-              </Link>
+            <Button href='/' style={{width: '30%'}} color='light' onClick={() => dispatch(clearAlert())}>
+              <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
             </Button>
           </div>
         </Form>

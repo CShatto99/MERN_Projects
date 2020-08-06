@@ -11,7 +11,7 @@ import {
   Collapse,
   Container
 } from 'reactstrap'
-import { logout } from '../store/auth'
+import { logout } from '../../store/auth'
 
 const AppNavbar = () => {
   const dispatch = useDispatch()
@@ -20,13 +20,20 @@ const AppNavbar = () => {
 
   const toggle = () => setIsOpen(!isOpen)
 
+
+  let id = (isAuthenticated && !loading) ? user._id : '#'
+
   const userLinks = (
     <Fragment>
       <NavItem>
-        <NavLink href='#'>Welcome, {isAuthenticated && <span>{user.name}</span>}</NavLink>
+        <Link
+          className='nav-link'
+          to='/home'
+        >Home
+        </Link>
       </NavItem>
       <NavItem>
-        <Link className='nav-link' to='/home'>Home</Link>
+        <Link className='nav-link' to={`/account/${id}`}>Account</Link>
       </NavItem>
       <NavItem>
         <NavLink onClick={() => dispatch(logout())} style={{cursor: 'pointer'}}>Logout</NavLink>
@@ -49,7 +56,7 @@ const AppNavbar = () => {
     <div>
       <Navbar className='mb-5' dark expand='sm'>
         <Container>
-          <NavbarBrand href='/'>Markdown Notes</NavbarBrand>
+          <NavbarBrand href='/'>Markdown Notes | <small>Welcome{isAuthenticated && <span>, {user.name}</span>}</small></NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
