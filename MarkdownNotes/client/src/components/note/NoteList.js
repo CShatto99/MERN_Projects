@@ -14,8 +14,6 @@ import AddNote from './AddNote'
 import EditNote from './EditNote'
 import { getNotes, deleteNote } from '../../store/note'
 
-
-
 const NoteList = () => {
   const dispatch = useDispatch()
   const { isAuthenticated, } = useSelector(state => state.auth)

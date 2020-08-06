@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import {
   Button,
   Form,
@@ -71,10 +71,10 @@ const Login = () => {
           </FormGroup>
           <div className='text-center'>
             <Button style={{width: '30%'}} className='mr-3' color='primary'>
-              Login <i class="fa fa-sign-in" aria-hidden="true"></i>
+              Login <i className="fa fa-sign-in" aria-hidden="true"></i>
             </Button>
             <Button href='/' style={{width: '30%'}} color='light' onClick={() => dispatch(clearAlert())}>
-              <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
+              <i className="fa fa-arrow-left" aria-hidden="true"></i> Go Back
             </Button>
           </div>
         </Form>

@@ -68,6 +68,7 @@ const AddNote = () => {
                 onChange={e => onChange(e)}
               />
             </FormGroup>
+            <hr/>
             <Button color='primary' block>Add Note</Button>
             <Button onClick={toggle} color='light' block>Cancel</Button>
           </Form>

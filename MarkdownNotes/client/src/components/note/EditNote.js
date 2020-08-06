@@ -74,6 +74,7 @@ const EditNote = ({ _id, note }) => {
                 onChange={e => onChange(e)}
               />
             </FormGroup>
+            <hr/>
             <Button color='primary' block>Save Changes</Button>
             <Button onClick={toggle} color='light' block>Cancel</Button>
           </Form>

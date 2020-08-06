@@ -91,7 +91,16 @@ export const loadUser = () => async dispatch => {
     dispatch(load_user(res.data))
   } catch(err) {
     console.error(err.message)
-    // dispatch error
+  }
+}
+
+export const deleteUser = () => async dispatch => {
+  try {
+    await axios.delete('/api/auth')
+
+    dispatch(logout())
+  } catch(err) {
+    console.error(err.message)
   }
 }
 

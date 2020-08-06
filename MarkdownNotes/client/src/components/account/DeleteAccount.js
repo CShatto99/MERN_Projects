@@ -1,15 +1,25 @@
 import React, { Fragment, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   Button,
   Modal,
   ModalHeader,
   ModalBody
 } from 'reactstrap'
+import { deleteUser } from '../../store/auth'
 
 const DeleteAccount = () => {
+  const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen)
+
+  const onClick = () => {
+    console.log(' here')
+    dispatch(deleteUser())
+
+    toggle()
+  }
 
   return (
     <Fragment>
@@ -24,8 +34,8 @@ const DeleteAccount = () => {
           <p>This will permanently delete your account and all of its content.</p>
           <p>
             Are you sure?
-            <Button color='danger' size='sm'>Yes</Button>
-            <Button color='primary' size='sm'>No</Button>
+            <Button onClick={onClick} className='ml-2' color='danger' size='sm'>Yes</Button>
+            <Button onClick={toggle} className='ml-2' color='primary' size='sm'>No</Button>
           </p>
         </ModalBody>
       </Modal>

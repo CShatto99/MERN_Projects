@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 import {
   Jumbotron,
   Button
@@ -29,10 +29,10 @@ const Hero = () => {
       </p>
       <hr />
       <Button href='/register' style={{width: '30%'}} className='mr-3' color='primary'>
-        Register <i class="fa fa-sign-in" aria-hidden="true"></i>
+        Register <i className="fa fa-sign-in" aria-hidden="true"></i>
       </Button>
       <Button href='/login' style={{width: '30%'}} color='light'>
-        Login <i class="fa fa-sign-in" aria-hidden="true"></i>
+        Login <i className="fa fa-sign-in" aria-hidden="true"></i>
       </Button>
     </Jumbotron>
   )

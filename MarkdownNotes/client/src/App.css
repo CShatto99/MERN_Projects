@@ -51,3 +51,11 @@ li.list-group-item-cust {
   padding: 15px;
   border-radius: 4px;
 }
+
+
+
+@media screen and (max-width: 450px) {
+  .fa {
+      display: none;
+  }
+}

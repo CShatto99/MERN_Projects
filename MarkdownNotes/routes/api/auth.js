@@ -6,19 +6,6 @@ const auth = require('../../middleware/auth')
 
 const User = require('../../models/User')
 
-// @route GET /api/auth
-// @desc  Load a user
-// @access Public
-router.get('/', auth, async (req, res) => {
-  try {
-    const user = await User.findById({ _id: req.user._id }).select('-password -notes')
-    res.json(user)
-  } catch(err) {
-    console.error(err.message)
-    res.status(500).send('Server error')
-  }
-})
-
 // @route POST /api/auth
 // @desc  Login a user
 // @access Public
@@ -50,7 +37,34 @@ router.post('/', async (req, res) => {
     console.error(err.message)
     res.status(500).send('Server error')
   }
-
 })
+
+// @route GET /api/auth
+// @desc  Load a user
+// @access Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById({ _id: req.user._id }).select('-password -notes')
+    res.json(user)
+  } catch(err) {
+    console.error(err.message)
+    res.status(500).send('Server error')
+  }
+})
+
+// @route DELETE /api/auth
+// @desc  Delete a user
+// @access Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    await User.findByIdAndDelete({ _id: req.user._id })
+
+    res.status(204)
+  } catch(err) {
+    console.error(err.message)
+    res.status(500).send('Server error')
+  }
+})
+
 
 module.exports = router

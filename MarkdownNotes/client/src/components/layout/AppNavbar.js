@@ -20,9 +20,6 @@ const AppNavbar = () => {
 
   const toggle = () => setIsOpen(!isOpen)
 
-
-  let id = (isAuthenticated && !loading) ? user._id : '#'
-
   const userLinks = (
     <Fragment>
       <NavItem>
@@ -33,7 +30,7 @@ const AppNavbar = () => {
         </Link>
       </NavItem>
       <NavItem>
-        <Link className='nav-link' to={`/account/${id}`}>Account</Link>
+        {user && (<Link className='nav-link' to={`/account/${user._id}`}>Account</Link>)}
       </NavItem>
       <NavItem>
         <NavLink onClick={() => dispatch(logout())} style={{cursor: 'pointer'}}>Logout</NavLink>
@@ -56,11 +53,11 @@ const AppNavbar = () => {
     <div>
       <Navbar className='mb-5' dark expand='sm'>
         <Container>
-          <NavbarBrand href='/'>Markdown Notes | <small>Welcome{isAuthenticated && <span>, {user.name}</span>}</small></NavbarBrand>
+          <NavbarBrand href='/'>Markdown Notes | <small>Welcome{isAuthenticated && user && <span>, {user.name}</span>}</small></NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
-              {isAuthenticated && !loading ? userLinks : guestLinks}
+              {isAuthenticated && !loading && user ? userLinks : guestLinks}
               <NavItem>
                 <NavLink className='nav-item' target='_blank' href='https://github.com/CShatto99/MERN_Projects/tree/master/MarkdownNotes'>Github</NavLink>
               </NavItem>
