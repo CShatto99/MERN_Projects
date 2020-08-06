@@ -66,5 +66,25 @@ router.delete('/', auth, async (req, res) => {
   }
 })
 
+// @route PUT /api/auth
+// @desc  Update a user
+// @access Private
+router.put('/', auth, async (req, res) => {
+
+  try {
+    const { name, email } = req.body
+
+    user = await User.findByIdAndUpdate(
+      { _id: req.user._id },
+      { name, email },
+      { new: true }
+    ).select('-password -notes')
+
+    res.json(user)
+  } catch(err) {
+    console.error(err.message)
+    res.status(500).send('Server error')
+  }
+})
 
 module.exports = router

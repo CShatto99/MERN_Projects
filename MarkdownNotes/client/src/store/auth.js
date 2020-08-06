@@ -25,8 +25,8 @@ const auth = createSlice({
     load_user: (state, action) => {
       return {
         ...state,
-        isAuthenticated: true,
         user: action.payload,
+        isAuthenticated: true,
         loading: false
       }
     },
@@ -97,10 +97,26 @@ export const loadUser = () => async dispatch => {
 export const deleteUser = () => async dispatch => {
   try {
     dispatch(logout())
-    
+
     await axios.delete('/api/auth')
   } catch(err) {
     console.error(err.message)
+  }
+}
+
+export const editAccount = formData => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const res = await axios.put('/api/auth', formData, config)
+    console.log(res.data)
+    dispatch(load_user(res.data))
+  } catch(err) {
+    dispatch(setAlert(err.response.data.msg, err.response.statusText))
   }
 }
 

@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../store/auth'
 import DeleteAccount from './DeleteAccount'
+import EditAccount from './EditAccount'
 
 const Account = ({ match }) => {
   const dispatch = useDispatch()
@@ -27,9 +28,7 @@ const Account = ({ match }) => {
           <Button onClick={() => dispatch(logout())} style={{width: '30%'}} className='mr-3' color='primary'>
             Logout <i className="fa fa-sign-out" aria-hidden="true"></i>
           </Button>
-          <Button style={{width: '30%'}} className='mr-3' color='primary'>
-            Edit Account <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-          </Button>
+          <EditAccount />
           <DeleteAccount />
         </Fragment>
       )}
