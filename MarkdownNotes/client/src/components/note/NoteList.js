@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Moment from 'react-moment'
 import marked from 'marked'
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import {
   Button,
   ListGroup,
@@ -18,18 +18,25 @@ const NoteList = () => {
   const dispatch = useDispatch()
   const { isAuthenticated, } = useSelector(state => state.auth)
   const { notes, loading } = useSelector(state => state.note)
+  const [inProp, setInProp] = useState(false)
 
   useEffect(() => {
-    if(isAuthenticated) dispatch(getNotes())
+    dispatch(getNotes())
   }, [isAuthenticated, dispatch])
-
-  if(!isAuthenticated)
-    return <Redirect to='/' />
 
   const rawMarkup = note => {
     let rawMarkup = marked(note)
     return { __html: rawMarkup }
   }
+
+  const onClickDelete = _id => {
+    dispatch(deleteNote(_id))
+
+    setInProp(!inProp)
+  }
+
+  if(!isAuthenticated)
+    return <Redirect to='/' />
 
   return (
     <div>
@@ -53,28 +60,30 @@ const NoteList = () => {
               </ListGroupItem>
             </ListGroup> :
             <ListGroup>
-              {notes.map(({ note, _id, date }) => (
-                <CSSTransition key={_id} timeout={500} classNames='note-item'>
-                  <ListGroup className='mb-1' key={_id}>
-                    <ListGroupItem className='list-group-item-cust'>
-                      <small><Moment format='MMM Do, YYYY hh:mm:ss A'>{date}</Moment></small>
-                      <Button
-                        className='float-right ml-1'
-                        size='sm'
-                        color='danger'
-                        onClick={() => dispatch(deleteNote(_id))}
-                      >
-                        <i className="fa fa-trash" aria-hidden="true"></i>
-                      </Button>
-                      <EditNote _id={_id} note={note} />
-                    </ListGroupItem>
-                    <ListGroupItem className='list-group-item-cust'>
-                        <i className="fa fa-sticky-note" aria-hidden="true"></i>
-                        <span dangerouslySetInnerHTML={rawMarkup(note)} />
-                    </ListGroupItem>
-                  </ListGroup>
-                </CSSTransition>
-              ))}
+              <TransitionGroup>
+                {notes.map(({ note, _id, date }) => (
+                  <CSSTransition key={_id} timeout={500} classNames='note-item'>
+                    <ListGroup className='mb-1' key={_id}>
+                      <ListGroupItem className='list-group-item-cust'>
+                        <small><Moment format='MMM Do, YYYY hh:mm:ss A'>{date}</Moment></small>
+                        <Button
+                          className='float-right ml-1'
+                          size='sm'
+                          color='danger'
+                          onClick={() => onClickDelete(_id)}
+                        >
+                          <i className="fa fa-trash" aria-hidden="true"></i>
+                        </Button>
+                        <EditNote _id={_id} note={note} />
+                      </ListGroupItem>
+                      <ListGroupItem className='list-group-item-cust'>
+                          <i className="fa fa-sticky-note" aria-hidden="true"></i>
+                          <span dangerouslySetInnerHTML={rawMarkup(note)} />
+                      </ListGroupItem>
+                    </ListGroup>
+                  </CSSTransition>
+                ))}
+              </TransitionGroup>
             </ListGroup>
           }
         </Fragment>

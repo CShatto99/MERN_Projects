@@ -61,7 +61,7 @@ export const register = user => async dispatch => {
     dispatch(loadUser())
   } catch(err) {
     console.error(err.message)
-    dispatch(setAlert(err.response.data.msg, err.response.statusText))
+    dispatch(setAlert(err.response.data.msg, err.response.status))
   }
 }
 
@@ -77,7 +77,7 @@ export const login = user => async dispatch => {
     dispatch(login_user(res.data))
     dispatch(loadUser())
   } catch(err) {
-    dispatch(setAlert(err.response.data.msg, err.response.statusText))
+    dispatch(setAlert(err.response.data.msg, err.response.status))
   }
 }
 
@@ -113,10 +113,10 @@ export const editAccount = formData => async dispatch => {
 
   try {
     const res = await axios.put('/api/auth', formData, config)
-    console.log(res.data)
     dispatch(load_user(res.data))
   } catch(err) {
-    dispatch(setAlert(err.response.data.msg, err.response.statusText))
+    console.log(err.response)
+    dispatch(setAlert(err.response.data.msg, err.response.status))
   }
 }
 

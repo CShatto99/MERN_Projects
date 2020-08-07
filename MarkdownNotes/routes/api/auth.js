@@ -70,17 +70,24 @@ router.delete('/', auth, async (req, res) => {
 // @desc  Update a user
 // @access Private
 router.put('/', auth, async (req, res) => {
-
   try {
     const { name, email } = req.body
 
-    user = await User.findByIdAndUpdate(
+    if(!name || !email)
+      return res.status(400).json({ msg: 'Please enter a name and email' })
+
+    const existingUser = await User.findOne({ email })
+
+    if(existingUser && req.user._id !== existingUser._id.toString())
+      return res.status(409).json({ msg: 'User already exists' })
+
+    const updatedUser = await User.findByIdAndUpdate(
       { _id: req.user._id },
       { name, email },
       { new: true }
     ).select('-password -notes')
 
-    res.json(user)
+    res.json(updatedUser)
   } catch(err) {
     console.error(err.message)
     res.status(500).send('Server error')

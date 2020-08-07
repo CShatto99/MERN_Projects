@@ -4,7 +4,7 @@ const alert = createSlice({
   name: 'alert',
   initialState: {
     msg: '',
-    type: ''
+    type: null
   },
   reducers: {
     set_alert: (state, action) => {
@@ -18,7 +18,7 @@ const alert = createSlice({
       return {
         ...state,
         msg: '',
-        type: ''
+        type: null
       }
     }
   }

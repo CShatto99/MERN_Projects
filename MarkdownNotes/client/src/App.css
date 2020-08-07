@@ -1,3 +1,4 @@
+/* GENERAL */
 body {
   background-image: url('./img/star-exposure.jpg');
   background-repeat: no-repeat;
@@ -5,6 +6,12 @@ body {
   background-size: cover;
 }
 
+.std-link:hover {
+  text-decoration: none;
+}
+/* GENERAL */
+
+/* HOME PAGE */
 .note-item-enter {
   opacity: 0.01;
 }
@@ -20,11 +27,12 @@ body {
   transition: opacity 1000ms ease-in;
 }
 
-.nav-item:link, .nav-item:hover, .nav-item:active, .nav-item:visited {
-  text-decoration: none;
-  color: #fff;
+li.list-group-item-cust {
+  background-color: #e9ecef;
 }
+/* HOME PAGE */
 
+/* FORM */
 .form-title {
   background-color: #e9ecef;
   padding: 5px;
@@ -37,21 +45,17 @@ body {
   padding: 20px;
   border-radius: 4px;
 }
+/* FORM */
 
-.std-link:hover {
-  text-decoration: none;
-}
-
-li.list-group-item-cust {
-  background-color: #e9ecef;
-}
-
+/* 404 NOT FOUND PAGE */
 .not-found {
   background-color: #e9ecef;
   padding: 15px;
   border-radius: 4px;
 }
+/* 404 NOT FOUND PAGE */
 
+/* RESPONSIVE BUTTON */
 .is-mobile {
   width: 30%;
 }
@@ -63,3 +67,4 @@ li.list-group-item-cust {
     margin-bottom: 8px;
   }
 }
+/* RESPONSIVE BUTTON */

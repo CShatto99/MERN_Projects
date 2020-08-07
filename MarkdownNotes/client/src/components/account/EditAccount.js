@@ -8,13 +8,16 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Alert
 } from 'reactstrap'
 import { editAccount } from '../../store/auth'
+import { clearAlert } from '../../store/alert'
 
 const EditAccount = () => {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.auth)
+  const { msg } = useSelector(state => state.alert)
   const [state, setState] = useState({
     isOpen: false,
     name: user.name,
@@ -24,8 +27,12 @@ const EditAccount = () => {
   const toggle = () => {
     setState({
       ...state,
-      isOpen: !state.isOpen
+      isOpen: !state.isOpen,
+      email: user.email
     })
+
+    if(msg)
+      dispatch(clearAlert())
   }
 
   const onChange = e => {
@@ -40,7 +47,8 @@ const EditAccount = () => {
 
     dispatch(editAccount({ name: state.name, email: state.email }))
 
-    if(state.isOpen) toggle()
+    if(state.name && state.email)
+      toggle()
   }
 
   return (
@@ -54,6 +62,7 @@ const EditAccount = () => {
         </ModalHeader>
         <ModalBody>
           <Form onSubmit={e => onSubmit(e)}>
+            {msg && <Alert color='danger'>{msg}</Alert>}
             <FormGroup>
               <Label for='name'>Name</Label>
               <Input
