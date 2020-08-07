@@ -115,7 +115,6 @@ export const editAccount = formData => async dispatch => {
     const res = await axios.put('/api/auth', formData, config)
     dispatch(load_user(res.data))
   } catch(err) {
-    console.log(err.response)
     dispatch(setAlert(err.response.data.msg, err.response.status))
   }
 }
