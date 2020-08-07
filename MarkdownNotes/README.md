@@ -1,6 +1,3 @@
-# MERN Projects
-This repository showcases the projects that I have created using the MERN stack.
-
 # Markdown Notes
 
 Demo: [MarkdownNotes](https://markdown-notes.herokuapp.com/)
