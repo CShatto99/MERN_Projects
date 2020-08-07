@@ -1,10 +1,10 @@
-# Markdown Notes
+# MERN Shopping List
 
 Demo: [Shopping List](https://digital-shopping-list.herokuapp.com/)
 
 ### Introduction
 
-Shopping List is a simple web app that allows a user to keep track of a list of shopping items. Once an account has been created the user can add and delete items. This site was created for practicing the MERN stack and is not entirely my work. The original code can be found ![here]() and the lectures can be found ![here](https://www.youtube.com/watch?v=PBTYxXADG_k) 
+Shopping List is a simple web app that allows a user to keep track of a list of shopping items. Once an account has been created the user can add and delete items. This site was created for practicing the MERN stack and is not entirely my work. The original code can be found [here](https://github.com/bradtraversy/mern_shopping_list) and the lectures can be found [here](https://www.youtube.com/watch?v=PBTYxXADG_k) 
 
 ### What I learned
 
