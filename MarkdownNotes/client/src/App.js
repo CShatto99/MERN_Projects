@@ -17,7 +17,8 @@ import { loadUser } from './store/auth'
 
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadUser())
+    if(store.getState().auth.isAuthenticated)
+      store.dispatch(loadUser())
   })
 
   return (

@@ -5,10 +5,12 @@ const auth = require('../../middleware/auth')
 const User = require('../../models/User')
 const Note = require('../../models/Note')
 
+router.use(auth)
+
 // @route GET /api/note
 // @desc Get user notes
 // @access Private
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const user = await User.findById({ _id: req.user._id })
 
@@ -23,7 +25,7 @@ router.get('/', auth, async (req, res) => {
 // @route POST /api/note
 // @desc Create a note
 // @access Private
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     if(!req.body.note)
       return res.status(400).json({ msg: 'Please enter a note' })
@@ -45,7 +47,7 @@ router.post('/', auth, async (req, res) => {
 // @route DELETE /api/note/:_id
 // @desc Delete a note by id
 // @access Private
-router.delete('/:_id', auth, async (req, res) => {
+router.delete('/:_id', async (req, res) => {
   try {
     const user = await User.findById({ _id: req.user._id })
 
@@ -64,11 +66,11 @@ router.delete('/:_id', auth, async (req, res) => {
 // @route PUT /api/note/:_id
 // @desc Edit a note by id
 // @access Private
-router.put('/:_id', auth, async (req, res) => {
+router.put('/:_id', async (req, res) => {
   try {
     if(!req.body.note)
       return res.status(400).json({ msg: 'Please enter a note' })
-      
+
     const user = await User.findById({ _id: req.user._id })
 
     user.notes.map(note => {

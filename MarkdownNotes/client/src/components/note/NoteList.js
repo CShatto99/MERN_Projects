@@ -21,7 +21,7 @@ const NoteList = () => {
   const [inProp, setInProp] = useState(false)
 
   useEffect(() => {
-    dispatch(getNotes())
+    if(isAuthenticated) dispatch(getNotes())
   }, [isAuthenticated, dispatch])
 
   const rawMarkup = note => {

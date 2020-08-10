@@ -63,7 +63,7 @@ const Mapbox = () => {
             'source': source,
             'layout': {},
             'paint': {
-              'fill-color': state.fillColor,
+              'fill-color': '#DE44FF',
               'fill-opacity': 0.5
             }
           })
@@ -72,7 +72,7 @@ const Mapbox = () => {
     })
 
     return () => map.remove()
-  }, [state])
+  }, [])
 
   const onChange = e => {
     setState({
