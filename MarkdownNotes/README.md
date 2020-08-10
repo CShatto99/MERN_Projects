@@ -8,8 +8,8 @@ Markdown Notes is a simple web app that allows a user to keep track of a list of
 
 ### What I learned
 
-* Built a REST API to handle client requests using Node.js, Express, & MongoDB.
-* Created a user login & registration system using bcryptjs and jwt for encryption and authentication.
+* Built a REST API using Node.js, Express.js, & MongoDB to efficiently handle HTTP client requests
+* Created a user login/registration system with bcryptjs and JWT for encryption and authentication
 * Constructed and styled the UI with React and bootstrap.
 * Used Redux and Redux Toolkit for app state management.
 
