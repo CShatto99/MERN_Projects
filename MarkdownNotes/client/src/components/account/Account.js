@@ -20,7 +20,7 @@ const Account = ({ match }) => {
   if(!isAuthenticated)
     return <Redirect to='/login' />
 
-  if(type === 409) {
+  if(type === 409 || type === 401) {
     setTimeout(() => dispatch(clearAlert()), 5000)
   }
 
@@ -29,7 +29,7 @@ const Account = ({ match }) => {
       {loading ?
         <Spinner color='primary'/> : (
         <Fragment>
-          {type === 409 && <Alert color='danger'>The email you entered was taken, changes were ignored.</Alert>}
+          {(type === 409 || type === 401) && <Alert color='danger'>The email you entered was taken, changes were ignored.</Alert>}
           <h1>{user.name}</h1>
           <p className='lead'>{user.email}</p>
           <hr/>

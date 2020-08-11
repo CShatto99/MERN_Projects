@@ -14,7 +14,8 @@ const auth = createSlice({
   },
   reducers: {
     login_user: (state, action) => {
-      localStorage.setItem('token', action.payload.token)
+      localStorage.setItem('token', action.payload.accessToken)
+      localStorage.setItem('refreshToken', action.payload.refreshToken)
       return {
         ...state,
         ...action.payload,
@@ -23,6 +24,7 @@ const auth = createSlice({
       }
     },
     load_user: (state, action) => {
+      localStorage.setItem('token', action.payload.acessToken)
       return {
         ...state,
         user: action.payload,
@@ -32,6 +34,7 @@ const auth = createSlice({
     },
     clear_user: (state, action) => {
       localStorage.removeItem('token')
+      localStorage.removeItem('refreshToken')
       return {
         ...state,
         token: null,
@@ -71,6 +74,7 @@ export const login = user => async dispatch => {
       'Content-Type': 'application/json'
     }
   }
+
   try {
     const res = await axios.post('/api/auth', user, config)
 
@@ -81,16 +85,23 @@ export const login = user => async dispatch => {
   }
 }
 
-export const loadUser = () => async dispatch => {
+export const loadUser = (accessToken = null) => async dispatch => {
   if(localStorage.token)
     setAuthToken(localStorage.token)
+
+  if(accessToken)
+    setAuthToken(accessToken)
 
   try {
     const res = await axios.get('/api/auth')
 
     dispatch(load_user(res.data))
   } catch(err) {
-    console.error(err.message)
+    if(err.response.status === 401) {
+      const res = await axios.post('/api/auth/token', { refreshToken: localStorage.refreshToken})
+      dispatch(loadUser(res.data.accessToken))
+    }
+    dispatch(setAlert(err.response.data.msg, err.response.status))
   }
 }
 
@@ -100,7 +111,11 @@ export const deleteUser = () => async dispatch => {
 
     await axios.delete('/api/auth')
   } catch(err) {
-    console.error(err.message)
+    if(err.response.status === 401) {
+      const res = await axios.post('/api/auth/token', { refreshToken: localStorage.refreshToken})
+      dispatch(loadUser(res.data.accessToken))
+    }
+    dispatch(setAlert(err.response.data.msg, err.response.status))
   }
 }
 
@@ -115,11 +130,28 @@ export const editAccount = formData => async dispatch => {
     const res = await axios.put('/api/auth', formData, config)
     dispatch(load_user(res.data))
   } catch(err) {
+    if(err.response.status === 401) {
+      const res = await axios.post('/api/auth/token', { refreshToken: localStorage.refreshToken})
+      dispatch(loadUser(res.data.accessToken))
+    }
     dispatch(setAlert(err.response.data.msg, err.response.status))
   }
 }
 
-export const logout = () => dispatch => {
-  dispatch(clear_user())
-  dispatch(clearNotes())
+export const logout = () => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  }
+
+  try {
+    console.log(localStorage.refreshToken)
+    await axios.delete('/api/auth/logout', { token: localStorage.getItem('refreshToken') }, config)
+
+    dispatch(clear_user())
+    dispatch(clearNotes())
+  } catch(err) {
+    dispatch(setAlert(err.response.data.msg, err.response.status))
+  }
 }

@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 
 const User = require('../../models/User')
+const RefreshToken = require('../../models/RefreshToken')
+const genAccessToken = require('../../middleware/genAccessToken')
 
 // @route POST /api/user
 // @desc Register a user
@@ -34,10 +36,15 @@ router.post('/', async (req, res) => {
 
     const user = await newUser.save()
 
-    const token = jwt.sign({ _id: user._id }, process.env.ACCESS_SECRET_TOKEN, { expiresIn: 600 })
+    const accessToken = genAccessToken(user)
+    const refreshToken = jwt.sign({ _id: user._id }, process.env.REFRESH_SECRET_TOKEN)
+
+    const newRefreshToken = new RefreshToken({ token: refreshToken })
+    await newRefreshToken.save()
 
     res.json({
-      token,
+      accessToken,
+      refreshToken,
       user: { name, email }
     })
 

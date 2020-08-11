@@ -11,9 +11,11 @@ async function auth(req, res, next) {
 
     next()
   } catch(err) {
-    console.error(err.message)
-    res.status(401).json({ msg: 'Invalid token' })
+    console.error(err)
+    res.status(401).json({ msg: 'Invalid token, try again' })
   }
 }
+
+const genAccessToken = user => jwt.sign({ _id: user._id }, process.env.ACCESS_SECRET_TOKEN, { expiresIn: 30 })
 
 module.exports = auth

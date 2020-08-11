@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { Fragment, useRef, useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Container,
   Row,
@@ -6,22 +7,27 @@ import {
   Button,
   Form,
   FormGroup,
+  Label,
   Input
 } from 'reactstrap'
 import mapboxgl from 'mapbox-gl'
 import geoJSON from '../json/geoJSON.json'
 import '../css/mapbox.css'
+import { updateFill } from '../store/mapbox'
+import Checklist from './Checklist'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyMThvczlzYTAifQ.unXf2zoBfeVM28V-tQSRPw'
 
 const Mapbox = () => {
   const mapContainerRef = useRef(null)
+  const dispatch = useDispatch()
+  const { visited, fillColor } = useSelector(state => state.mapbox)
 
   const [state, setState] = useState({
     lng: -92,
     lat: 40,
     zoom: 3,
-    fillColor: ''
+    fillColor
   })
 
   useEffect(() => {
@@ -44,8 +50,9 @@ const Mapbox = () => {
     })
 
     geoJSON.regions.map(region => {
-      const { source, visited, coordinates } = region
-      if(visited) {
+      const { source, coordinates } = region
+      if(visited.indexOf(source) > -1) {
+        console.log('display' + source)
         map.on('load', function() {
           map.addSource(source, {
             'type': 'geojson',
@@ -63,7 +70,7 @@ const Mapbox = () => {
             'source': source,
             'layout': {},
             'paint': {
-              'fill-color': '#DE44FF',
+              'fill-color': fillColor,
               'fill-opacity': 0.5
             }
           })
@@ -72,7 +79,7 @@ const Mapbox = () => {
     })
 
     return () => map.remove()
-  }, [])
+  }, [visited, fillColor])
 
   const onChange = e => {
     setState({
@@ -83,14 +90,12 @@ const Mapbox = () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    setState({
-      ...state,
-      fillColor: ''
-    })
+
+    dispatch(updateFill(state.fillColor))
   }
 
   return (
-    <Container>
+    <Fragment>
       <Row className='justify-content-center'>
         <Col sm={{size: 'auto'}}>
           <div className="sidebarStyle">
@@ -103,10 +108,14 @@ const Mapbox = () => {
       <Row className='justify-content-center'>
         <div className="map-container" ref={mapContainerRef} />
       </Row>
-      <Row className='justify-content-center mt-3'>
-        <Col sm={{size: 'auto'}} className='text-center'>
-          <Form>
+      <Row className='align-items-center mt-3'>
+        <Col>
+          <Checklist />
+        </Col>
+        <Col className='text-center'>
+          <Form onSubmit={e => onSubmit(e)}>
             <FormGroup>
+              <Label className='text-light' for='fillColor'>Change Highlight</Label>
               <Input
                 onChange={e => onChange(e)}
                 type='text' id='fillColor'
@@ -115,7 +124,7 @@ const Mapbox = () => {
                 value={state.fillColor}
               />
             </FormGroup>
-            <Button color='dark'>Submit</Button>
+            <Button color='dark' block>Save</Button>
             <p className='text-light'>
               Click{' '}
               <a
@@ -131,7 +140,7 @@ const Mapbox = () => {
           </Form>
         </Col>
       </Row>
-    </Container>
+    </Fragment>
   );
 }
 
