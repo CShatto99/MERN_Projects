@@ -14,7 +14,6 @@ import {
 import mapboxgl from 'mapbox-gl'
 import geoJSON from '../json/geoJSON.json'
 import '../css/mapbox.css'
-import { updateFill } from '../store/mapbox'
 import Checklist from './Checklist'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyMThvczlzYTAifQ.unXf2zoBfeVM28V-tQSRPw'
@@ -22,13 +21,13 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyM
 const Mapbox = () => {
   const mapContainerRef = useRef(null)
   const dispatch = useDispatch()
-  const { visited, fillColor } = useSelector(state => state.mapbox)
+  const { profile } = useSelector(state => state.profile)
 
   const [state, setState] = useState({
     lng: -92,
     lat: 40,
     zoom: 3,
-    fillColor
+    fillColor: profile.fillColor
   })
 
   useEffect(() => {
@@ -52,35 +51,38 @@ const Mapbox = () => {
 
     geoJSON.regions.map(region => {
       const { source, coordinates } = region
-      if(visited.indexOf(source) > -1) {
-        console.log('display' + source)
-        map.on('load', function() {
-          map.addSource(source, {
-            'type': 'geojson',
-            'data': {
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Polygon',
-                'coordinates': coordinates
+      if(profile.visited) {
+        if(profile.visited.indexOf(source) > -1) {
+          console.log('display' + source)
+          map.on('load', function() {
+            map.addSource(source, {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Polygon',
+                  'coordinates': coordinates
+                }
               }
-            }
+            })
+            map.addLayer({
+              'id': source,
+              'type': 'fill',
+              'source': source,
+              'layout': {},
+              'paint': {
+                'fill-color': profile.fillColor,
+                'fill-opacity': 0.5
+              }
+            })
           })
-          map.addLayer({
-            'id': source,
-            'type': 'fill',
-            'source': source,
-            'layout': {},
-            'paint': {
-              'fill-color': fillColor,
-              'fill-opacity': 0.5
-            }
-          })
-        })
+        }
       }
+
     })
 
     return () => map.remove()
-  }, [visited, fillColor])
+  }, [profile.visited, profile.fillColor])
 
   const onChange = e => {
     setState({
@@ -92,7 +94,7 @@ const Mapbox = () => {
   const onSubmit = e => {
     e.preventDefault()
 
-    dispatch(updateFill(state.fillColor))
+    //dispatch(updateFill(state.fillColor))
   }
 
   return (
@@ -109,41 +111,14 @@ const Mapbox = () => {
       <Row className='justify-content-center'>
         <div className="map-container" ref={mapContainerRef} />
       </Row>
-      <Row className='align-items-center mt-3'>
-        <Col>
+      <Row className='justify-content-center mt-3'>
+        <Col sm={{size: 'auto'}}>
           <Checklist />
         </Col>
-        <Col>
+        <Col sm={{size: 'auto'}}>
           <Button color='dark' href='/settings'>
-            <i className="fa fa-cog" aria-hidden="true"></i>
+            Map Settings <i className="fa fa-cog" aria-hidden="true"></i>
           </Button>
-        </Col>
-        <Col className='text-center'>
-          <Form onSubmit={e => onSubmit(e)}>
-            <FormGroup>
-              <Label className='text-light' for='fillColor'>Change Highlight</Label>
-              <Input
-                onChange={e => onChange(e)}
-                type='text' id='fillColor'
-                name='fillColor'
-                placeholder='Change Highlight'
-                value={state.fillColor}
-              />
-            </FormGroup>
-            <Button color='dark' block>Save </Button>
-            <p className='text-light'>
-              Click{' '}
-              <a
-                className='std-link'
-                href='https://htmlcolorcodes.com/color-picker/'
-                target='_blank'
-                rel="noopener noreferrer"
-              >
-                here
-              </a>{' '}
-              for hex color codes
-            </p>
-          </Form>
         </Col>
       </Row>
     </Fragment>

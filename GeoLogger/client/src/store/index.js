@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
-import mapbox from './mapbox'
+import profile from './profile'
 
 const reducer = combineReducers({
-  mapbox
+  profile
 })
 
-const store = configureStore({ reducer})
+const store = configureStore({ reducer })
 
 export default store

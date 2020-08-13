@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Container } from 'reactstrap'
 import Mapbox from './components/Mapbox'
@@ -7,8 +7,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Provider } from 'react-redux'
 import store from './store/index'
+import { loadProfile } from './store/profile'
 
 const App = () => {
+  useEffect(() => {
+    store.dispatch(loadProfile("5f34ca4308e75a1e04e37618"))
+  })
+
   return (
     <div>
       <Router>

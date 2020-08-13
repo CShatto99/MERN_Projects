@@ -10,14 +10,13 @@ import {
   Label,
   Input
 } from 'reactstrap'
-import { updateFill } from '../store/mapbox'
 
 const Settings = () => {
   const dispatch = useDispatch()
-  const { fillColor } = useSelector(state => state.mapbox)
+  const { profile } = useSelector(state => state.profile)
   const [state, setState] = useState({
     isOpen: false,
-    fillColor
+    fillColor: profile.fillColor
   })
 
   const onChange = e => {
@@ -37,7 +36,7 @@ const Settings = () => {
   const onSubmit = e => {
     e.preventDefault()
 
-    dispatch(updateFill(state.fillColor))
+    //dispatch(updateFill(state.fillColor))
   }
 
   return (
@@ -57,7 +56,7 @@ const Settings = () => {
               type='text' id='fillColor'
               name='fillColor'
               placeholder='Color'
-              value={state.fillColor}
+              value={profile.fillColor}
             />
           </FormGroup>
           <Button color='dark' block>Save </Button>

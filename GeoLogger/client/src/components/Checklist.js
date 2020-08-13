@@ -14,11 +14,10 @@ import {
   Row
 } from 'reactstrap'
 import usa from '../json/US.json'
-import { updateVisited } from '../store/mapbox'
 
 const Checklist = () => {
   const dispatch = useDispatch()
-  const { visited } = useSelector(state => state.mapbox)
+  const { profile } = useSelector(state => state.profile)
   const [state, setState] = useState({
     isOpen: false,
     visited: []
@@ -46,7 +45,7 @@ const Checklist = () => {
   const onSubmit = e => {
     e.preventDefault()
 
-    dispatch(updateVisited(state.visited))
+    //dispatch(updateVisited(state.visited))
   }
 
   return (
