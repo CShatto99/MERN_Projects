@@ -38,7 +38,6 @@ const App = () => {
           </Container>
         </Provider>
       </Router>
-
     </div>
   );
 }

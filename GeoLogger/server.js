@@ -1,5 +1,10 @@
 const express = require('express')
 const app = express()
+const connectDB = require('./config/db')
+
+app.use(express.json())
+
+connectDB()
 
 app.use('/api/test', require('./routes/api/test'))
 

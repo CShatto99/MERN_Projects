@@ -1,4 +1,5 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Container,
@@ -112,6 +113,11 @@ const Mapbox = () => {
         <Col>
           <Checklist />
         </Col>
+        <Col>
+          <Button color='dark' href='/settings'>
+            <i className="fa fa-cog" aria-hidden="true"></i>
+          </Button>
+        </Col>
         <Col className='text-center'>
           <Form onSubmit={e => onSubmit(e)}>
             <FormGroup>
@@ -124,7 +130,7 @@ const Mapbox = () => {
                 value={state.fillColor}
               />
             </FormGroup>
-            <Button color='dark' block>Save</Button>
+            <Button color='dark' block>Save </Button>
             <p className='text-light'>
               Click{' '}
               <a

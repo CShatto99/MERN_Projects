@@ -39,7 +39,7 @@ const Checklist = () => {
       }) :
       setState({
         ...state,
-        visited: state.visited.filter(element => element != e.target.name)
+        visited: state.visited.filter(element => element !== e.target.name)
       })
   }
 
