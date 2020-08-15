@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Modal,
@@ -14,14 +14,22 @@ import {
   Row
 } from 'reactstrap'
 import usa from '../json/US.json'
+import { updateVisited } from '../store/profile'
 
 const Checklist = () => {
   const dispatch = useDispatch()
-  const { profile } = useSelector(state => state.profile)
+  const { visited, loading } = useSelector(state => state.profile)
   const [state, setState] = useState({
     isOpen: false,
     visited: []
   })
+
+  useEffect(() => {
+    setState({
+      ...state,
+      visited: [...visited]
+    })
+  }, [visited])
 
   const toggle = () => {
     setState({
@@ -30,22 +38,24 @@ const Checklist = () => {
     })
   }
 
-  const onChange = e => {
-    e.target.checked ?
-      setState({
-        ...state,
-        visited: [...state.visited, e.target.name]
-      }) :
-      setState({
-        ...state,
-        visited: state.visited.filter(element => element !== e.target.name)
-      })
-  }
-
   const onSubmit = e => {
     e.preventDefault()
 
-    //dispatch(updateVisited(state.visited))
+    dispatch(updateVisited("5f34ca4308e75a1e04e37618", state.visited))
+
+    toggle()
+  }
+
+  const onClick = region => {
+    !state.visited.includes(region) ?
+      setState({
+        ...state,
+        visited: [...state.visited, region]
+      }) :
+      setState({
+        ...state,
+        visited: state.visited.filter(element => element !== region)
+      })
   }
 
   return (
@@ -58,30 +68,20 @@ const Checklist = () => {
         <ModalBody>
           <Form onSubmit={e => onSubmit(e)}>
             <Button color='dark' className='mb-2' block>Save</Button>
-            <Button color='primary' className='mb-3' onClick={toggle} block>Finish</Button>
-            <ListGroup>
-              {usa.map(state => (
-                  <ListGroupItem key={state.name} className='mb-2 border rounded'>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        name={state.name}
-                        value={state.name}
-                        id={state.name}
-                        className="form-check-input"
-                        onChange={e => onChange(e)}
-                      />
-                      <label className="form-check-label" for={state.name}>{state.name}</label>
-                    </div>
-                  </ListGroupItem>
-              ))}
-            </ListGroup>
+            {!loading && (
+              <ListGroup>
+                {usa.map(region => (
+                  <Button key={region.name} id={region.name} className='text-left' onClick={() => onClick(region.name)} color='light' block>
+                    {region.name}
+                    {state.visited.includes(region.name) ? <span className='float-right text-success'>VISITED</span> : ''}
+                  </Button>
+                ))}
+              </ListGroup>
+            )}
           </Form>
         </ModalBody>
       </Modal>
-
     </Fragment>
-
   )
 }
 

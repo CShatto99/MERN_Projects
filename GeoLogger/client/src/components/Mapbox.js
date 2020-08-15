@@ -21,13 +21,12 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyM
 const Mapbox = () => {
   const mapContainerRef = useRef(null)
   const dispatch = useDispatch()
-  const { profile } = useSelector(state => state.profile)
+  const { visited, fillColor, loading } = useSelector(state => state.profile)
 
   const [state, setState] = useState({
     lng: -92,
     lat: 40,
     zoom: 3,
-    fillColor: profile.fillColor
   })
 
   useEffect(() => {
@@ -51,9 +50,8 @@ const Mapbox = () => {
 
     geoJSON.regions.map(region => {
       const { source, coordinates } = region
-      if(profile.visited) {
-        if(profile.visited.indexOf(source) > -1) {
-          console.log('display' + source)
+      if(!loading) {
+        if(visited.indexOf(source) > -1) {
           map.on('load', function() {
             map.addSource(source, {
               'type': 'geojson',
@@ -71,7 +69,7 @@ const Mapbox = () => {
               'source': source,
               'layout': {},
               'paint': {
-                'fill-color': profile.fillColor,
+                'fill-color': fillColor,
                 'fill-opacity': 0.5
               }
             })
@@ -82,7 +80,7 @@ const Mapbox = () => {
     })
 
     return () => map.remove()
-  }, [profile.visited, profile.fillColor])
+  }, [visited, fillColor])
 
   const onChange = e => {
     setState({
