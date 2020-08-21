@@ -1,9 +1,6 @@
 {
-  "art": [
-    { "title": "hoj17w.jpg" },
-    { "title": "hppzjn.jpg" },
-    { "title": "i3mb6d.jpg" },
-    { "title": "glv09c.jpg" },
-    { "title": "hrjsz9.jpg" }
-  ]
+    "art": [
+        "hppzjn.png",
+        "i3mb6d.jpg"
+    ]
 }
