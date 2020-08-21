@@ -23,6 +23,12 @@ const AppNavbar = () => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
+                <NavLink href='/'>Sources coming soon</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='https://www.twitch.tv/xqcow'>xQcOW</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href='https://github.com/CShatto99/MERN_Projects/tree/master/PogUArt' target='__blank'>Github</NavLink>
               </NavItem>
             </Nav>
@@ -30,7 +36,6 @@ const AppNavbar = () => {
         </Container>
       </Navbar>
     </div>
-
   )
 }
 

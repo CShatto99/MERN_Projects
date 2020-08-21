@@ -62,7 +62,7 @@ const Collage = () => {
   return (
     <Fragment>
       <Container className='text-center'>
-        <h3 className='mb-5'>There are {art.length} pieces of PogU Art</h3>
+        <h3 className='mb-5'>{art.length} PogU Arts</h3>
         { collage }
       </Container>
     </Fragment>
