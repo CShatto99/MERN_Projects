@@ -9,8 +9,6 @@ import images from '../json/images.json'
 const Collage = () => {
   const { art } = images
 
-  console.log(art[0])
-
   const collage = []
 
   for(let i = 0; i < art.length; i+=2) {

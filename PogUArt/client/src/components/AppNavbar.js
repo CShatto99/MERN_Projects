@@ -9,6 +9,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap'
+import xqcphp from '../img/xqcphp.jpeg'
 
 const AppNavbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -18,7 +19,7 @@ const AppNavbar = () => {
     <div>
       <Navbar dark expand='sm'>
         <Container>
-          <NavbarBrand href='/'>Pogu Art</NavbarBrand>
+          <NavbarBrand href='/'><img className='mr-2' src={xqcphp} alt='xqcphp' width='30px'/>Pogu Art</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
