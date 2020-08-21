@@ -1,6 +1,5 @@
 const express = require('express')
 const https = require('https')
-require('require-context/register')
 const app = express()
 
 app.use(express.json())

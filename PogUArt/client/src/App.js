@@ -1,14 +1,18 @@
 import React from 'react'
 import { Container } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import AppNavbar from './components/AppNavbar'
 import Collage from './components/Collage'
 
 const App = () => {
   return (
-    <Container className='mt-5'>
-      <h2 className='text-center mb-5'>PogU Art</h2>
-      <Collage />
-    </Container>
+    <div>
+      <AppNavbar />
+      <Container className='mt-3'>
+
+        <Collage />
+      </Container>
+    </div>
   )
 }
 

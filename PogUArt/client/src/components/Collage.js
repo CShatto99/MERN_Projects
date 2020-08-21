@@ -17,15 +17,42 @@ const Collage = () => {
     if(i + 2 <= art.length) {
       collage.push(
         <Row key={art[i]} className='align-items-center mb-5'>
-          <Col><img src={require(`../xqcow/${art[i]}`)} alt="PogU Art" /></Col>
-          <Col><img src={require(`../xqcow/${art[i+1]}`)} alt="PogU Art" /></Col>
+          <Col className='mr-5'>
+            <Row>
+              <img src={require(`../xqcow/${art[i]}`)} alt="PogU Art" />
+            </Row>
+            <Row className='justify-content-center mt-2'>
+              <a className='text-light' style={{textDecoration: 'none'}} href='/'>
+                <small>SOURCE</small>
+              </a>
+            </Row>
+          </Col>
+          <Col>
+            <Row>
+              <img src={require(`../xqcow/${art[i+1]}`)} alt="PogU Art" />
+            </Row>
+            <Row className='justify-content-center mt-2'>
+              <a className='text-light' style={{textDecoration: 'none'}} href='/'>
+                <small>SOURCE</small>
+              </a>
+            </Row>
+          </Col>
         </Row>
       )
     }
     else {
       collage.push(
         <Row key={art[i].title} className='align-items-center mb-5'>
-          <Col><img src={require(`../xqcow/${art[i]}`)} alt="PogU Art" /></Col>
+          <Col className='mr-5'>
+            <Row>
+              <img src={require(`../xqcow/${art[i]}`)} alt="PogU Art" />
+            </Row>
+            <Row className='justify-content-center mt-2'>
+              <a className='text-light' style={{textDecoration: 'none'}} href='/'>
+                <small>SOURCE</small>
+              </a>
+            </Row>
+          </Col>
           <Col></Col>
         </Row>
       )
@@ -35,6 +62,7 @@ const Collage = () => {
   return (
     <Fragment>
       <Container className='text-center'>
+        <h3 className='mb-5'>There are {art.length} pieces of PogU Art</h3>
         { collage }
       </Container>
     </Fragment>
