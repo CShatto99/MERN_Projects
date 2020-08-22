@@ -36,7 +36,7 @@ npm install
 cd ..
 npm install
 
-# Add your Mongo URI and JWT secret to the .env file
+# Add your Mongo URI to the .env file
 
 # Run the dev script
 npm run dev
