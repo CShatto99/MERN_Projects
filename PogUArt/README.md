@@ -1,6 +1,6 @@
-# Markdown Notes
+# PogU Art
 
-Demo: [MarkdownNotes](https://markdown-notes.herokuapp.com/)
+Demo: [PogU Art](http://poguart.com/)
 
 ### Introduction
 
@@ -35,6 +35,8 @@ cd client
 npm install
 cd ..
 npm install
+
+# Add your Mongo URI and JWT secret to the .env file
 
 # Run the dev script
 npm run dev
