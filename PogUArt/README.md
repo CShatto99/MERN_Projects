@@ -36,8 +36,6 @@ npm install
 cd ..
 npm install
 
-# Add your Mongo URI to the .env file
-
 # Run the dev script
 npm run dev
 ```
