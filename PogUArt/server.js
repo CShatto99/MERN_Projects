@@ -1,11 +1,6 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-const connectDB = require('./config/db')
-
-connectDB()
-
-app.use('/api/images', require('./routes/api/images'))
 
 if(process.env.NODE_ENV == 'production') {
   app.use(express.static('client/build'))
@@ -15,6 +10,6 @@ if(process.env.NODE_ENV == 'production') {
   })
 }
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 5000
 
 app.listen(port, () => console.log(`Listening on port ${port}`))

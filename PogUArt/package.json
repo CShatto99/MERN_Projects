@@ -1,7 +1,7 @@
 {
   "name": "poguart",
   "version": "1.0.0",
-  "description": "Collage app that hosts all of the art posted on r/xqcow",
+  "description": "A simple web app that hosts art posted on r/xqcow",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -12,13 +12,11 @@
   },
   "author": "Cameron S.",
   "license": "MIT",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.10.0"
-  },
   "devDependencies": {
     "concurrently": "^5.3.0",
     "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }

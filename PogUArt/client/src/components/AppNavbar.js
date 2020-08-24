@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Container,
   Navbar,
@@ -9,7 +10,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap'
-import xqcphp from '../img/xqcphp.jpeg'
+import xqcpfp from '../img/xqcpfp.jpeg'
 
 const AppNavbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,18 +20,21 @@ const AppNavbar = () => {
     <div>
       <Navbar dark expand='sm'>
         <Container>
-          <NavbarBrand href='/'><img className='mr-2' src={xqcphp} alt='xqcphp' width='30px'/>Pogu Art</NavbarBrand>
+          <NavbarBrand href='/'><img className='mr-2' src={xqcpfp} alt='xqcphp' width='30px'/>PogU Art</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href='/'>Sources coming soon</NavLink>
+                <Link to ='/' className='nav-link'  onClick={toggle}>Art</Link>
               </NavItem>
               <NavItem>
-                <NavLink href='https://www.twitch.tv/xqcow'>xQcOW</NavLink>
+                <Link to='/authors' className='nav-link' onClick={toggle}>Authors</Link>
               </NavItem>
               <NavItem>
-                <NavLink href='https://github.com/CShatto99/MERN_Projects/tree/master/PogUArt' target='__blank'>Github</NavLink>
+                <NavLink href='https://www.twitch.tv/xqcow'  onClick={toggle}>xQcOW</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='https://github.com/CShatto99/MERN_Projects/tree/master/PogUArt' target='__blank'  onClick={toggle}>Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

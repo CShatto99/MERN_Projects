@@ -1,127 +1,82 @@
-import React, { Fragment, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { Fragment, useState, useEffect } from 'react'
 import {
   Container,
   Row,
   Col,
-  Spinner
+  Button
 } from 'reactstrap'
-import { getImages } from '../store/image'
+import { v4 as uuidv4 } from 'uuid';
+import images from '../json/images.json'
+import authors from '../json/authors.json'
 
 const Collage = () => {
-  const dispatch = useDispatch()
+  const [state, setState] = useState({
+    collage: []
+  })
+
   useEffect(() => {
-    dispatch(getImages())
-  }, [dispatch])
-  const { images, loading } = useSelector(state => state.image)
+    onClickHandler()
+  }, [])
 
-  const base64ArrayBuffer = arrayBuffer => {
-    let base64    = ''
-    let encodings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  const { art } = images
 
-    let bytes = new Uint8Array(arrayBuffer)
-    let byteLength = bytes.byteLength
-    let byteRemainder = byteLength % 3
-    let mainLength = byteLength - byteRemainder
-
-    let a, b, c, d
-    let chunk
-
-    for (let i = 0; i < mainLength; i = i + 3) {
-      chunk = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2]
-
-      a = (chunk & 16515072) >> 18
-      b = (chunk & 258048)   >> 12
-      c = (chunk & 4032)     >>  6
-      d = chunk & 63
-
-      base64 += encodings[a] + encodings[b] + encodings[c] + encodings[d]
+  const loadMore = index => {
+    let collage = []
+    let i = index
+    while(i < index+20) {
+      if(i + 2 <= art.length) {
+        collage.push(
+          <Fragment key={uuidv4()}>
+            <Row className='not-mobile align-items-center mb-5'>
+              <Col className='mr-5'>
+                <img src={art[i].url} alt='PogU Art' />
+              </Col>
+              <Col>
+                <img src={art[i+1].url} alt='PogU Art' />
+              </Col>
+            </Row>
+            <Row className='mobile-div align-items-center mb-5'>
+              <Col>
+                <img className='mb-5 ' src={art[i].url} alt='PogU Art' />
+                <img src={art[i+1].url} alt='PogU Art' />
+              </Col>
+            </Row>
+          </Fragment>
+        )
+        i+=2
+      }
+      else {
+        collage.push(
+          <Fragment>
+            <Row className='not-mobile align-items-center mb-5'>
+              <Col className='mobile-margin'>
+                <img src={art[i].url} alt='PogU Art' />
+              </Col>
+              <Col></Col>
+            </Row>
+          </Fragment>
+        )
+        i++
+        break
+      }
     }
-
-    if (byteRemainder === 1) {
-      chunk = bytes[mainLength]
-
-      a = (chunk & 252) >> 2
-      b = (chunk & 3)   << 4
-
-      base64 += encodings[a] + encodings[b] + '=='
-    }
-    else if (byteRemainder === 2) {
-      chunk = (bytes[mainLength] << 8) | bytes[mainLength + 1]
-
-      a = (chunk & 64512) >> 10
-      b = (chunk & 1008)  >>  4
-
-      c = (chunk & 15)    <<  2 // 15    = 2^4 - 1
-
-      base64 += encodings[a] + encodings[b] + encodings[c] + '='
-    }
-
-    return base64
+    return collage
   }
 
-  let base64Strings = []
-  if(!loading)
-    images.map(image => base64Strings.push(base64ArrayBuffer(image.img.data.data)))
-
-  const collage = []
-
-  for(let i = 0; i < images.length; i+=2) {
-    if(i + 2 <= images.length) {
-      collage.push(
-        <Row key={images[i].img.name} className='align-items-center mb-5'>
-          <Col className='mr-5'>
-            <Row>
-              <img src={`data:image/${images[i].img.contentType};base64,${base64Strings[i]}`} alt='PogU Art' />
-            </Row>
-            // <Row className='justify-content-center mt-2'>
-            //   <a className='text-light' style={{textDecoration: 'none'}} href='/'>
-            //     <small>SOURCE</small>
-            //   </a>
-            // </Row>
-          </Col>
-          <Col>
-            <Row>
-              <img src={`data:image/${images[i].img.contentType};base64,${base64Strings[i+1]}`} alt='PogU Art' />
-            </Row>
-            // <Row className='justify-content-center mt-2'>
-            //   <a className='text-light' style={{textDecoration: 'none'}} href='/'>
-            //     <small>SOURCE</small>
-            //   </a>
-            // </Row>
-          </Col>
-        </Row>
-      )
-    }
-    else {
-      collage.push(
-        <Row key={images[i].img.name} className='align-items-center mb-5'>
-          <Col className='mr-5'>
-            <Row>
-              <img src={`data:image/${images[i].img.contentType};base64,${base64Strings[i]}`} alt='PogU Art' />
-            </Row>
-            // <Row className='justify-content-center mt-2'>
-            //   <a className='text-light' style={{textDecoration: 'none'}} href='/'>
-            //     <small>SOURCE</small>
-            //   </a>
-            // </Row>
-          </Col>
-          <Col></Col>
-        </Row>
-      )
-    }
+  const onClickHandler = () => {
+    setState({
+      ...state,
+      collage: state.collage.concat(loadMore(state.collage.length*2))
+    })
   }
 
   return (
     <Fragment>
       <Container className='text-center'>
-
-        {loading ? <Spinner color='primary' /> :
-          <Row className='align-items-center mb-5'>
-            <h1>{images.length} PogU Arts</h1>
-            {collage}
-          </Row>
-        }
+        <h1 className='mobile-header1'>PogU Art</h1>
+        <h4 className='mobile-header4 mb-5'>{art.length} pieces by {authors.authors.length} authors</h4>
+        {state.collage.length > 0 && state.collage}
+        {state.collage.length*2 < art.length && <Button className='mb-5' size='sm' color='primary' onClick={() => onClickHandler()}>Load More</Button>}
       </Container>
     </Fragment>
   )
