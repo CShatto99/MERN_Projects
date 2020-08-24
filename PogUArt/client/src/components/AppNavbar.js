@@ -25,16 +25,16 @@ const AppNavbar = () => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to ='/' className='nav-link'  onClick={toggle}>Art</Link>
+                <Link to ='/' className='nav-link' onClick={toggle}>Art</Link>
               </NavItem>
               <NavItem>
                 <Link to='/authors' className='nav-link' onClick={toggle}>Authors</Link>
               </NavItem>
               <NavItem>
-                <NavLink href='https://www.twitch.tv/xqcow'  onClick={toggle}>xQcOW</NavLink>
+                <NavLink href='https://www.twitch.tv/xqcow' target='__blank' onClick={toggle}>xQcOW</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='https://github.com/CShatto99/MERN_Projects/tree/master/PogUArt' target='__blank'  onClick={toggle}>Github</NavLink>
+                <NavLink href='https://github.com/CShatto99/MERN_Projects/tree/master/PogUArt' target='__blank' onClick={toggle}>Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
