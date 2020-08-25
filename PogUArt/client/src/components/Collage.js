@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState } from 'react'
 import {
   Container,
   Row,
@@ -51,10 +51,15 @@ const loadMore = (index, randex) => {
       collage.push(
         <Fragment>
           <Row className='not-mobile align-items-center mb-5'>
-            <Col className='mobile-margin'>
+            <Col>
               <img src={art[randex[i]].url} alt='PogU Art' />
             </Col>
             <Col></Col>
+          </Row>
+          <Row className='mobile-div align-items-center mb-5'>
+            <Col>
+              <img src={art[randex[i]].url} alt='PogU Art' />
+            </Col>
           </Row>
         </Fragment>
       )
@@ -66,7 +71,7 @@ const loadMore = (index, randex) => {
 }
 
 const Collage = () => {
-  const [randex, setRandex] = useState(shuffle())
+  const randex = shuffle()
   const [collage, setCollage] = useState(loadMore(0, randex))
 
   return (
