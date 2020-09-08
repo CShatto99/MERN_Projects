@@ -1,4 +1,5 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Row, Col, Button } from "reactstrap";
 import mapboxgl from "mapbox-gl";
@@ -9,9 +10,13 @@ import Checklist from "./Checklist";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyMThvczlzYTAifQ.unXf2zoBfeVM28V-tQSRPw";
 
+
 const Mapbox = () => {
   const mapContainerRef = useRef(null);
-  const { visited, fillColor, loading } = useSelector((state) => state.profile);
+  const { visited, fillColor, loading } = useSelector(state => state.profile);
+  const { isAuth } = useSelector(state => state.auth);
+
+  
 
   const [state, setState] = useState({
     lng: -92,
@@ -20,6 +25,7 @@ const Mapbox = () => {
   });
 
   useEffect(() => {
+    
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/dark-v10",
@@ -38,7 +44,7 @@ const Mapbox = () => {
       });
     });
 
-    geoJSON.regions.map((region) => {
+    geoJSON.regions.map(region => {
       const { source, coordinates } = region;
       if (!loading) {
         if (visited.indexOf(source) > -1) {
@@ -68,9 +74,15 @@ const Mapbox = () => {
       }
     });
 
+    
+
     return () => map.remove();
   }, [visited, fillColor]);
 
+  
+  if(!isAuth)
+    return <Redirect to='/' />
+    
   return (
     <Fragment>
       <Row className="justify-content-center">

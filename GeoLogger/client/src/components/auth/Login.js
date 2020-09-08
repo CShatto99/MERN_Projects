@@ -6,24 +6,24 @@ import { login } from "../../store/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth } = useSelector(state => state.auth);
   const [state, setState] = useState({
-    userOrEmail: "",
+    email: "",
     password: "",
   });
 
-  const onChange = (e) => {
+  const onChange = e => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
 
     const user = {
-      userOrEmail: state.userOrEmail,
+      email: state.email,
       password: state.password,
     };
 
@@ -36,12 +36,12 @@ const Login = () => {
     <div>
       <Form onSubmit={onSubmit}>
         <FormGroup>
-          <Label for="userOrEmail">Username or Email</Label>
+          <Label for="email">Username or Email</Label>
           <Input
             type="text"
-            id="userOrEmail"
-            name="userOrEmail"
-            onChange={(e) => onChange(e)}
+            id="email"
+            name="email"
+            onChange={e => onChange(e)}
           />
         </FormGroup>
         <FormGroup>
@@ -50,7 +50,7 @@ const Login = () => {
             type="password"
             id="password"
             name="password"
-            onChange={(e) => onChange(e)}
+            onChange={e => onChange(e)}
           />
         </FormGroup>
         <Button color="primary">Login</Button>

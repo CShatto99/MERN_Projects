@@ -27,7 +27,8 @@ const { load_profile } = profile.actions
 
 export const loadProfile = profile_id => async dispatch => {
   try {
-    const res = await axios.get(`/api/profile/${profile_id}`)
+    const res = await axios.get(`/api/profile/5f34ca4308e75a1e04e37618
+    `)
     dispatch(load_profile(res.data))
   } catch(err) {
     console.error(err.message)
