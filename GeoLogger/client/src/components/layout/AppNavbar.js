@@ -12,10 +12,10 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button
+  Button,
 } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from '../../store/auth'
+import { logout } from "../../store/auth";
 
 const AppNavbar = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,11 @@ const AppNavbar = () => {
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem>
-            <Link to="/settings" className="text-dark">
+            <Link
+              to="/settings"
+              className="nav-link text-dark"
+              style={{ paddingLeft: "0" }}
+            >
               Settings
             </Link>
           </DropdownItem>

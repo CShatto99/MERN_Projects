@@ -5,8 +5,6 @@ const profile = createSlice({
   name: 'profile',
   initialState: {
     profile: {},
-    visited: [],
-    fillColor: '',
     loading: true
   },
   reducers: {
@@ -59,36 +57,4 @@ export const updateProfile = profile => async dispatch => {
 
 export const clearProfile = () => dispatch => {
   dispatch(clear_profile());
-}
-
-export const updateVisited = (profile_id, visited) => async dispatch => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  try {
-    const res = await axios.post(`/api/profile/${profile_id}/visited`, { visited }, config)
-    dispatch(load_profile(res.data))
-  } catch(err) {
-    console.error(err.message)
-    // alert
-  }
-}
-
-export const updateFill = (profile_id, fillColor) => async dispatch => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  try {
-    const res = await axios.post(`/api/profile/${profile_id}/fill`, { fillColor }, config)
-    dispatch(load_profile(res.data))
-  } catch(err) {
-    console.error(err.message)
-    // dispatch alert
-  }
 }

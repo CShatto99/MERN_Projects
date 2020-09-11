@@ -13,7 +13,7 @@ mapboxgl.accessToken =
 
 const Mapbox = () => {
   const mapContainerRef = useRef(null);
-  const { profile, visited, fillColor, loading } = useSelector(state => state.profile);
+  const { profile, loading } = useSelector(state => state.profile);
   const { isAuth } = useSelector(state => state.auth);
 
   const [state, setState] = useState({
@@ -74,7 +74,7 @@ const Mapbox = () => {
     
 
     return () => map.remove();
-  }, [visited, fillColor]);
+  }, [profile]);
 
   
   if(!isAuth)

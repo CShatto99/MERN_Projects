@@ -10,11 +10,11 @@ import {
   Row,
 } from "reactstrap";
 import usa from "../json/US.json";
-import { updateVisited } from "../store/profile";
+import { updateProfile } from "../store/profile";
 
 const Checklist = () => {
   const dispatch = useDispatch();
-  const { visited, loading } = useSelector((state) => state.profile);
+  const { profile, loading } = useSelector(state => state.profile);
   const [state, setState] = useState({
     isOpen: false,
     visited: [],
@@ -23,9 +23,11 @@ const Checklist = () => {
   useEffect(() => {
     setState({
       ...state,
-      visited: [...visited],
+      theme: profile.theme,
+      fillColor: profile.fillColor,
+      visited: [...profile.visited],
     });
-  }, [visited]);
+  }, [profile]);
 
   const toggle = () => {
     setState({
@@ -34,15 +36,21 @@ const Checklist = () => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
 
-    dispatch(updateVisited("5f34ca4308e75a1e04e37618", state.visited));
+    const profile = {
+      theme: state.theme,
+      fillColor: state.fillColor,
+      visited: state.visited,
+    };
+
+    dispatch(updateProfile(profile));
 
     toggle();
   };
 
-  const onClick = (region) => {
+  const onClick = region => {
     !state.visited.includes(region)
       ? setState({
           ...state,
@@ -50,9 +58,11 @@ const Checklist = () => {
         })
       : setState({
           ...state,
-          visited: state.visited.filter((element) => element !== region),
+          visited: state.visited.filter(element => element !== region),
         });
   };
+
+  console.log(state.visited);
 
   return (
     <Fragment>
@@ -64,13 +74,13 @@ const Checklist = () => {
       <Modal isOpen={state.isOpen}>
         <ModalHeader toggle={toggle}>Add Some States</ModalHeader>
         <ModalBody>
-          <Form onSubmit={(e) => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)}>
             <Button color="dark" className="mb-2" block>
               Save
             </Button>
             {!loading && (
               <ListGroup>
-                {usa.map((region) => (
+                {usa.map(region => (
                   <Button
                     key={region.name}
                     id={region.name}

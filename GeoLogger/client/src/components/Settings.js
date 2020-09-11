@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Container,
@@ -17,15 +18,18 @@ const Settings = () => {
   const { profile, loading } = useSelector(state => state.profile);
   const [state, setState] = useState({
     saved: false,
+    theme: "",
     fillColor: "",
   });
 
   useEffect(() => {
-    setState({
-      ...state,
-      theme: profile.theme,
-      fillColor: profile.fillColor,
-    });
+    if (!loading)
+      setState({
+        ...state,
+        theme: profile.theme,
+        fillColor: profile.fillColor,
+        visited: profile.visited,
+      });
   }, [profile]);
 
   const onChange = e => {
@@ -35,20 +39,13 @@ const Settings = () => {
     });
   };
 
-  const toggle = () => {
-    setState({
-      ...state,
-      isOpen: !state.isOpen,
-    });
-  };
-
   const onSubmit = e => {
     e.preventDefault();
 
     const profile = {
       theme: state.theme,
       fillColor: state.fillColor,
-      visited: profile.visited,
+      visited: state.visited,
     };
 
     dispatch(updateProfile(profile));
@@ -57,10 +54,17 @@ const Settings = () => {
       ...state,
       saved: true,
     });
+
+    setTimeout(() => {
+      setState({
+        ...state,
+        saved: false,
+      });
+    }, 4000);
   };
 
   return (
-    <Container>
+    <>
       {loading ? (
         <h3 className="text-center text-light">Loading...</h3>
       ) : (
@@ -68,16 +72,27 @@ const Settings = () => {
           <Row className="justify-content-center mb-1">
             {state.saved && <p className="text-success">Changes Saved!</p>}
           </Row>
-          <Row className="justify-content-start mb-3 ml-1">
-            <Button color="dark" href="/">
-              Go Back
-            </Button>
+          <Row className="mb-3">
+            <Col>
+              <Link className="btn btn-outline-dark text-light" to="/map">
+                Back to Map
+              </Link>
+            </Col>
+            <Col>
+              <Button
+                className="float-right text-light"
+                type="submit"
+                form="settings-form"
+                color="success"
+                outline
+              >
+                Save{" "}
+              </Button>
+            </Col>
           </Row>
-          <hr style={{ backgroundColor: "#fff" }} />
-          <Form
-            className="justify-content-start ml-1"
-            onSubmit={e => onSubmit(e)}
-          >
+
+          <Form id="settings-form" className="" onSubmit={e => onSubmit(e)}>
+            <hr style={{ backgroundColor: "#fff" }} />
             <FormGroup>
               <Label className="justify-content-start" for="fillColor">
                 <h4 className="text-left">Region Highlight Color</h4>
@@ -88,7 +103,7 @@ const Settings = () => {
                 id="fillColor"
                 name="fillColor"
                 placeholder="Color"
-                value={profile.fillColor}
+                value={state.fillColor}
               />
               <p className="text-light mt-2">
                 Click{" "}
@@ -139,12 +154,11 @@ const Settings = () => {
                 </Label>
               </FormGroup>
             </FormGroup>
+            <hr style={{ backgroundColor: "#fff" }} />
           </Form>
-          <hr style={{ backgroundColor: "#fff" }} />
-          <Button formAction={e => onSubmit(e)} color="dark">Save </Button>
         </Fragment>
       )}
-    </Container>
+    </>
   );
 };
 

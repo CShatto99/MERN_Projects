@@ -31,6 +31,7 @@ router.post("/", authToken, async (req, res) => {
 
   const profileFields = {
     user: req.user.id,
+    theme,
     fillColor,
     visited,
   };
