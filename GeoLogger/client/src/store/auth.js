@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { loadProfile, clearProfile } from './profile'
+import { loadProfile, clearProfile } from "./profile";
 import setAuthToken from "../utils/setAuthToken";
 
 const auth = createSlice({
@@ -13,6 +13,7 @@ const auth = createSlice({
   },
   reducers: {
     login_user: (state, action) => {
+      localStorage.setItem("isAuth", "true");
       return {
         ...state,
         isAuth: true,
@@ -28,12 +29,13 @@ const auth = createSlice({
       };
     },
     logout_user: (state, action) => {
+      localStorage.removeItem("isAuth");
       return {
         ...state,
         user: {},
-        isAuth: false
-      }
-    }
+        isAuth: false,
+      };
+    },
   },
 });
 
@@ -53,6 +55,7 @@ export const loadUser = () => async dispatch => {
 
 export const login = user => async dispatch => {
   axios.defaults.headers.withCredentials = true;
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -65,15 +68,13 @@ export const login = user => async dispatch => {
     setAuthToken(data.accessToken);
 
     dispatch(loadUser());
-    dispatch(loadProfile())
+    dispatch(loadProfile());
     dispatch(login_user());
   } catch (err) {
     console.log(err.message);
     //dispatch(sertAlert(err.response.data.msg, err.response.status))
   }
 };
-
-
 
 export const register = user => async dispatch => {
   axios.defaults.headers.withCredentials = true;
@@ -89,7 +90,7 @@ export const register = user => async dispatch => {
     setAuthToken(data.accessToken);
 
     dispatch(loadUser());
-    dispatch(loadProfile())
+    dispatch(loadProfile());
     dispatch(login_user());
   } catch (err) {
     console.log(err.message);
@@ -99,29 +100,29 @@ export const register = user => async dispatch => {
 
 export const refreshUser = () => async dispatch => {
   try {
-    const { data } = await axios.get('/api/auth/token')
+    const { data } = await axios.get("/api/auth/token");
 
-    setAuthToken(data.accessToken)
+    setAuthToken(data.accessToken);
 
-    if(data.accessToken) {
-      dispatch(loadUser())
-      dispatch(loadProfile())
-      dispatch(login_user())
+    if (data.accessToken) {
+      dispatch(loadUser());
+      dispatch(loadProfile());
+      dispatch(login_user());
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message);
     //dispatch(sertAlert(err.response.data.msg, err.response.status))
   }
-}
+};
 
 export const logout = () => async dispatch => {
   try {
-    dispatch(clearProfile())
+    dispatch(clearProfile());
     dispatch(logout_user());
 
-    await axios.delete('/api/auth/logout')
-  } catch(err) {
+    await axios.delete("/api/auth/logout");
+  } catch (err) {
     console.log(err.message);
     //dispatch(sertAlert(err.response.data.msg, err.response.status))
   }
-}
+};

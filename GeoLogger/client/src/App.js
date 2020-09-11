@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container } from "reactstrap";
+import PrivateRoute from './components/routing/PrivateRoute'
 import AppNavbar from "./components/layout/AppNavbar";
 import Register from "./components/auth/Register"
 import Login from "./components/auth/Login"
@@ -27,9 +28,9 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
-              <Route exact path='/map' component={Mapbox} />
+              <PrivateRoute exact path='/map' component={Mapbox} />
               <Route exact path="/" component={Home} />
-              <Route exact path="/settings" component={Settings} />
+              <PrivateRoute exact path="/settings" component={Settings} />
             </Switch>
           </Container>
         </Provider>

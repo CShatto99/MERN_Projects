@@ -21,12 +21,13 @@ const Checklist = () => {
   });
 
   useEffect(() => {
-    setState({
-      ...state,
-      theme: profile.theme,
-      fillColor: profile.fillColor,
-      visited: [...profile.visited],
-    });
+    if(!loading)
+      setState({
+        ...state,
+        theme: profile.theme,
+        fillColor: profile.fillColor,
+        visited: [...profile.visited],
+      });
   }, [profile]);
 
   const toggle = () => {
@@ -61,8 +62,6 @@ const Checklist = () => {
           visited: state.visited.filter(element => element !== region),
         });
   };
-
-  console.log(state.visited);
 
   return (
     <Fragment>
