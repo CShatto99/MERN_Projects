@@ -69,6 +69,18 @@ const Settings = () => {
         <h3 className="text-center text-light">Loading...</h3>
       ) : (
         <Fragment>
+          <Row className="mb-3">
+            <Col>
+              <h2>Account Info</h2>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col className="ml-3">
+              <p>Username: {profile.user.username}</p>
+              <p>Email: {profile.user.email}</p>
+              <p>Register Date: {profile.user.date}</p>
+            </Col>
+          </Row>
           <Row className="justify-content-center mb-1">
             {state.saved && <p className="text-success">Changes Saved!</p>}
           </Row>
@@ -90,8 +102,95 @@ const Settings = () => {
               </Button>
             </Col>
           </Row>
-
-          <Form id="settings-form" className="" onSubmit={e => onSubmit(e)}>
+          <Row className="mb-3">
+            <Col>
+              <h2>User Settings</h2>
+            </Col>
+          </Row>
+          <FormGroup tag="fieldset">
+            <h4>Map Style</h4>
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => {
+                    setState({
+                      ...state,
+                      theme: "light",
+                    });
+                  }}
+                  checked={state.theme === "light" ? true : false}
+                />{" "}
+                Light
+              </Label>
+            </FormGroup>
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => {
+                    setState({
+                      ...state,
+                      theme: "dark",
+                    });
+                  }}
+                  checked={state.theme === "dark" ? true : false}
+                />{" "}
+                Dark
+              </Label>
+            </FormGroup>
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => {
+                    setState({
+                      ...state,
+                      theme: "light",
+                    });
+                  }}
+                  checked={state.theme === "light" ? true : false}
+                />{" "}
+                Outdoors
+              </Label>
+            </FormGroup>
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => {
+                    setState({
+                      ...state,
+                      theme: "light",
+                    });
+                  }}
+                  checked={state.theme === "light" ? true : false}
+                />{" "}
+                Streets
+              </Label>
+            </FormGroup>
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => {
+                    setState({
+                      ...state,
+                      theme: "light",
+                    });
+                  }}
+                  checked={state.theme === "light" ? true : false}
+                />{" "}
+                Satellite
+              </Label>
+            </FormGroup>
+          </FormGroup>
+          <Form id="settings-form" onSubmit={e => onSubmit(e)}>
             <hr style={{ backgroundColor: "#fff" }} />
             <FormGroup>
               <Label className="justify-content-start" for="fillColor">

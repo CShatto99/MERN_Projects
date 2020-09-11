@@ -67,7 +67,7 @@ const Checklist = () => {
   return (
     <Fragment>
       <Row className="justify-content-center">
-        <Button color="dark" onClick={toggle} block>
+        <Button className="text-light" color="dark" onClick={toggle} outline>
           Add States
         </Button>
       </Row>

@@ -26,6 +26,11 @@ const Mapbox = () => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/dark-v10",
+      // Other map styles
+      //style: "mapbox://styles/mapbox/light-v10",
+      //style: "mapbox://styles/mapbox/streets-v11",
+      //style: "mapbox://styles/mapbox/outdoors-v11",
+      //style: "mapbox://styles/mapbox/satellite-v9",
       center: [state.lng, state.lat],
       zoom: state.zoom,
     });
@@ -70,9 +75,6 @@ const Mapbox = () => {
         }
       }
     });
-
-    
-
     return () => map.remove();
   }, [profile]);
 
@@ -98,11 +100,6 @@ const Mapbox = () => {
       <Row className="justify-content-center mt-3">
         <Col sm={{ size: "auto" }}>
           <Checklist />
-        </Col>
-        <Col sm={{ size: "auto" }}>
-          <Button color="dark" href="/settings">
-            Map Settings <i className="fa fa-cog" aria-hidden="true"></i>
-          </Button>
         </Col>
       </Row>
     </Fragment>
