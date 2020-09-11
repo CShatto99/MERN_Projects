@@ -36,7 +36,7 @@ const Login = () => {
     <div>
       <Form onSubmit={onSubmit}>
         <FormGroup>
-          <Label for="email">Username or Email</Label>
+          <Label for="email">Email</Label>
           <Input
             type="text"
             id="email"

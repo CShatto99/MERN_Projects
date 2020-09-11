@@ -1,68 +1,95 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const Profile = require('../../models/profile')
+const Profile = require("../../models/profile");
+const authToken = require("../../middleware/authToken");
 
-// @route GET /api/profile/:_id
+// @route GET /api/profile
 // @desc Get a user profile
 // @access Private
-router.get('/:_id', async (req, res) => {
+router.get("/", authToken, async (req, res) => {
   try {
-    const profile = await Profile.findById({ _id: req.params._id })
+    const profile = await Profile.findOne({
+      user: req.user.id,
+    }).populate("user", ["username", "email", "date"]);
 
-    res.json(profile)
-  } catch(err) {
-    console.error(err.message)
-    res.status(500).send('Server error')
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
-})
+});
 
 // @route POST /api/profile
-// @desc Create a user profile
+// @desc Create or update a user profile
 // @access Private
-router.post('/', async (req, res) => {
-  const { fillColor } = req.body
+router.post("/", authToken, async (req, res) => {
+  const { theme, fillColor, visited } = req.body;
 
-  const profileFields = new Profile({
-    fillColor
-  })
+  if (!fillColor)
+    return res.status(400).json({ msg: "Please provide a fill color" });
+
+  const profileFields = {
+    user: req.user.id,
+    fillColor,
+    visited,
+  };
 
   try {
-    const profile = await profileFields.save()
+    let profile = await Profile.findOne({ user: req.user.id });
 
-    res.json(profile)
-  } catch(err) {
-    console.error(err.message)
-    res.status(500).send('Server error')
+    if (profile) {
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      );
+      return res.json(profile);
+    }
+
+    profile = await profileFields.save();
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
-})
+});
 
 // @route POST /api/profile/:_id/visited
 // @desc Update a user visited states
 // @access Private
-router.post('/:_id/visited', async (req, res) => {
+router.post("/:_id/visited", async (req, res) => {
   try {
-    const profile = await Profile.findByIdAndUpdate(req.params._id, { visited: req.body.visited }, { new: true })
+    const profile = await Profile.findByIdAndUpdate(
+      req.params._id,
+      { visited: req.body.visited },
+      { new: true }
+    );
 
-    res.json(profile)
-  } catch(err) {
-    console.error(err.message)
-    res.status(500).send('Server error')
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
-})
+});
 
 // @route POST /api/profile/:_id/fill
 // @desc Update a user visited states
 // @access Private
-router.post('/:_id/fill', async (req, res) => {
+router.post("/:_id/fill", async (req, res) => {
   try {
-    const profile = await Profile.findByIdAndUpdate(req.params._id, { fillColor: req.body.fillColor }, { new: true })
+    const profile = await Profile.findByIdAndUpdate(
+      req.params._id,
+      { fillColor: req.body.fillColor },
+      { new: true }
+    );
 
-    res.json(profile)
-  } catch(err) {
-    console.error(err.message)
-    res.status(500).send('Server error')
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
-})
+});
 
-module.exports = router
+module.exports = router;

@@ -13,9 +13,14 @@ const profile = createSlice({
     load_profile: (state, action) => {
       return {
         ...state,
-        visited: action.payload.visited,
-        fillColor: action.payload.fillColor,
+        profile: action.payload,
         loading: false
+      }
+    },
+    clear_profile: (state, action) => {
+      return {
+        ...state,
+        profile: {}
       }
     }
   }
@@ -23,17 +28,37 @@ const profile = createSlice({
 
 export default profile.reducer
 
-const { load_profile } = profile.actions
+const { load_profile, clear_profile } = profile.actions
 
-export const loadProfile = profile_id => async dispatch => {
+export const loadProfile = () => async dispatch => {
   try {
-    const res = await axios.get(`/api/profile/5f34ca4308e75a1e04e37618
-    `)
+    const res = await axios.get(`/api/profile`)
     dispatch(load_profile(res.data))
   } catch(err) {
     console.error(err.message)
     // dispach alert
   }
+}
+
+export const updateProfile = profile => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const { data } = await axios.post('/api/profile', profile, config)
+
+    dispatch(load_profile(data))
+  } catch(err) {
+    console.error(err.message)
+    // alert
+  }
+}
+
+export const clearProfile = () => dispatch => {
+  dispatch(clear_profile());
 }
 
 export const updateVisited = (profile_id, visited) => async dispatch => {

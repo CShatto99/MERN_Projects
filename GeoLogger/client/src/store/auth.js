@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { loadProfile } from './profile'
+import { loadProfile, clearProfile } from './profile'
 import setAuthToken from "../utils/setAuthToken";
 
 const auth = createSlice({
@@ -27,12 +27,19 @@ const auth = createSlice({
         loading: false,
       };
     },
+    logout_user: (state, action) => {
+      return {
+        ...state,
+        user: {},
+        isAuth: false
+      }
+    }
   },
 });
 
 export default auth.reducer;
 
-const { login_user, load_user } = auth.actions;
+const { login_user, load_user, logout_user } = auth.actions;
 
 export const loadUser = () => async dispatch => {
   try {
@@ -94,8 +101,6 @@ export const refreshUser = () => async dispatch => {
   try {
     const { data } = await axios.get('/api/auth/token')
 
-    console.log(data)
-
     setAuthToken(data.accessToken)
 
     if(data.accessToken) {
@@ -103,6 +108,18 @@ export const refreshUser = () => async dispatch => {
       dispatch(loadProfile())
       dispatch(login_user())
     }
+  } catch(err) {
+    console.log(err.message);
+    //dispatch(sertAlert(err.response.data.msg, err.response.status))
+  }
+}
+
+export const logout = () => async dispatch => {
+  try {
+    dispatch(clearProfile())
+    dispatch(logout_user());
+
+    await axios.delete('/api/auth/logout')
   } catch(err) {
     console.log(err.message);
     //dispatch(sertAlert(err.response.data.msg, err.response.status))

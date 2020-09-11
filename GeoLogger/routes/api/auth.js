@@ -25,8 +25,8 @@ router.get("/token", (req, res) => {
   }
 });
 
-// @route GET /api/auth/logout
-// @desc Refresh a user
+// @route DELETE /api/auth/logout
+// @desc Logout a user
 // @access Public
 router.delete('/logout', (req, res) => {
   res.clearCookie('token')

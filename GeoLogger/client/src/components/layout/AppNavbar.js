@@ -8,10 +8,17 @@ import {
   NavbarToggler,
   Collapse,
   NavItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Button
 } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from '../../store/auth'
 
 const AppNavbar = () => {
+  const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,11 +48,20 @@ const AppNavbar = () => {
           Map
         </Link>
       </NavItem>
-      <NavItem>
-        <Link to="/settings" className="nav-link">
-          Settings
-        </Link>
-      </NavItem>
+      <UncontrolledDropdown nav inNavbar>
+        <DropdownToggle nav caret>
+          Profile
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem>
+            <Link to="/settings" className="text-dark">
+              Settings
+            </Link>
+          </DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem onClick={() => dispatch(logout())}>Logout</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
     </Fragment>
   );
 

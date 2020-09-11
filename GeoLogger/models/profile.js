@@ -3,7 +3,11 @@ const mongoose = require('mongoose')
 const ProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'user'
+  },
+  theme: {
+    type: String,
+    default: 'dark'
   },
   visited: {
     type: [String],
@@ -11,7 +15,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   fillColor: {
     type: String,
-    required: true
+    default: ""
   },
   date: {
     type: Date,

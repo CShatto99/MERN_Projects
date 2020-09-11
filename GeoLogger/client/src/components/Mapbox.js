@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Button } from "reactstrap";
 import mapboxgl from "mapbox-gl";
 import geoJSON from "../json/geoJSON.json";
@@ -13,10 +13,8 @@ mapboxgl.accessToken =
 
 const Mapbox = () => {
   const mapContainerRef = useRef(null);
-  const { visited, fillColor, loading } = useSelector(state => state.profile);
+  const { profile, visited, fillColor, loading } = useSelector(state => state.profile);
   const { isAuth } = useSelector(state => state.auth);
-
-  
 
   const [state, setState] = useState({
     lng: -92,
@@ -25,7 +23,6 @@ const Mapbox = () => {
   });
 
   useEffect(() => {
-    
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/dark-v10",
@@ -47,7 +44,7 @@ const Mapbox = () => {
     geoJSON.regions.map(region => {
       const { source, coordinates } = region;
       if (!loading) {
-        if (visited.indexOf(source) > -1) {
+        if (profile.visited.indexOf(source) > -1) {
           map.on("load", function () {
             map.addSource(source, {
               type: "geojson",
@@ -65,7 +62,7 @@ const Mapbox = () => {
               source: source,
               layout: {},
               paint: {
-                "fill-color": fillColor,
+                "fill-color": profile.fillColor,
                 "fill-opacity": 0.5,
               },
             });
