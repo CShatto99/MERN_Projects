@@ -23,25 +23,10 @@ const Mapbox = () => {
     if (mapContainerRef.current) {
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
-        //style: "mapbox://styles/mapbox/dark-v10",
         style: `mapbox://styles/mapbox/${profile.mapStyle}`,
-        // Other map styles
-        //style: "mapbox://styles/mapbox/light-v10",
-        //style: "mapbox://styles/mapbox/streets-v11",
-        //style: "mapbox://styles/mapbox/outdoors-v11",
-        //style: "mapbox://styles/mapbox/satellite-v9",
         center: [state.lng, state.lat],
         zoom: state.zoom,
       });
-
-      // map.on("moveend", () => {
-      //   setState({
-      //     ...state,
-      //     lng: map.getCenter().lng.toFixed(4),
-      //     lat: map.getCenter().lat.toFixed(4),
-      //     zoom: map.getZoom().toFixed(2),
-      //   });
-      // });
 
       geoJSON.regions.map(region => {
         const { source, coordinates } = region;

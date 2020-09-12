@@ -13,6 +13,12 @@ import {
 } from "reactstrap";
 import Moment from "react-moment";
 import { updateProfile, updateFill } from "../store/profile";
+import "../css/settings.css";
+import darkV10 from "../img/dark-v10.png";
+import lightV10 from "../img/light-v10.png";
+import outdoorsV11 from "../img/outdoors-v11.png";
+import streetsV11 from "../img/streets-v11.png";
+import satelliteV9 from "../img/satellite-v9.png";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -20,6 +26,7 @@ const Settings = () => {
   const { user } = useSelector(state => state.auth);
   const [state, setState] = useState({
     saved: false,
+    thumbnail: false,
     theme: "",
     mapStyle: "",
     fillColor: "",
@@ -69,8 +76,6 @@ const Settings = () => {
     }, 4000);
   };
 
-  console.log(state);
-
   return (
     <>
       {loading ? (
@@ -87,10 +92,12 @@ const Settings = () => {
           </Row>
           <Row className="mb-3">
             <Col className="ml-3">
-              <p>Username: {user.username}</p>
-              <p>Email: {user.email}</p>
-              <p>Register Date: {user.date}</p>
-              <Moment format="MMM Do, YYYY hh:mm:ss A">{user.date}</Moment>
+              <h4>{user.username}</h4>
+              <h5>{user.email}</h5>
+              <p>
+                Registered on{" "}
+                <Moment format="MMM Do, YYYY hh:mm:ss A">{user.date}</Moment>
+              </p>
             </Col>
           </Row>
           <Row className="mb-3">
@@ -118,86 +125,163 @@ const Settings = () => {
           </Row>
           <FormGroup tag="fieldset">
             <h4>Map Style</h4>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => {
-                    setState({
-                      ...state,
-                      mapStyle: "dark-v10",
-                    });
-                  }}
-                  checked={state.mapStyle === "dark-v10" ? true : false}
-                />{" "}
-                Dark
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => {
-                    setState({
-                      ...state,
-                      mapStyle: "light-v10",
-                    });
-                  }}
-                  checked={state.mapStyle === "light-v10" ? true : false}
-                />{" "}
-                Light
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => {
-                    setState({
-                      ...state,
-                      mapStyle: "outdoors-v11",
-                    });
-                  }}
-                  checked={state.mapStyle === "outdoors-v11" ? true : false}
-                />{" "}
-                Outdoors
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => {
-                    setState({
-                      ...state,
-                      mapStyle: "streets-v11",
-                    });
-                  }}
-                  checked={state.mapStyle === "streets-v11" ? true : false}
-                />{" "}
-                Streets
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => {
-                    setState({
-                      ...state,
-                      mapStyle: "satellite-v9",
-                    });
-                  }}
-                  checked={state.mapStyle === "satellite-v9" ? true : false}
-                />{" "}
-                Satellite
-              </Label>
-            </FormGroup>
+            <Row>
+              <Col>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio1"
+                      onChange={() => {
+                        setState({
+                          ...state,
+                          mapStyle: "dark-v10",
+                        });
+                      }}
+                      checked={state.mapStyle === "dark-v10" ? true : false}
+                    />{" "}
+                    Dark
+                  </Label>
+                  <a
+                    className="std-link float-right"
+                    href="https://www.mapbox.com/maps/dark"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Demo
+                  </a>
+                </FormGroup>
+                <img
+                  className="thumbnail"
+                  src={darkV10}
+                  alt="mapbox dark-v10 theme"
+                />
+              </Col>
+              <Col>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio1"
+                      onChange={() => {
+                        setState({
+                          ...state,
+                          mapStyle: "light-v10",
+                        });
+                      }}
+                      checked={state.mapStyle === "light-v10" ? true : false}
+                    />{" "}
+                    Light
+                  </Label>
+                  <a
+                    className="std-link float-right"
+                    href="https://www.mapbox.com/maps/light"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Demo
+                  </a>
+                </FormGroup>
+                <img
+                  className="thumbnail"
+                  src={lightV10}
+                  alt="mapbox light-v10 theme"
+                />
+              </Col>
+              <Col>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio1"
+                      onChange={() => {
+                        setState({
+                          ...state,
+                          mapStyle: "outdoors-v11",
+                        });
+                      }}
+                      checked={state.mapStyle === "outdoors-v11" ? true : false}
+                    />{" "}
+                    Outdoors
+                  </Label>
+                  <a
+                    className="std-link float-right"
+                    href="https://www.mapbox.com/maps/streets"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Demo
+                  </a>
+                </FormGroup>
+                <img
+                  className="thumbnail"
+                  src={outdoorsV11}
+                  alt="mapbox outdoors-v11 theme"
+                />
+              </Col>
+              <Col>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio1"
+                      onChange={() => {
+                        setState({
+                          ...state,
+                          mapStyle: "streets-v11",
+                        });
+                      }}
+                      checked={state.mapStyle === "streets-v11" ? true : false}
+                    />{" "}
+                    Streets
+                  </Label>
+                  <a
+                    className="std-link float-right"
+                    href="https://www.mapbox.com/maps/outdoors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Demo
+                  </a>
+                </FormGroup>
+                <img
+                  className="thumbnail"
+                  src={streetsV11}
+                  alt="mapbox streets-v11 theme"
+                />
+              </Col>
+              <Col>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio1"
+                      onChange={() => {
+                        setState({
+                          ...state,
+                          mapStyle: "satellite-v9",
+                        });
+                      }}
+                      checked={state.mapStyle === "satellite-v9" ? true : false}
+                    />{" "}
+                    Satellite
+                  </Label>
+                  <a
+                    className="std-link float-right"
+                    href="https://www.mapbox.com/maps/satellite"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Demo
+                  </a>
+                </FormGroup>
+                <img
+                  className="thumbnail"
+                  src={satelliteV9}
+                  alt="mapbox satellite-v9 theme"
+                />
+              </Col>
+            </Row>
           </FormGroup>
           <Form id="settings-form" onSubmit={e => onSubmit(e)}>
             <hr style={{ backgroundColor: "#fff" }} />
