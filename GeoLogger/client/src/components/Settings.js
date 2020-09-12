@@ -11,15 +11,19 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import Moment from "react-moment";
 import { updateProfile, updateFill } from "../store/profile";
 
 const Settings = () => {
   const dispatch = useDispatch();
   const { profile, loading } = useSelector(state => state.profile);
+  const { user } = useSelector(state => state.auth);
   const [state, setState] = useState({
     saved: false,
     theme: "",
+    mapStyle: "",
     fillColor: "",
+    visited: [],
   });
 
   useEffect(() => {
@@ -27,6 +31,7 @@ const Settings = () => {
       setState({
         ...state,
         theme: profile.theme,
+        mapStyle: profile.mapStyle,
         fillColor: profile.fillColor,
         visited: profile.visited,
       });
@@ -44,6 +49,7 @@ const Settings = () => {
 
     const profile = {
       theme: state.theme,
+      mapStyle: state.mapStyle,
       fillColor: state.fillColor,
       visited: state.visited,
     };
@@ -63,12 +69,17 @@ const Settings = () => {
     }, 4000);
   };
 
+  console.log(state);
+
   return (
     <>
       {loading ? (
         <h3 className="text-center text-light">Loading...</h3>
       ) : (
         <Fragment>
+          <Row className="justify-content-center mb-1">
+            {state.saved && <p className="text-success">Changes Saved!</p>}
+          </Row>
           <Row className="mb-3">
             <Col>
               <h2>Account Info</h2>
@@ -76,13 +87,11 @@ const Settings = () => {
           </Row>
           <Row className="mb-3">
             <Col className="ml-3">
-              <p>Username: {profile.user.username}</p>
-              <p>Email: {profile.user.email}</p>
-              <p>Register Date: {profile.user.date}</p>
+              <p>Username: {user.username}</p>
+              <p>Email: {user.email}</p>
+              <p>Register Date: {user.date}</p>
+              <Moment format="MMM Do, YYYY hh:mm:ss A">{user.date}</Moment>
             </Col>
-          </Row>
-          <Row className="justify-content-center mb-1">
-            {state.saved && <p className="text-success">Changes Saved!</p>}
           </Row>
           <Row className="mb-3">
             <Col>
@@ -117,26 +126,10 @@ const Settings = () => {
                   onChange={() => {
                     setState({
                       ...state,
-                      theme: "light",
+                      mapStyle: "dark-v10",
                     });
                   }}
-                  checked={state.theme === "light" ? true : false}
-                />{" "}
-                Light
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="radio1"
-                  onChange={() => {
-                    setState({
-                      ...state,
-                      theme: "dark",
-                    });
-                  }}
-                  checked={state.theme === "dark" ? true : false}
+                  checked={state.mapStyle === "dark-v10" ? true : false}
                 />{" "}
                 Dark
               </Label>
@@ -149,10 +142,26 @@ const Settings = () => {
                   onChange={() => {
                     setState({
                       ...state,
-                      theme: "light",
+                      mapStyle: "light-v10",
                     });
                   }}
-                  checked={state.theme === "light" ? true : false}
+                  checked={state.mapStyle === "light-v10" ? true : false}
+                />{" "}
+                Light
+              </Label>
+            </FormGroup>
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => {
+                    setState({
+                      ...state,
+                      mapStyle: "outdoors-v11",
+                    });
+                  }}
+                  checked={state.mapStyle === "outdoors-v11" ? true : false}
                 />{" "}
                 Outdoors
               </Label>
@@ -165,10 +174,10 @@ const Settings = () => {
                   onChange={() => {
                     setState({
                       ...state,
-                      theme: "light",
+                      mapStyle: "streets-v11",
                     });
                   }}
-                  checked={state.theme === "light" ? true : false}
+                  checked={state.mapStyle === "streets-v11" ? true : false}
                 />{" "}
                 Streets
               </Label>
@@ -181,10 +190,10 @@ const Settings = () => {
                   onChange={() => {
                     setState({
                       ...state,
-                      theme: "light",
+                      mapStyle: "satellite-v9",
                     });
                   }}
-                  checked={state.theme === "light" ? true : false}
+                  checked={state.mapStyle === "satellite-v9" ? true : false}
                 />{" "}
                 Satellite
               </Label>

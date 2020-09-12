@@ -1,7 +1,6 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Button } from "reactstrap";
+import { useSelector } from "react-redux";
+import { Row, Col} from "reactstrap";
 import mapboxgl from "mapbox-gl";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
@@ -13,7 +12,6 @@ mapboxgl.accessToken =
 const Mapbox = () => {
   const mapContainerRef = useRef(null);
   const { profile, loading } = useSelector(state => state.profile);
-  const { isAuth } = useSelector(state => state.auth);
 
   const [state, setState] = useState({
     lng: -92,
@@ -25,7 +23,8 @@ const Mapbox = () => {
     if (mapContainerRef.current) {
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: "mapbox://styles/mapbox/dark-v10",
+        //style: "mapbox://styles/mapbox/dark-v10",
+        style: `mapbox://styles/mapbox/${profile.mapStyle}`,
         // Other map styles
         //style: "mapbox://styles/mapbox/light-v10",
         //style: "mapbox://styles/mapbox/streets-v11",
@@ -35,16 +34,14 @@ const Mapbox = () => {
         zoom: state.zoom,
       });
 
-      map.addControl(new mapboxgl.NavigationControl(), "top-right");
-
-      map.on("moveend", () => {
-        setState({
-          ...state,
-          lng: map.getCenter().lng.toFixed(4),
-          lat: map.getCenter().lat.toFixed(4),
-          zoom: map.getZoom().toFixed(2),
-        });
-      });
+      // map.on("moveend", () => {
+      //   setState({
+      //     ...state,
+      //     lng: map.getCenter().lng.toFixed(4),
+      //     lat: map.getCenter().lat.toFixed(4),
+      //     zoom: map.getZoom().toFixed(2),
+      //   });
+      // });
 
       geoJSON.regions.map(region => {
         const { source, coordinates } = region;
