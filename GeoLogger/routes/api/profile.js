@@ -37,6 +37,8 @@ router.post("/", authToken, async (req, res) => {
     visited,
   };
 
+  
+
   try {
     let profile = await Profile.findOne({ user: req.user.id });
 
@@ -52,6 +54,7 @@ router.post("/", authToken, async (req, res) => {
     profile = await profileFields.save();
 
     res.json(profile);
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
