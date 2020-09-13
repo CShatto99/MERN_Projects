@@ -2,6 +2,29 @@ body {
     color: #fff;
 }
 
+.app-wrapper {
+    max-width: 1000px;
+}
+
 .mapboxgl-ctrl {
     display: none ;
+}
+
+.register-enter {
+    transition: ease-out 0.7s;
+    opacity: 1;
+}
+
+.register-exit {
+    transition: ease-out 0.7s;
+    transform: translateX(100vw);
+    opacity: 0;
+}
+
+.register-btn {
+    transition: ease-in-out 0.2s;
+}
+
+.register-div {
+    height: 100%;
 }

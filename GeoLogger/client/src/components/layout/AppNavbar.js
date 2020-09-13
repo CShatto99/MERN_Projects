@@ -29,12 +29,12 @@ const AppNavbar = () => {
   const guestLinks = (
     <Fragment>
       <NavItem>
-        <Link to="/register" className="nav-link">
+        <Link to="/register" className="nav-link text-white">
           Register
         </Link>
       </NavItem>
       <NavItem>
-        <Link to="/login" className="nav-link">
+        <Link to="/login" className="nav-link text-white">
           Login
         </Link>
       </NavItem>
@@ -44,20 +44,19 @@ const AppNavbar = () => {
   const userLinks = (
     <Fragment>
       <NavItem>
-        <Link to="/map" className="nav-link">
+        <Link to="/map" className="nav-link text-white">
           Map
         </Link>
       </NavItem>
       <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret>
+        <DropdownToggle className="text-white" nav caret>
           Profile
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem>
             <Link
               to="/settings"
-              className="nav-link text-dark"
-              style={{ paddingLeft: "0" }}
+              className="text-black no-underline"
             >
               Settings
             </Link>
@@ -70,29 +69,31 @@ const AppNavbar = () => {
   );
 
   return (
-    <div>
-      <Navbar color="dark" dark expand="sm">
-        <Container>
-          <NavbarBrand
-            href="https://github.com/CShatto99/MERN_Projects/tree/master/GeoLogger"
-            target="__blank"
-          >
-            GeoLogger
-          </NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <Link to="/" className="nav-link">
-                  Home
-                </Link>
-              </NavItem>
-              {isAuth ? userLinks : guestLinks}
-            </Nav>
-          </Collapse>
-        </Container>
-      </Navbar>
-    </div>
+    <Navbar
+      className="bg-gradient-to-r from-blue-800 to-blue-200"
+      dark
+      expand="sm"
+    >
+      <Container>
+        <NavbarBrand
+          href="https://github.com/CShatto99/MERN_Projects/tree/master/GeoLogger"
+          target="__blank"
+        >
+          GeoLogger
+        </NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <Link to="/" className="nav-link text-white">
+                Home
+              </Link>
+            </NavItem>
+            {isAuth ? userLinks : guestLinks}
+          </Nav>
+        </Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

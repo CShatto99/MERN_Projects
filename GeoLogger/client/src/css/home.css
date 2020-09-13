@@ -1,0 +1,16 @@
+.div-enter {
+  transition: ease 0.6s;
+  opacity: 1;
+}
+
+.div-exit {
+  transform: translateX(-100vw);
+  transition: ease-out 0.6s;
+  opacity: 0;
+}
+
+.landing-div {
+  height: 70vh;
+  width: 100%;
+  padding: 0 5% 0 5%;
+}

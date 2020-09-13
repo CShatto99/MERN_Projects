@@ -33,28 +33,31 @@ const Login = () => {
   if (isAuth) return <Redirect to="/" />;
 
   return (
-    <div>
-      <Form onSubmit={onSubmit}>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
-            type="text"
-            id="email"
-            name="email"
-            onChange={e => onChange(e)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            type="password"
-            id="password"
-            name="password"
-            onChange={e => onChange(e)}
-          />
-        </FormGroup>
-        <Button color="primary">Login</Button>
-      </Form>
+    <div className="h-screen register-div p-8">
+      <div className="max-w-lg mx-auto mt-5 p-6 bg-gray-300 rounded text-black">
+        <h2>Login</h2>
+        <Form onSubmit={onSubmit}>
+          <FormGroup>
+            <Label for="email">Email</Label>
+            <Input
+              type="text"
+              id="email"
+              name="email"
+              onChange={e => onChange(e)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="password">Password</Label>
+            <Input
+              type="password"
+              id="password"
+              name="password"
+              onChange={e => onChange(e)}
+            />
+          </FormGroup>
+          <Button color="primary">Login</Button>
+        </Form>
+      </div>
     </div>
   );
 };

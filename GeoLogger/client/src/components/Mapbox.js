@@ -62,7 +62,7 @@ const Mapbox = () => {
   }, [profile]);
 
   return (
-    <Fragment>
+    <div className="">
       <Row className="justify-content-center">
         <div className="map-container" ref={mapContainerRef} />
       </Row>
@@ -82,7 +82,7 @@ const Mapbox = () => {
           </div>
         </Col>
       </Row> */}
-    </Fragment>
+    </div>
   );
 };
 
