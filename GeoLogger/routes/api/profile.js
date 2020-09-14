@@ -14,6 +14,7 @@ router.get("/", authToken, async (req, res) => {
     }).populate("user", ["username", "email", "date"]);
 
     res.json(profile);
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -26,9 +27,6 @@ router.get("/", authToken, async (req, res) => {
 router.post("/", authToken, async (req, res) => {
   const { theme, mapStyle, fillColor, visited } = req.body;
 
-  if (!fillColor)
-    return res.status(400).json({ msg: "Please provide a fill color" });
-
   const profileFields = {
     user: req.user.id,
     theme,
@@ -36,8 +34,6 @@ router.post("/", authToken, async (req, res) => {
     fillColor,
     visited,
   };
-
-  
 
   try {
     let profile = await Profile.findOne({ user: req.user.id });
@@ -50,6 +46,9 @@ router.post("/", authToken, async (req, res) => {
       ).populate("user", ["username", "email", "data"]);
       return res.json(profile);
     }
+
+    if (!fillColor)
+      return res.status(400).json({ msg: "Please provide a fill color" });
 
     profile = await profileFields.save();
 

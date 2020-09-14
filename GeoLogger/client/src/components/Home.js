@@ -30,7 +30,7 @@ for (let i = 0; i < 10; i++) {
       block
     >
       {usa[i].name}
-      {i % 2 === 1 ? (
+      {Math.random() > 0.6 ? (
         <span className="float-right text-success">VISITED</span>
       ) : (
         ""
@@ -41,66 +41,42 @@ for (let i = 0; i < 10; i++) {
 
 const Home = () => {
   const { isAuth } = useSelector(state => state.auth);
-  const [isOpen, setIsOpen] = useState(true);
+  const [landingDiv, setLandingDiv] = useState(false);
   const [regOpen, setRegOpen] = useState(false);
 
   useEffect(() => {
-    setRegOpen(!regOpen);
+    setLandingDiv(!landingDiv);
   }, []);
 
   return (
     <>
-      <div className="bg-black">
-        <div className="max-w-6xl mx-auto landing-div">
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3 h-full ">
-            <div className="my-auto">
-              <h1>Welcome To GeoLogger</h1>
-              <p className="font-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Morbi tristique senectus et netus et malesuada fames.
-              </p>
-              <Link className="btn btn-dark" to="/register">
-                Start Logging
-              </Link>
-            </div>
-            <div
-              className={
-                regOpen
-                  ? "register-enter my-auto p-6 bg-gray-300 rounded shadow-xl text-black"
-                  : "register-exit my-auto p-6 bg-gray-300 rounded shadow-xl text-black"
-              }
-            >
-              <h2>Lorem ipsum</h2>
-              <p className="font-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <h2>Lorem ipsum</h2>
-              <p className="font-light">
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.{" "}
-              </p>
-              <a
-                href="https://www.mapbox.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="register-btn no-underline bg-blue-700 text-white font-normal py-2 px-3 rounded-lg hover:bg-blue-800">
-                  Learn More
-                </button>
-              </a>
-            </div>
-          </div>
+      <div className="landing-div flex justify-center items-start min-h-screen bg-black">
+        <div
+          className={
+            landingDiv
+              ? "div-enter max-w-6xl p-5 text-center mt-5"
+              : "div-exit max-w-6xl p-5 text-center mt-5"
+          }
+        >
+          <h1>Welcome To GeoLogger</h1>
+          <p className="font-light">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi
+            tristique senectus et netus et malesuada fames.
+          </p>
+          <Link
+            className="register-btn bg-blue-700 text-white font-normal py-2 px-3 rounded-full hover:bg-blue-800"
+            to="/register"
+          >
+            Start Logging
+          </Link>
         </div>
       </div>
 
-      <div className="bg-gray-300">
+      <div className="map-div min-h-screen bg-gray-300">
         <div className="max-w-6xl mx-auto p-5">
-          <h1 className="mb-5 text-black text-center col-span-2">
-            Choose a Map Style
-          </h1>
-          <div className="grid md:grid-cols-2 gap-5 h-full text-black">
+          <h1 className="mb-5 text-black text-center">Choose a Map Style</h1>
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-5 h-full text-black">
             <div className="text-center">
               <img
                 className="rounded-lg shadow-lg"
@@ -133,11 +109,10 @@ const Home = () => {
               />
               <h3 className="mt-2 font-light">Streets V11</h3>
             </div>
-            <div className="text-center col-span-2">
+            <div className="text-center md:col-span-2 sm:col-span-1">
               <img
-                className="rounded-lg shadow-lg mx-auto"
+                className="sat-img rounded-lg shadow-lg mx-auto"
                 src={satelliteV9}
-                width="50%"
                 alt="mapbox satellite-v9 theme"
               />
               <h3 className="mt-2 font-light">Satellite V9</h3>
@@ -146,27 +121,20 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="bg-black">
-        <div className="max-w-6xl mx-auto p-5">
-          <h1 className="mb-5 text-right col-span-2">
-            Log Your Vacation History
-          </h1>
-          <div className="grid md:grid-cols-2 gap-5 h-full">
-            <div className="text-center">
-              <img
-                className="rounded-lg shadow-lg"
-                src={lightV10}
-                alt="mapbox light-v10 theme"
-              />
-              <h3 className="mt-2 font-light">Light V10</h3>
-            </div>
-            <div className="bg-gray-300 rounded-lg">
-              <ModalBody>
-                <ListGroup>
-                  {modalDemo}
-                </ListGroup>
-              </ModalBody>
-            </div>
+      <div className="vaca-history-div min-h-screen bg-black">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
+          <h1 className="col-span-1 md:col-span-2 sm:text-center md:text-right">Log Your Vacation History</h1>
+          <div className="text-center my-auto">
+            <img
+              className="rounded-lg shadow-lg"
+              src={outdoorsV11}
+              alt="mapbox outdoors-v11 theme"
+            />
+          </div>
+          <div className="bg-gray-300 rounded-lg my-auto">
+            <ModalBody>
+              <ListGroup>{modalDemo}</ListGroup>
+            </ModalBody>
           </div>
         </div>
       </div>

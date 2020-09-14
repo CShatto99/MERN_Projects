@@ -1,8 +1,9 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
+import { Redirect } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import { Row, Col } from "reactstrap";
 import mapboxgl from "mapbox-gl";
-import ReactMapGL, { Layer, Source } from "react-map-gl";
+import ReactMapGL, { FullscreenControl, Layer, Source } from "react-map-gl";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
 import Checklist from "./Checklist";
@@ -83,6 +84,7 @@ import useWindowDimensions from "../hooks/windowDimensions";
 function Mapbox() {
   const { profile, loading } = useSelector(state => state.profile);
   const { height, width } = useWindowDimensions();
+  const [sources, setSources] = useState([]);
 
   let geoJSONRegions = [];
 
@@ -95,7 +97,7 @@ function Mapbox() {
 
         geoJSONRegions.push(
           <Source
-            id={"my-data"}
+            id={source}
             type="geojson"
             data={{
               type: "FeatureCollection",
@@ -108,7 +110,7 @@ function Mapbox() {
             }}
           >
             <Layer
-              id="point"
+              id={source}
               type="fill"
               paint={{
                 "fill-color": profile.fillColor,
@@ -118,55 +120,30 @@ function Mapbox() {
           </Source>
         );
       });
+      setSources(geoJSONRegions);
     }
   }, [profile]);
 
   const [viewport, setViewport] = useState({
-    width: width*.8,
-    height: height/2,
+    width: 1152,
+    height: height*.5,
     latitude: 40,
     longitude: -92,
     zoom: 3,
   });
 
-  if (!loading) {
-    profile.visited.map(region => {
-      const { source, coordinates } = geoJSON.regions.find(
-        ({ source }) => source === region
-      );
-
-      geoJSONRegions.push(
-        <Source
-          id={"my-data"}
-          type="geojson"
-          data={{
-            type: "FeatureCollection",
-            features: [
-              {
-                type: "Feature",
-                geometry: { type: "Polygon", coordinates: coordinates },
-              },
-            ],
-          }}
-        >
-          <Layer
-            id="point"
-            type="fill"
-            paint={{
-              "fill-color": profile.fillColor,
-              "fill-opacity": 0.5,
-            }}
-          />
-        </Source>
-      );
-    });
-  }
+  if(!localStorage.getItem('isAuth'))
+    return <Redirect to='/' />
 
   return (
     <>
-      {!loading && (
-        <>
-          <div className="max-w-6xl p-5 grid grid-cols-1 m-auto flex justify-center">
+      {loading ? (
+        <div className="flex justify-center items-start h-screen">
+          <h1 className="mt-5 font-light">Loading...</h1>
+        </div>
+      ) : (
+        <div className="p-5">
+          <div className="map-container grid grid-cols-1 mb-3">
             <ReactMapGL
               {...viewport}
               mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
@@ -174,13 +151,13 @@ function Mapbox() {
               mapboxApiAccessToken={
                 "pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyMThvczlzYTAifQ.unXf2zoBfeVM28V-tQSRPw"
               }
-              className="mr-0 "
+              className=" rounded-lg"
             >
-              {geoJSONRegions}
+              {sources}
             </ReactMapGL>
           </div>
           <Checklist />
-        </>
+        </div>
       )}
     </>
   );

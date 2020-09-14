@@ -18,7 +18,8 @@ const profile = createSlice({
     clear_profile: (state, action) => {
       return {
         ...state,
-        profile: {}
+        profile: {},
+        loading: true
       }
     }
   }

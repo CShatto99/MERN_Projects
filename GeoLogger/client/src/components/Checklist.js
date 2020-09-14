@@ -27,6 +27,7 @@ const Checklist = () => {
         theme: profile.theme,
         fillColor: profile.fillColor,
         visited: [...profile.visited],
+        mapStyle: profile.mapStyle
       });
   }, [profile]);
 
@@ -44,6 +45,7 @@ const Checklist = () => {
       theme: state.theme,
       fillColor: state.fillColor,
       visited: state.visited,
+      mapStyle: state.mapStyle
     };
 
     dispatch(updateProfile(profile));

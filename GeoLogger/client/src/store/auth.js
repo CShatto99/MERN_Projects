@@ -34,6 +34,7 @@ const auth = createSlice({
         ...state,
         user: {},
         isAuth: false,
+        loading: true
       };
     },
   },
