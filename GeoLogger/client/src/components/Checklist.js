@@ -21,13 +21,13 @@ const Checklist = () => {
   });
 
   useEffect(() => {
-    if(!loading)
+    if (!loading)
       setState({
         ...state,
         theme: profile.theme,
         fillColor: profile.fillColor,
         visited: [...profile.visited],
-        mapStyle: profile.mapStyle
+        mapStyle: profile.mapStyle,
       });
   }, [profile]);
 
@@ -45,7 +45,7 @@ const Checklist = () => {
       theme: state.theme,
       fillColor: state.fillColor,
       visited: state.visited,
-      mapStyle: state.mapStyle
+      mapStyle: state.mapStyle,
     };
 
     dispatch(updateProfile(profile));
@@ -73,7 +73,9 @@ const Checklist = () => {
         </Button>
       </Row>
       <Modal isOpen={state.isOpen}>
-        <ModalHeader toggle={toggle}>Add Some States</ModalHeader>
+        <ModalHeader className="text-black" toggle={toggle}>
+          Add Some States
+        </ModalHeader>
         <ModalBody>
           <Form onSubmit={e => onSubmit(e)}>
             <Button color="dark" className="mb-2" block>

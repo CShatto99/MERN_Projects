@@ -17,6 +17,7 @@ import lightV10 from "../img/light-v10.png";
 import outdoorsV11 from "../img/outdoors-v11.png";
 import streetsV11 from "../img/streets-v11.png";
 import satelliteV9 from "../img/satellite-v9.png";
+import vacaEx from "../img/vaca-ex.png";
 
 let modalDemo = [];
 
@@ -121,7 +122,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="vaca-history-div min-h-screen bg-black">
+      <div className="vaca-history-div">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
           <h1 className="col-span-1 md:col-span-2 sm:text-center md:text-right">
             Log Your Vacation History
@@ -129,7 +130,7 @@ const Home = () => {
           <div className="text-center my-auto">
             <img
               className="rounded-lg shadow-lg"
-              src={outdoorsV11}
+              src={vacaEx}
               alt="mapbox outdoors-v11 theme"
             />
           </div>

@@ -34,7 +34,7 @@ const Register = () => {
     dispatch(register(user));
   };
 
-  if (isAuth) return <Redirect to="/" />;
+  if (isAuth) return <Redirect to="/map" />;
 
   return (
     <div className="register-div min-h-screen flex justify-center items-start p-5">
