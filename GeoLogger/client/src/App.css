@@ -1,27 +1,54 @@
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
 body {
-    color: #fff;
-}
-
-.mapboxgl-ctrl {
-    display: none ;
-}
-
-.register-enter {
-    transition: ease-out 0.7s;
-    opacity: 1;
-}
-
-.register-exit {
-    transition: ease-out 0.7s;
-    transform: translateX(100vw);
-    opacity: 0;
-}
-
-.register-btn, .register-btn:hover {
-    transition: ease-in-out 0.2s;
-    text-decoration: none;
+  color: #fff;
+  background-color: rgba(226, 232, 240);
 }
 
 .register-div {
-    height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./img/dark-v10.png");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin-top: -56px;
+}
+
+.register-enter {
+  transition: ease-out 0.7s;
+  opacity: 1;
+}
+
+.register-exit {
+  transition: ease-out 0.7s;
+  transform: translateX(100vw);
+  opacity: 0;
+}
+
+.gen-btn,
+.gen-btn:hover {
+  transition: ease-in-out 0.2s;
+  text-decoration: none;
+}
+
+.cancel-btn {
+  border-color: #fc8181 !important;
+}
+
+.nav-link {
+  transition: ease-in-out 0.2s;
+}
+
+.sibling-highlight {
+  transition: ease-in-out 0.2s;
+  border-top: 1.5px solid #edf2f7;
+  width: 0%;
+  margin: -5px auto 0 auto;
+}
+
+.sibling-hover:hover ~ .sibling-highlight {
+  width: 70%;
 }

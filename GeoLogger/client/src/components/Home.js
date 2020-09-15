@@ -50,22 +50,22 @@ const Home = () => {
 
   return (
     <>
-      <div className="landing-div flex justify-center items-start min-h-screen bg-black">
+      <div className="landing-div flex justify-center items-center min-h-screen bg-black">
         <div
           className={
             landingDiv
-              ? "div-enter max-w-6xl p-5 text-center mt-5"
-              : "div-exit max-w-6xl p-5 text-center mt-5"
+              ? "div-enter max-w-6xl p-5 text-center mb-24"
+              : "div-exit max-w-6xl p-5 text-center mb-24"
           }
         >
-          <h1>Welcome To GeoLogger</h1>
-          <p className="font-light">
+          <h1 className="font-medium">Welcome To GeoLogger</h1>
+          <p className="font-light mb-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi
             tristique senectus et netus et malesuada fames.
           </p>
           <Link
-            className="register-btn bg-blue-700 text-white font-normal py-2 px-3 rounded-full hover:bg-blue-800"
+            className="gen-btn bg-blue-700 text-white font-normal py-2 px-3 rounded-full hover:bg-blue-800"
             to="/register"
           >
             Start Logging
@@ -74,10 +74,10 @@ const Home = () => {
       </div>
 
       <div className="map-div min-h-screen bg-gray-300">
-        <div className="max-w-6xl mx-auto p-5">
-          <h1 className="mb-5 text-black text-center">Choose a Map Style</h1>
+        <div className="max-w-6xl max-h-full text-center text-black p-5">
+          <h1 className="mb-5 font-medium">Choose a Map Style</h1>
           <div className="grid md:grid-cols-2 grid-cols-1 gap-5 h-full text-black">
-            <div className="text-center">
+            <div>
               <img
                 className="rounded-lg shadow-lg"
                 src={darkV10}
@@ -85,7 +85,7 @@ const Home = () => {
               />
               <h3 className="mt-2 font-light">Dark V10</h3>
             </div>
-            <div className="text-center">
+            <div>
               <img
                 className="rounded-lg shadow-lg"
                 src={lightV10}
@@ -93,7 +93,7 @@ const Home = () => {
               />
               <h3 className="mt-2 font-light">Light V10</h3>
             </div>
-            <div className="text-center">
+            <div>
               <img
                 className="rounded-lg shadow-lg"
                 src={outdoorsV11}
@@ -101,7 +101,7 @@ const Home = () => {
               />
               <h3 className="mt-2 font-light">Outdoors V11</h3>
             </div>
-            <div className="text-center">
+            <div>
               <img
                 className="rounded-lg shadow-lg"
                 src={streetsV11}
@@ -109,7 +109,7 @@ const Home = () => {
               />
               <h3 className="mt-2 font-light">Streets V11</h3>
             </div>
-            <div className="text-center md:col-span-2 sm:col-span-1">
+            <div className="md:col-span-2 sm:col-span-1">
               <img
                 className="sat-img rounded-lg shadow-lg mx-auto"
                 src={satelliteV9}
@@ -123,7 +123,9 @@ const Home = () => {
 
       <div className="vaca-history-div min-h-screen bg-black">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
-          <h1 className="col-span-1 md:col-span-2 sm:text-center md:text-right">Log Your Vacation History</h1>
+          <h1 className="col-span-1 md:col-span-2 sm:text-center md:text-right">
+            Log Your Vacation History
+          </h1>
           <div className="text-center my-auto">
             <img
               className="rounded-lg shadow-lg"
@@ -138,53 +140,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="grid grid-cols-3 gap-4 text-black mb-5">
-        <div className="flex p-6 bg-white rounded-lg shadow-xl">
-          <div>1</div>
-        </div>
-        <div className="flex p-6 bg-white rounded-lg shadow-xl">
-          <div>1</div>
-        </div>
-        <div className="flex p-6 bg-white rounded-lg shadow-xl">
-          <div>1</div>
-        </div>
-        <div className="flex p-6 bg-white rounded-lg shadow-xl">
-          <div>1</div>
-        </div>
-        <div className="flex p-6 bg-white rounded-lg shadow-xl">
-          <div>1</div>
-        </div>
-      </div>
-      <div
-        className={
-          isOpen
-            ? "div-enter max-w-sm mx-auto flex p-6 bg-white rounded-lg shadow-xl"
-            : "div-exit max-w-sm mx-auto flex p-6 bg-white rounded-lg shadow-xl"
-        }
-      >
-        <div className="flex-shrink-0">
-          <img className="h-12 w-12" src={darkV10} alt="test" />
-        </div>
-        <div className="ml-6 pt-1">
-          <h4 className="text-xl text-gray-900 leading-tight">GeoLogger</h4>
-          <p className="text-base text-gray-600 leading-none">
-            You have a new message!
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-sm mx-auto">
-        <Button
-          onClick={() => setIsOpen(!isOpen)}
-          className="mt-3"
-          color="primary"
-          outline
-          block
-        >
-          Test
-        </Button>
-      </div> */}
     </>
   );
 };

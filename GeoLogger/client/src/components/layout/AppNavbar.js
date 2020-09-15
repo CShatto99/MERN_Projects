@@ -29,13 +29,20 @@ const AppNavbar = () => {
   const guestLinks = (
     <Fragment>
       <NavItem>
-        <Link to="/register" className="nav-link text-white">
-          Register
+        <Link
+          to="/login"
+          className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
+        >
+          Login
         </Link>
+        <div className="sibling-highlight" />
       </NavItem>
       <NavItem>
-        <Link to="/login" className="nav-link text-white">
-          Login
+        <Link
+          to="/register"
+          className="gen-btn nav-link bg-blue-700 text-white font-medium mt-1 ml-1 py-1 px-2 rounded-lg hover:bg-blue-800"
+        >
+          Register
         </Link>
       </NavItem>
     </Fragment>
@@ -44,20 +51,21 @@ const AppNavbar = () => {
   const userLinks = (
     <Fragment>
       <NavItem>
-        <Link to="/map" className="nav-link text-white">
+        <Link
+          to="/map"
+          className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
+        >
           Map
         </Link>
+        <div className="sibling-highlight" />
       </NavItem>
       <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle className="text-white" nav caret>
+        <DropdownToggle className="text-gray-400 hover:text-gray-200" nav caret>
           Profile
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem>
-            <Link
-              to="/settings"
-              className="text-black no-underline"
-            >
+            <Link to="/settings" className="text-black no-underline">
               Settings
             </Link>
           </DropdownItem>
@@ -69,11 +77,7 @@ const AppNavbar = () => {
   );
 
   return (
-    <Navbar
-      className="bg-gradient-to-r from-blue-800 to-blue-200"
-      dark
-      expand="sm"
-    >
+    <Navbar className="bg-transparent" expand="sm">
       <Container>
         <NavbarBrand
           href="https://github.com/CShatto99/MERN_Projects/tree/master/GeoLogger"
@@ -85,9 +89,13 @@ const AppNavbar = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <Link to="/" className="nav-link text-white">
+              <Link
+                to="/"
+                className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
+              >
                 Home
               </Link>
+              <div className="sibling-highlight" />
             </NavItem>
             {isAuth ? userLinks : guestLinks}
           </Nav>
