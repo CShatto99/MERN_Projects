@@ -8,6 +8,7 @@ import Login from "./components/auth/Login";
 import Home from "./components/Home";
 import Mapbox from "./components/Mapbox";
 import Settings from "./components/Settings";
+import Footer from "./components/layout/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Provider } from "react-redux";
@@ -24,13 +25,14 @@ const App = () => {
       <Router>
         <Provider store={store}>
           <AppNavbar />
-            <Switch>
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <PrivateRoute exact path="/map" component={Mapbox} />
-              <Route exact path="/" component={Home} />
-              <PrivateRoute exact path="/settings" component={Settings} />
-            </Switch>
+          <Switch>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/map" component={Mapbox} />
+            <Route exact path="/" component={Home} />
+            <PrivateRoute exact path="/settings" component={Settings} />
+          </Switch>
+          <Footer />
         </Provider>
       </Router>
     </div>

@@ -38,7 +38,7 @@ const Register = () => {
 
   return (
     <div className="register-div min-h-screen flex justify-center items-start p-5">
-      <div className="mt-5 w-full p-6 bg-gray-300 rounded shadow-lg text-black">
+      <div className="mt-5 max-w-4xl w-full p-6 bg-gray-300 rounded shadow-lg text-black">
         <div className="flex justify-between items-center">
           <h2>Register</h2>
           <p className="float-right text-red-600 text-base m-0">* required</p>
