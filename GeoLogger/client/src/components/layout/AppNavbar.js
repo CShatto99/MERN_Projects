@@ -79,11 +79,14 @@ const AppNavbar = () => {
   return (
     <Navbar className="bg-transparent" expand="sm">
       <Container>
-        <NavbarBrand
-          href="https://github.com/CShatto99/MERN_Projects/tree/master/GeoLogger"
-          target="__blank"
-        >
-          GeoLogger
+        <i
+          className="gen-btn fa fa-globe fa-3x cursor-pointer mt-1 hover:text-blue-800"
+          aria-hidden="true"
+        ></i>
+        <NavbarBrand href="/" className="text-gray-100 ml-3">
+          <div className="gen-btn text-3xl font-medium hover:text-blue-800">
+            GeoLogger
+          </div>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

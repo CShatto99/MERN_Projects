@@ -67,3 +67,12 @@ footer a {
 .footer-link-hover:hover ~ .footer-link-highlight {
   width: 18%;
 }
+
+.footer-icon {
+  transition: ease-in-out 0.2s;
+}
+
+.footer-icon:hover {
+  transition: ease-in-out 0.2s;
+  color: #4743d1;
+}

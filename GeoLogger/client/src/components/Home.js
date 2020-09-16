@@ -74,7 +74,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="map-div min-h-screen bg-gray-300">
+      <div className="map-div min-h-screen bg-gray-200">
         <div className="max-w-6xl mx-auto text-center text-black p-5">
           <h1 className="mb-5 font-medium">Choose a Map Style</h1>
           <div className="grid md:grid-cols-2 grid-cols-1 gap-5 h-full text-black">

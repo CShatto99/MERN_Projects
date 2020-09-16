@@ -1,5 +1,5 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Row, Col } from "reactstrap";
 import mapboxgl from "mapbox-gl";
@@ -126,14 +126,13 @@ function Mapbox() {
 
   const [viewport, setViewport] = useState({
     width: 1152,
-    height: height*.5,
+    height: height * 0.5,
     latitude: 40,
     longitude: -92,
     zoom: 3,
   });
 
-  if(!localStorage.getItem('isAuth'))
-    return <Redirect to='/' />
+  if (!localStorage.getItem("isAuth")) return <Redirect to="/" />;
 
   return (
     <>
@@ -142,7 +141,7 @@ function Mapbox() {
           <h1 className="mt-5 font-light">Loading...</h1>
         </div>
       ) : (
-        <div className="p-5">
+        <div className="p-5 h-screen">
           <div className="map-container grid grid-cols-1 mb-3">
             <ReactMapGL
               {...viewport}
