@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Container } from "reactstrap";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import AppNavbar from "./components/layout/AppNavbar";
 import Register from "./components/auth/Register";

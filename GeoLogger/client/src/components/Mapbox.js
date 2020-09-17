@@ -1,9 +1,8 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Row, Col } from "reactstrap";
-import mapboxgl from "mapbox-gl";
-import ReactMapGL, { FullscreenControl, Layer, Source } from "react-map-gl";
+import ReactMapGL, { Layer, Source } from "react-map-gl";
+import { Spinner } from "reactstrap";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
 import Checklist from "./Checklist";
@@ -137,11 +136,14 @@ function Mapbox() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-start h-screen">
-          <h1 className="mt-5 font-light">Loading...</h1>
+        <div className="flex justify-center items-start h-screen mt-56">
+          <Spinner
+            className="spinner"
+            style={{ width: "3rem", height: "3rem" }}
+          />
         </div>
       ) : (
-        <div className="p-5 h-screen">
+        <div className="p-5 h-screen mt-5">
           <div className="map-container grid grid-cols-1 mb-3">
             <ReactMapGL
               {...viewport}

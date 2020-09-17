@@ -12,7 +12,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button,
 } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/auth";
@@ -21,6 +20,7 @@ const AppNavbar = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownActive, setDropdownActive] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -60,51 +60,64 @@ const AppNavbar = () => {
         <div className="sibling-highlight" />
       </NavItem>
       <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle className="text-gray-400 hover:text-gray-200" nav caret>
+        <div
+          to="/map"
+          className="nav-link cursor-pointer text-gray-400 hover:text-gray-200"
+          onClick={() => setDropdownActive(!dropdownActive)}
+        >
           Profile
-        </DropdownToggle>
-        <DropdownMenu right>
-          <DropdownItem>
+        </div>
+        <ul
+          className={
+            dropdownActive
+              ? "dropdown-active bg-gray-200 text-black p-3"
+              : "dropdown-closed"
+          }
+        >
+          <li className="mb-2">
             <Link to="/settings" className="text-black no-underline">
               Settings
             </Link>
-          </DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem onClick={() => dispatch(logout())}>Logout</DropdownItem>
-        </DropdownMenu>
+          </li>
+          <li
+            className="gen-btn cursor-pointer"
+            onClick={() => dispatch(logout())}
+          >
+            Logout
+          </li>
+        </ul>
       </UncontrolledDropdown>
     </Fragment>
   );
 
   return (
-    <Navbar className="bg-transparent" expand="sm">
-      <Container>
-        <i
-          className="gen-btn fa fa-globe fa-3x cursor-pointer mt-1 hover:text-blue-800"
-          aria-hidden="true"
-        ></i>
-        <NavbarBrand href="/" className="text-gray-100 ml-3">
-          <div className="gen-btn text-3xl font-medium hover:text-blue-800">
+    <div className="flex justify-center">
+      <nav className="pt-3 pl-5 pr-5 max-w-6xl w-full flex justify-between">
+        <div className="flex items-center">
+          <i
+            className="gen-btn fa fa-globe fa-3x cursor-pointer hover:text-blue-800"
+            aria-hidden="true"
+          >
+            <div className="navbrand-icon"></div>
+          </i>
+          <button className="gen-btn ml-3 text-3xl font-medium cursor-pointer hover:text-blue-800">
             GeoLogger
-          </div>
-        </NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <Link
-                to="/"
-                className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
-              >
-                Home
-              </Link>
-              <div className="sibling-highlight" />
-            </NavItem>
-            {isAuth ? userLinks : guestLinks}
-          </Nav>
-        </Collapse>
-      </Container>
-    </Navbar>
+          </button>
+        </div>
+        <ul className="flex justify-end items-center m-0">
+          <NavItem>
+            <Link
+              to="/"
+              className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
+            >
+              Home
+            </Link>
+            <div className="sibling-highlight" />
+          </NavItem>
+          {isAuth ? userLinks : guestLinks}
+        </ul>
+      </nav>
+    </div>
   );
 };
 

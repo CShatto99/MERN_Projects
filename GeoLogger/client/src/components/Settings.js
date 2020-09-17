@@ -1,16 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap";
+import { Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Moment from "react-moment";
 import { updateProfile, updateFill } from "../store/profile";
 import "../css/settings.css";

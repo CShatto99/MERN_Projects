@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, Link } from "react-router-dom";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ListGroup,
-  Form,
-  Button,
-} from "reactstrap";
+import { Link } from "react-router-dom";
+import { ModalBody, ListGroup, Button } from "reactstrap";
 import { useSelector } from "react-redux";
-import Register from "./auth/Register";
 import "../css/home.css";
 import usa from "../json/US.json";
 import darkV10 from "../img/dark-v10.png";

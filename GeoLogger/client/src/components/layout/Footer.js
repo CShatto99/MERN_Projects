@@ -56,12 +56,12 @@ const Footer = () => {
         <div className="footer-link-highlight" />
       </div>
       <div>
-        <button
+        <a
           onClick={() => dispatch(logout())}
-          className="nav-link footer-link-hover text-gray-800 hover:text-gray-600"
+          className="nav-link footer-link-hover cursor-pointer text-gray-800 hover:text-gray-600"
         >
           Logout
-        </button>
+        </a>
         <div className="footer-link-highlight" />
       </div>
     </>
@@ -69,7 +69,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-200">
-      <div className="max-w-6xl mx-auto grid grid-cols-3 gap-10 text-center text-black p-5">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 sm:grid-cols-1 gap-10 text-center text-black p-5 ">
         <div>
           <h2>About</h2>
           <p>
