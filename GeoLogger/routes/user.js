@@ -2,24 +2,24 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 
-const User = require("../../models/user");
-const authToken = require('../../middleware/authToken')
-const genAccessToken = require("../../utils/genAccessToken");
-const genRefreshToken = require("../../utils/genRefreshToken");
+const User = require("../models/user");
+const authToken = require("../middleware/authToken");
+const genAccessToken = require("../utils/genAccessToken");
+const genRefreshToken = require("../utils/genRefreshToken");
 
 // @route GET /api/user
 // @desc Load a user
 // @access Public
-router.get('/', authToken, async (req, res) => {
+router.get("/", authToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select(" -password -__v")
+    const user = await User.findById(req.user.id).select(" -password -__v");
 
-    res.json(user)
-  } catch(err) {
+    res.json(user);
+  } catch (err) {
     console.log(err.message);
     res.status(500).json({ msg: "Error loading user" });
   }
-})
+});
 
 // @route POST /api/user
 // @desc Login a user
@@ -28,21 +28,18 @@ router.post("/", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    if (!email) 
-      return res.status(400).json({ msg: "An email is required" });
+    if (!email) return res.status(400).json({ msg: "An email is required" });
 
     if (!password)
       return res.status(400).json({ msg: "A password is required" });
 
     const user = await User.findOne({ email }).select("_id password");
 
-    if (!user) 
-      return res.status(400).json({ msg: "Invalid credentials" });
+    if (!user) return res.status(400).json({ msg: "Invalid credentials" });
 
     const match = await bcrypt.compare(password, user.password);
 
-    if (!match) 
-      return res.status(400).json({ msg: "Invalid credentials" });
+    if (!match) return res.status(400).json({ msg: "Invalid credentials" });
 
     const accessToken = genAccessToken({ id: user._id });
     const refreshToken = genRefreshToken({ id: user._id });

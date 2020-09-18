@@ -2,6 +2,7 @@ import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
 
 import { loadProfile, clearProfile } from "./profile";
+import { setAlert } from "./alert";
 import setAuthToken from "../utils/setAuthToken";
 
 const auth = createSlice({
@@ -34,7 +35,7 @@ const auth = createSlice({
         ...state,
         user: {},
         isAuth: false,
-        loading: true
+        loading: true,
       };
     },
   },
@@ -73,7 +74,7 @@ export const login = user => async dispatch => {
     dispatch(login_user());
   } catch (err) {
     console.log(err.message);
-    //dispatch(sertAlert(err.response.data.msg, err.response.status))
+    dispatch(setAlert(err.response.data.msg, err.response.status));
   }
 };
 

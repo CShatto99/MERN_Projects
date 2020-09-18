@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,6 +57,7 @@ const Footer = () => {
       </div>
       <div>
         <a
+          href="/"
           onClick={() => dispatch(logout())}
           className="nav-link footer-link-hover cursor-pointer text-gray-800 hover:text-gray-600"
         >
@@ -95,7 +96,7 @@ const Footer = () => {
           <h2>Contact</h2>
           <Form onSubmit={onSubmit}>
             <FormGroup>
-              {/* <Label for="email">Email</Label> */}
+              <Label for="email">Email</Label>
               <Input
                 type="text"
                 id="email"
@@ -105,7 +106,7 @@ const Footer = () => {
               />
             </FormGroup>
             <FormGroup>
-              {/* <Label for="message">Message</Label> */}
+              <Label for="message">Message</Label>
               <Input
                 type="textarea"
                 id="message"

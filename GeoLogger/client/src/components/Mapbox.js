@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactMapGL, { Layer, Source } from "react-map-gl";
@@ -82,7 +82,7 @@ import useWindowDimensions from "../hooks/windowDimensions";
 
 function Mapbox() {
   const { profile, loading } = useSelector(state => state.profile);
-  const { height, width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
   const [sources, setSources] = useState([]);
 
   let geoJSONRegions = [];

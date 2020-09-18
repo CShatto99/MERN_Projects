@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ModalBody, ListGroup, Button } from "reactstrap";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import "../css/home.css";
 import usa from "../json/US.json";
 import darkV10 from "../img/dark-v10.png";
@@ -33,9 +33,9 @@ for (let i = 0; i < 10; i++) {
 }
 
 const Home = () => {
-  const { isAuth } = useSelector(state => state.auth);
+  //const { isAuth } = useSelector(state => state.auth);
   const [landingDiv, setLandingDiv] = useState(false);
-  const [regOpen, setRegOpen] = useState(false);
+  //const [regOpen, setRegOpen] = useState(false);
 
   useEffect(() => {
     setLandingDiv(!landingDiv);

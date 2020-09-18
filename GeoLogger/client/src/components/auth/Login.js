@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { login } from "../../store/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
+  const { msg } = useSelector(state => state.alert);
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -35,6 +36,7 @@ const Login = () => {
   return (
     <div className="register-div min-h-screen flex justify-center items-start p-5">
       <div className="mt-5 max-w-4xl w-full p-6 bg-gray-300 rounded shadow-lg text-black">
+        {msg && <Alert color="danger">{msg}</Alert>}
         <div className="flex justify-between items-center">
           <h2>Login</h2>
           <p className="float-right text-red-600 text-base m-0">* required</p>

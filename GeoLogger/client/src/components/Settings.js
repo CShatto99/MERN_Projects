@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Moment from "react-moment";
-import { updateProfile, updateFill } from "../store/profile";
+import { updateProfile } from "../store/profile";
 import "../css/settings.css";
 import darkV10 from "../img/dark-v10.png";
 import lightV10 from "../img/light-v10.png";

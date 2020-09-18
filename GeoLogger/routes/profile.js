@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const Profile = require("../../models/profile");
-const authToken = require("../../middleware/authToken");
+const Profile = require("../models/profile");
+const authToken = require("../middleware/authToken");
 
 // @route GET /api/profile
 // @desc Get a user profile
@@ -14,7 +14,6 @@ router.get("/", authToken, async (req, res) => {
     }).populate("user", ["username", "email", "date"]);
 
     res.json(profile);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -53,7 +52,6 @@ router.post("/", authToken, async (req, res) => {
     profile = await profileFields.save();
 
     res.json(profile);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

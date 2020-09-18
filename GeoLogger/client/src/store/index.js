@@ -1,13 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { combineReducers } from 'redux'
-import profile from './profile'
-import auth from './auth'
+import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
+import profile from "./profile";
+import auth from "./auth";
+import alert from "./alert";
 
 const reducer = combineReducers({
   profile,
-  auth
-})
+  auth,
+  alert,
+});
 
-const store = configureStore({ reducer })
+const store = configureStore({ reducer });
 
-export default store
+export default store;

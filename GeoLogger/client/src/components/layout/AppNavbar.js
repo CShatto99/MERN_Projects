@@ -1,30 +1,16 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Container,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  Collapse,
-  NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
+import { NavItem } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/auth";
 
 const AppNavbar = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
-  const [isOpen, setIsOpen] = useState(false);
+  //const [isOpen, setIsOpen] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
-
-  const loggedIn = false;
+  //const toggle = () => setIsOpen(!isOpen);
 
   const guestLinks = (
     <Fragment>
@@ -61,33 +47,24 @@ const AppNavbar = () => {
       </NavItem>
       <div
         to="/map"
-        className="nav-link cursor-pointer text-gray-400 hover:text-gray-200"
+        className="nav-link profile-dropdown cursor-pointer text-gray-400 hover:text-gray-200"
         onClick={() => setDropdownActive(!dropdownActive)}
       >
         Profile
       </div>
-      {/* <div className="">
-        <ul className="bg-gray-200 text-black p-3">
-          <li className="mb-2">
-            <Link to="/settings" className="text-black no-underline">
-              Settings
-            </Link>
-          </li>
-          <li
-            className="gen-btn cursor-pointer"
-            onClick={() => dispatch(logout())}
-          >
-            Logout
-          </li>
-        </ul>
-      </div> */}
-      <div className="profile-dropdown">
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-        </ul>
-      </div>
+      <ul className="carte bg-gray-200 text-black p-3">
+        <li className="mb-2">
+          <Link to="/settings" className="text-black no-underline">
+            Settings
+          </Link>
+        </li>
+        <li
+          className="gen-btn cursor-pointer"
+          onClick={() => dispatch(logout())}
+        >
+          Logout
+        </li>
+      </ul>
     </Fragment>
   );
 

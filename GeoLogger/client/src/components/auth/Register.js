@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, FormGroup, Label, Input, Container } from "reactstrap";
+import { Form, FormGroup, Label, Input } from "reactstrap";
 import { register } from "../../store/auth";
 
 const Register = () => {
