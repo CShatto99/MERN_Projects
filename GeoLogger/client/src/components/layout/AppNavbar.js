@@ -59,21 +59,15 @@ const AppNavbar = () => {
         </Link>
         <div className="sibling-highlight" />
       </NavItem>
-      <UncontrolledDropdown nav inNavbar>
-        <div
-          to="/map"
-          className="nav-link cursor-pointer text-gray-400 hover:text-gray-200"
-          onClick={() => setDropdownActive(!dropdownActive)}
-        >
-          Profile
-        </div>
-        <ul
-          className={
-            dropdownActive
-              ? "dropdown-active bg-gray-200 text-black p-3"
-              : "dropdown-closed"
-          }
-        >
+      <div
+        to="/map"
+        className="nav-link cursor-pointer text-gray-400 hover:text-gray-200"
+        onClick={() => setDropdownActive(!dropdownActive)}
+      >
+        Profile
+      </div>
+      {/* <div className="">
+        <ul className="bg-gray-200 text-black p-3">
           <li className="mb-2">
             <Link to="/settings" className="text-black no-underline">
               Settings
@@ -86,7 +80,14 @@ const AppNavbar = () => {
             Logout
           </li>
         </ul>
-      </UncontrolledDropdown>
+      </div> */}
+      <div className="profile-dropdown">
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ul>
+      </div>
     </Fragment>
   );
 
