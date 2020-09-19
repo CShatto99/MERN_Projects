@@ -35,6 +35,11 @@ router.post("/", authToken, async (req, res) => {
   };
 
   try {
+    if (!mapStyle)
+      return res.status(400).json({ msg: "Please pick a map style" });
+    else if (!fillColor)
+      return res.status(400).json({ msg: "Please provide a fill color" });
+
     let profile = await Profile.findOne({ user: req.user.id });
 
     if (profile) {
@@ -46,12 +51,9 @@ router.post("/", authToken, async (req, res) => {
       return res.json(profile);
     }
 
-    if (!fillColor)
-      return res.status(400).json({ msg: "Please provide a fill color" });
+    const newProfile = await new Profile(profileFields).save();
 
-    profile = await profileFields.save();
-
-    res.json(profile);
+    res.json(newProfile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

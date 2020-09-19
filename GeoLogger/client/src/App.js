@@ -4,6 +4,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import AppNavbar from "./components/layout/AppNavbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import CreateProfile from "./components/layout/CreateProfile";
 import Home from "./components/Home";
 import Mapbox from "./components/Mapbox";
 import Settings from "./components/Settings";
@@ -30,6 +31,7 @@ const App = () => {
             <PrivateRoute exact path="/map" component={Mapbox} />
             <Route exact path="/" component={Home} />
             <PrivateRoute exact path="/settings" component={Settings} />
+            <PrivateRoute exact path="/create" component={CreateProfile} />
           </Switch>
           <Footer />
         </Provider>

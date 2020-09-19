@@ -88,7 +88,7 @@ const Login = () => {
           <p className="mt-2 mb-0">
             Don't have an account?{" "}
             <Link to="/register" className="std-link">
-              register
+              Register
             </Link>
           </p>
         </Form>

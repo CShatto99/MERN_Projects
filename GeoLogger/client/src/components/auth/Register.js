@@ -36,12 +36,12 @@ const Register = () => {
     dispatch(register(user));
   };
 
-  if (isAuth) return <Redirect to="/map" />;
-
   if (msg)
     setTimeout(() => {
       dispatch(clearAlert());
     }, 4000);
+
+  if (isAuth) return <Redirect to="/create" />;
 
   return (
     <div className="register-div min-h-screen flex justify-center items-start pt-24 pr-4 pb-4 pl-4">

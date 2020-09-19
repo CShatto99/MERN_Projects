@@ -134,6 +134,8 @@ function Mapbox() {
 
   if (!localStorage.getItem("isAuth")) return <Redirect to="/" />;
 
+  if (!profile) return <Redirect to="/create" />;
+
   return (
     <>
       {loading ? (

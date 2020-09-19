@@ -125,7 +125,7 @@ const Settings = () => {
                   }}
                   checked={state.mapStyle === "dark-v10" ? true : false}
                 />{" "}
-                <label check>Dark</label>
+                <label>Dark</label>
                 <a
                   className="std-link float-right"
                   href="https://www.mapbox.com/maps/dark"
@@ -152,7 +152,7 @@ const Settings = () => {
                   }}
                   checked={state.mapStyle === "light-v10" ? true : false}
                 />{" "}
-                <label check>Light</label>
+                <label>Light</label>
                 <a
                   className="std-link float-right"
                   href="https://www.mapbox.com/maps/light"
@@ -179,7 +179,7 @@ const Settings = () => {
                   }}
                   checked={state.mapStyle === "outdoors-v11" ? true : false}
                 />{" "}
-                <label check>Outdoors</label>
+                <label>Outdoors</label>
                 <a
                   className="std-link float-right"
                   href="https://www.mapbox.com/maps/streets"
@@ -206,7 +206,7 @@ const Settings = () => {
                   }}
                   checked={state.mapStyle === "streets-v11" ? true : false}
                 />{" "}
-                <label check>Streets</label>
+                <label>Streets</label>
                 <a
                   className="std-link float-right"
                   href="https://www.mapbox.com/maps/outdoors"
@@ -233,7 +233,7 @@ const Settings = () => {
                   }}
                   checked={state.mapStyle === "satellite-v9" ? true : false}
                 />{" "}
-                <label check>Satellite</label>
+                <label>Satellite</label>
                 <a
                   className="std-link float-right"
                   href="https://www.mapbox.com/maps/satellite"

@@ -50,14 +50,12 @@ export const loadUser = () => async dispatch => {
     const { data } = await axios.get("/api/user");
     dispatch(load_user(data));
   } catch (err) {
-    console.log(err.message);
-    //dispatch(sertAlert(err.response.data.msg, err.response.status))
+    dispatch(setAlert(err.response.data.msg, err.response.status));
   }
 };
 
 export const login = user => async dispatch => {
   axios.defaults.headers.withCredentials = true;
-
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -73,7 +71,6 @@ export const login = user => async dispatch => {
     dispatch(loadProfile());
     dispatch(login_user());
   } catch (err) {
-    console.log(err.message);
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }
 };
@@ -92,11 +89,10 @@ export const register = user => async dispatch => {
     setAuthToken(data.accessToken);
 
     dispatch(loadUser());
-    dispatch(loadProfile());
+    //dispatch(loadProfile());
     dispatch(login_user());
   } catch (err) {
-    console.log(err.message);
-    //dispatch(sertAlert(err.response.data.msg, err.response.status))
+    dispatch(setAlert(err.response.data.msg, err.response.status));
   }
 };
 
@@ -112,8 +108,7 @@ export const refreshUser = () => async dispatch => {
       dispatch(login_user());
     }
   } catch (err) {
-    console.log(err.message);
-    //dispatch(sertAlert(err.response.data.msg, err.response.status))
+    dispatch(setAlert(err.response.data.msg, err.response.status));
   }
 };
 
@@ -124,7 +119,6 @@ export const logout = () => async dispatch => {
 
     await axios.delete("/api/auth/logout");
   } catch (err) {
-    console.log(err.message);
-    //dispatch(sertAlert(err.response.data.msg, err.response.status))
+    dispatch(setAlert(err.response.data.msg, err.response.status));
   }
 };
