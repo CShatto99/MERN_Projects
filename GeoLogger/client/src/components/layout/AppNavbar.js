@@ -7,10 +7,8 @@ import { logout } from "../../store/auth";
 const AppNavbar = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
-  //const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
-
-  //const toggle = () => setIsOpen(!isOpen);
 
   const guestLinks = (
     <Fragment>
@@ -45,32 +43,28 @@ const AppNavbar = () => {
         </Link>
         <div className="sibling-highlight" />
       </NavItem>
-      <div
-        to="/map"
-        className="nav-link profile-dropdown cursor-pointer text-gray-400 hover:text-gray-200"
-        onClick={() => setDropdownActive(!dropdownActive)}
-      >
-        Profile
-      </div>
-      <ul className="carte bg-gray-200 text-black p-3">
-        <li className="mb-2">
+      <div className="dropdown">
+        <button className="nav-link text-gray-400 hover:text-gray-200 pb-1">
+          Profile
+        </button>
+        <div className="dropdown-content">
           <Link to="/settings" className="text-black no-underline">
             Settings
           </Link>
-        </li>
-        <li
-          className="gen-btn cursor-pointer"
-          onClick={() => dispatch(logout())}
-        >
-          Logout
-        </li>
-      </ul>
+          <a
+            className="text-black no-underline"
+            onClick={() => dispatch(logout())}
+          >
+            Logout
+          </a>
+        </div>
+      </div>
     </Fragment>
   );
 
   return (
     <div className="flex justify-center">
-      <nav className="pt-3 pl-5 pr-5 max-w-6xl w-full flex justify-between">
+      <nav className="pt-3 pl-4 pr-4 max-w-6xl w-full flex justify-between">
         <div className="flex items-center">
           <i
             className="gen-btn fa fa-globe fa-3x cursor-pointer hover:text-blue-800"

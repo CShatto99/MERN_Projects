@@ -47,8 +47,8 @@ const Home = () => {
         <div
           className={
             landingDiv
-              ? "div-enter max-w-6xl p-5 text-center mb-24"
-              : "div-exit max-w-6xl p-5 text-center mb-24"
+              ? "div-enter max-w-6xl p-4 text-center mb-24"
+              : "div-exit max-w-6xl p-4 text-center mb-24"
           }
         >
           <h1 className="font-medium">Welcome To GeoLogger</h1>
@@ -67,7 +67,7 @@ const Home = () => {
       </div>
 
       <div className="map-div min-h-screen bg-gray-200">
-        <div className="max-w-6xl mx-auto text-center text-black p-5">
+        <div className="max-w-6xl mx-auto text-center text-black p-4">
           <h1 className="mb-5 font-medium">Choose a Map Style</h1>
           <div className="grid md:grid-cols-2 grid-cols-1 gap-5 h-full text-black">
             <div>
@@ -115,7 +115,7 @@ const Home = () => {
       </div>
 
       <div className="vaca-history-div">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-4">
           <h1 className="col-span-1 md:col-span-2 sm:text-center md:text-right">
             Log Your Vacation History
           </h1>

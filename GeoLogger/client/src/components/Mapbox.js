@@ -96,6 +96,7 @@ function Mapbox() {
 
         geoJSONRegions.push(
           <Source
+            key={source}
             id={source}
             type="geojson"
             data={{
@@ -143,7 +144,7 @@ function Mapbox() {
           />
         </div>
       ) : (
-        <div className="p-5 h-screen mt-5">
+        <div className="h-screen pt-24 pr-4 pb-4 pl-4">
           <div className="map-container grid grid-cols-1 mb-3">
             <ReactMapGL
               {...viewport}
