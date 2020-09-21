@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, FormGroup, Label, Input } from "reactstrap";
 import { register } from "../../store/auth";
 import { clearAlert } from "../../store/alert";
 
@@ -55,51 +54,55 @@ const Register = () => {
           <h2>Register</h2>
           <p className="float-right text-red-600 text-base m-0">* required</p>
         </div>
-        <Form onSubmit={onSubmit}>
-          <FormGroup>
-            <Label for="username">
+        <form onSubmit={onSubmit}>
+          <div className="mb-3">
+            <label>
               Username<span className="text-red-600"> *</span>
-            </Label>
-            <Input
+            </label>
+            <input
               type="text"
               id="username"
               name="username"
+              className="cust-input"
               onChange={e => onChange(e)}
             />
-          </FormGroup>
-          <FormGroup>
-            <Label for="email">
+          </div>
+          <div className="mb-3">
+            <label>
               Email<span className="text-red-600"> *</span>
-            </Label>
-            <Input
+            </label>
+            <input
               type="email"
               id="email"
               name="email"
+              className="cust-input"
               onChange={e => onChange(e)}
             />
-          </FormGroup>
-          <FormGroup>
-            <Label for="password">
+          </div>
+          <div className="mb-3">
+            <label>
               Password<span className="text-red-600"> *</span>
-            </Label>
-            <Input
+            </label>
+            <input
               type="password"
               id="password"
               name="password"
+              className="cust-input"
               onChange={e => onChange(e)}
             />
-          </FormGroup>
-          <FormGroup>
-            <Label for="passVerify">
+          </div>
+          <div className="mb-3">
+            <label>
               Verify Password<span className="text-red-600"> *</span>
-            </Label>
-            <Input
+            </label>
+            <input
               type="password"
               id="passVerify"
               name="passVerify"
+              className="cust-input"
               onChange={e => onChange(e)}
             />
-          </FormGroup>
+          </div>
           <div className="flex items-center">
             <button className="gen-btn bg-blue-700 text-gray-200 font-medium py-1 px-3 mr-2 rounded-lg hover:bg-blue-800">
               Register
@@ -117,7 +120,7 @@ const Register = () => {
               Login
             </Link>
           </p>
-        </Form>
+        </form>
       </div>
     </div>
   );

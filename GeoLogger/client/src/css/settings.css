@@ -1,3 +1,8 @@
+.settings-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../img/settings-bg.png");
+}
+
 .thumbnail {
   transition: ease-out 0.2s;
   border-radius: 4px;
@@ -5,7 +10,7 @@
 
 .thumbnail:hover {
   transition: ease-in 0.2s;
-  transform: scale(1.5);
+  transform: scale(1.2);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
 }
@@ -26,4 +31,16 @@
 }
 .save-btn {
   border: 1px solid #2b6cb0 !important;
+}
+
+.card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+@media only screen and (max-width: 550px) {
+  .settings-nav-bg {
+    height: 6%;
+  }
 }

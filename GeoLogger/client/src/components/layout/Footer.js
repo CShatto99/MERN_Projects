@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Label, Input } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/auth";
 
@@ -17,7 +16,7 @@ const Footer = () => {
       <div>
         <Link
           to="/login"
-          className="nav-link footer-link-hover text-gray-800 hover:text-gray-600"
+          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Login
         </Link>
@@ -26,7 +25,7 @@ const Footer = () => {
       <div>
         <Link
           to="/register"
-          className="nav-link footer-link-hover text-gray-800 hover:text-gray-600"
+          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Register
         </Link>
@@ -40,7 +39,7 @@ const Footer = () => {
       <div>
         <Link
           to="/map"
-          className="nav-link footer-link-hover text-gray-800 hover:text-gray-600"
+          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Map
         </Link>
@@ -49,7 +48,7 @@ const Footer = () => {
       <div>
         <Link
           to="/settings"
-          className="nav-link footer-link-hover text-gray-800 hover:text-gray-600"
+          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Settings
         </Link>
@@ -59,7 +58,7 @@ const Footer = () => {
         <a
           href="/"
           onClick={() => dispatch(logout())}
-          className="nav-link footer-link-hover cursor-pointer text-gray-800 hover:text-gray-600"
+          className="nav-link footer-link-hover cursor-pointer text-gray-400 hover:text-gray-600"
         >
           Logout
         </a>
@@ -69,8 +68,8 @@ const Footer = () => {
   );
 
   return (
-    <footer className="bg-gray-200">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 sm:grid-cols-1 gap-10 text-center text-black p-5 ">
+    <footer className="bg-transparent">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 sm:grid-cols-1 gap-10 text-center text-gray-200 p-5">
         <div>
           <h2>About</h2>
           <p>
@@ -84,7 +83,7 @@ const Footer = () => {
           <div>
             <Link
               to="/"
-              className="nav-link footer-link-hover text-gray-800 hover:text-gray-600"
+              className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
             >
               Home
             </Link>
@@ -94,44 +93,42 @@ const Footer = () => {
         </div>
         <div className="text-center">
           <h2>Contact</h2>
-          <Form onSubmit={onSubmit}>
-            <FormGroup>
-              <Label for="email">Email</Label>
-              <Input
+          <form onSubmit={onSubmit}>
+            <div className="mb-3">
+              <label>Email</label>
+              <input
                 type="text"
-                id="email"
                 name="email"
+                className="cust-input"
                 placeholder="Email"
                 onChange={e => onChange(e)}
               />
-            </FormGroup>
-            <FormGroup>
-              <Label for="message">Message</Label>
-              <Input
+            </div>
+            <div className="mb-3">
+              <label>Message</label>
+              <input
                 type="textarea"
-                id="message"
                 name="message"
+                className="cust-input"
                 placeholder="Message"
                 onChange={e => onChange(e)}
               />
-            </FormGroup>
+            </div>
             <div className="flex justify-center items-center">
               <button className="gen-btn bg-blue-700 text-white font-medium py-1 px-3 mr-2 rounded-lg hover:bg-blue-800">
                 Send
               </button>
             </div>
-          </Form>
+          </form>
         </div>
         <div>
-          <small>
-            &copy; Copyright {`${new Date().getFullYear()}`}, GeoLogger
-          </small>
+          <small>&copy; Copyright {new Date().getFullYear()}, GeoLogger</small>
         </div>
         <div>
           <small>
             Made with{" "}
             <a
-              className="hover:no-underline"
+              className="hover:no-underline std-link text-sm"
               href="https://www.mapbox.com/"
               target="_blank"
               rel="noreferrer noopener"
@@ -142,7 +139,7 @@ const Footer = () => {
         </div>
         <div>
           <a
-            className="footer-icon text-black"
+            className="footer-icon text-gray-200"
             href="https://github.com/"
             target="_blank"
             rel="noreferrer noopener"

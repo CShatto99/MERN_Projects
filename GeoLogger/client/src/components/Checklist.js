@@ -66,11 +66,14 @@ const Checklist = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <Row className="justify-content-center">
-        <Button className="text-light" color="dark" onClick={toggle} outline>
+        <button
+          className="gen-btn bg-blue-700 text-gray-200 font-medium mt-1 py-1 px-3 mr-2 rounded-lg hover:bg-blue-800"
+          onClick={toggle}
+        >
           Add States
-        </Button>
+        </button>
       </Row>
       <Modal isOpen={state.isOpen}>
         <ModalHeader className="text-black" toggle={toggle}>
@@ -105,7 +108,7 @@ const Checklist = () => {
           </Form>
         </ModalBody>
       </Modal>
-    </Fragment>
+    </>
   );
 };
 

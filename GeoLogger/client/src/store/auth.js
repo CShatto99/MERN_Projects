@@ -89,7 +89,6 @@ export const register = user => async dispatch => {
     setAuthToken(data.accessToken);
 
     dispatch(loadUser());
-    //dispatch(loadProfile());
     dispatch(login_user());
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));

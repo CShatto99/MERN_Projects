@@ -82,7 +82,7 @@ import useWindowDimensions from "../hooks/windowDimensions";
 
 function Mapbox() {
   const { profile, loading } = useSelector(state => state.profile);
-  const { height } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const [sources, setSources] = useState([]);
 
   let geoJSONRegions = [];
@@ -126,7 +126,7 @@ function Mapbox() {
 
   const [viewport, setViewport] = useState({
     width: 1152,
-    height: height * 0.5,
+    height: height * 0.9,
     latitude: 40,
     longitude: -92,
     zoom: 3,
@@ -146,8 +146,8 @@ function Mapbox() {
           />
         </div>
       ) : (
-        <div className="h-screen pt-24 pr-4 pb-4 pl-4">
-          <div className="map-container grid grid-cols-1 mb-3">
+        <div className="min-h-screen pt-20">
+          <div className="map-container mb-3">
             <ReactMapGL
               {...viewport}
               mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
@@ -155,12 +155,12 @@ function Mapbox() {
               mapboxApiAccessToken={
                 "pk.eyJ1IjoiY3NoYXR0bzk5IiwiYSI6ImNrZGR2bzN1cjRpbjcydHFyMThvczlzYTAifQ.unXf2zoBfeVM28V-tQSRPw"
               }
-              className=" rounded-lg"
+              className="flex justify-end items-center"
             >
               {sources}
+              <Checklist />
             </ReactMapGL>
           </div>
-          <Checklist />
         </div>
       )}
     </>
