@@ -59,8 +59,8 @@ const Home = () => {
       </div>
 
       <div className="map-div">
-        <h1 className="mb-5">Choose a Map Style</h1>
         <div className="map-div-inner grid md:grid-cols-2 grid-cols-1">
+          <h1 className="col-span-1 md:col-span-2">Choose a Map Style</h1>
           <div>
             <img src={darkV10} alt="mapbox dark-v10 theme" />
             <h3>Dark V10</h3>

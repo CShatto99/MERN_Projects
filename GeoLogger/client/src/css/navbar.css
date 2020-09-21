@@ -1,0 +1,78 @@
+.fa-globe {
+  z-index: 9;
+  position: relative;
+  color: #2b6cb0;
+  -webkit-text-stroke: 1px #1a202c;
+}
+
+.navbrand-icon {
+  background-color: green;
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 80%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  max-height: 0;
+  background-color: #edf2f7;
+  min-width: 140px;
+
+  border-radius: 4px;
+  z-index: 1;
+  -webkit-transition: ease-out 300ms;
+  /* s */
+  transition: max-height ease-out 400ms, opacity ease-out 200ms,
+    visibility ease-out 200ms;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: #1a202c;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color ease-out 0.15s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  transition: background-color ease-in 0.15s;
+  background-color: #ddd;
+  color: #2b6cb0;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  visibility: visible;
+  opacity: 1;
+  max-height: 500px;
+  transition: max-height ease-in 400ms, opacity ease-in 400ms, visibility 400ms;
+}

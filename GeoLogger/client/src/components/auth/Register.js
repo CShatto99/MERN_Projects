@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../store/auth";
 import { clearAlert } from "../../store/alert";
+import "../../css/authForm.css";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -43,16 +44,12 @@ const Register = () => {
   if (isAuth) return <Redirect to="/create" />;
 
   return (
-    <div className="register-div min-h-screen flex justify-center items-start pt-24 pr-4 pb-4 pl-4">
-      <div className="max-w-4xl w-full p-6 bg-gray-300 rounded shadow-lg text-black">
-        {msg && (
-          <div className="col-span-5 bg-red-300 rounded-lg p-2">
-            <p className="m-0 text-gray-800 text-center">{msg}</p>
-          </div>
-        )}
-        <div className="flex justify-between items-center">
+    <div className="form-div">
+      <div className="form-div-inner">
+        {msg && <div className="err-div">{msg}</div>}
+        <div className="form-title">
           <h2>Register</h2>
-          <p className="float-right text-red-600 text-base m-0">* required</p>
+          <p>* required</p>
         </div>
         <form onSubmit={onSubmit}>
           <div className="mb-3">
@@ -104,13 +101,8 @@ const Register = () => {
             />
           </div>
           <div className="flex items-center">
-            <button className="gen-btn bg-blue-700 text-gray-200 font-medium py-1 px-3 mr-2 rounded-lg hover:bg-blue-800">
-              Register
-            </button>
-            <Link
-              to="/"
-              className="gen-btn cancel-btn border border-red-600 text-red-600 font-medium py-1 px-3 rounded-lg hover:bg-red-600 hover:text-gray-200 hover:border-transparent"
-            >
+            <button className="gen-btn form-btn">Login</button>
+            <Link to="/" className="gen-btn danger-btn">
               Cancel
             </Link>
           </div>

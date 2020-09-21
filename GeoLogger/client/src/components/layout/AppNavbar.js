@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { NavItem } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/auth";
+import "../../css/navbar.css";
 
 const AppNavbar = () => {
   const dispatch = useDispatch();
