@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "reactstrap";
 import Moment from "react-moment";
 import { updateProfile } from "../store/profile";
 import "../css/settings.css";
@@ -44,24 +45,28 @@ const Settings = () => {
     setSaved(true);
 
     setTimeout(() => {
-      setSaved(true);
+      setSaved(false);
     }, 4000);
   };
 
+  console.log(theme);
+
   return (
-    <div className="settings-bg min-h-screen bg-gray-200 flex justify-center items-start pt-32 pr-4 pb-4 pl-4">
+    <div className="settings-div">
       {loading ? (
-        <h3 className="text-center text-light">Loading...</h3>
+        <div className="spinner-div">
+          <Spinner />
+        </div>
       ) : (
-        <div className="max-w-6xl grid grid-cols-5 gap-5">
+        <div className="settings-div-inner grid grid-cols-5">
           {saved && (
-            <div className="col-span-5 bg-green-300 rounded-lg p-2">
-              <p className="m-0 text-gray-800 text-center">Changes Saved!</p>
+            <div className="saved-changes">
+              <p className="m-0">Changes Saved!</p>
             </div>
           )}
 
-          <div className="col-span-5 bg-gray-200 rounded-lg shadow-lg p-3">
-            <div className=" flex justify-between">
+          <div className="settings-card">
+            <div className="flex justify-between">
               <Link
                 className="gen-btn back-btn text-gray-900 font-medium px-2 py-1 rounded-lg hover:bg-red-600 hover:text-gray-200 hover:border-transparent"
                 to="/map"
@@ -69,7 +74,7 @@ const Settings = () => {
                 Back to Map
               </Link>
               <button
-                className="gen-btn cancel-btn justify-self-end bg-blue-500 text-gray-200 font-medium px-2 py-1 rounded-lg hover:bg-blue-800"
+                className="gen-btn primary-btn"
                 type="submit"
                 form="settings-form"
               >
@@ -78,8 +83,8 @@ const Settings = () => {
             </div>
           </div>
 
-          <div className="col-span-5 bg-gray-200 rounded-lg shadow-lg p-3 text-gray-900 text-center">
-            <h2 className="font-semibold">Account Info</h2>
+          <div className="settings-card">
+            <h2>Account Info</h2>
             <h4>{user.username}</h4>
             <h5>{user.email}</h5>
             <p>
@@ -88,9 +93,32 @@ const Settings = () => {
             </p>
           </div>
 
-          <div className="col-span-5 bg-gray-200 rounded-lg shadow-lg p-3 text-gray-900 text-center">
-            <h2 className="text-center font-semibold">User Settings</h2>
-            <h4 className="text-center mb-3">Map Style</h4>
+          <div className="settings-card">
+            <h2>User Settings</h2>
+            <div className="settings-theme">
+              <h4 className="w-full">Site Theme</h4>
+              <div
+                className="theme-option mr-2"
+                onClick={() => setTheme("light")}
+                style={{
+                  backgroundColor: theme === "light" && "#2b6cb0",
+                  color: theme === "light" && "#e2e8f0",
+                }}
+              >
+                Light
+              </div>
+              <div
+                className="theme-option"
+                onClick={() => setTheme("dark")}
+                style={{
+                  backgroundColor: theme === "dark" && "#2b6cb0",
+                  color: theme === "dark" && "#e2e8f0",
+                }}
+              >
+                Dark
+              </div>
+            </div>
+            <h4 className="mb-3">Map Style</h4>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
               <div className="md:col-span-1 sm:col-span-2">
                 <label>Dark V10</label>
@@ -144,10 +172,10 @@ const Settings = () => {
                   }}
                 />
               </div>
-              <div className="md:col-span-1 sm:col-span-2">
+              <div className="col-span-2 sm:col-span-1">
                 <label>Satellite V9</label>
                 <img
-                  className="thumbnail"
+                  className="thumbnail sat-img-settings"
                   src={satelliteV9}
                   alt="mapbox satellite-v9 theme"
                   onClick={() => setMapStyle("satellite-v9")}
@@ -160,7 +188,7 @@ const Settings = () => {
             </div>
             <form
               id="settings-form"
-              className="col-span-5 text-center"
+              className="col-span-5"
               onSubmit={e => onSubmit(e)}
             >
               <div className="mb-5">
@@ -188,31 +216,8 @@ const Settings = () => {
                   for hex color codes
                 </p>
               </div>
-              <div tag="fieldset">
-                <h4>Site Theme</h4>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="radio1"
-                      onChange={e => setTheme(e.target.value)}
-                      checked={theme === "light" ? true : false}
-                    />{" "}
-                    Light
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="radio1"
-                      onChange={e => setTheme(e.target.value)}
-                      checked={theme === "dark" ? true : false}
-                    />{" "}
-                    Dark
-                  </label>
-                </div>
-              </div>
+
+              <div></div>
             </form>
           </div>
         </div>
